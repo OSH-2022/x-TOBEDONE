@@ -130,7 +130,7 @@ DisGraFS分为5个组成部分：索引服务器、分布式存储集群、分�
 
 ​	Prometheus 的整体架构以及生态系统组件如下图所示：
 
-<img src="D:\desktop\OS\大作业\第三次调研\image\Prometheus 的整体架构以及生态系统组件.jpg" alt="Prometheus 的整体架构以及生态系统组件" style="zoom: 50%;" />
+<img src="D:\desktop\OS\大实验Git\x-TOBEDONE\docs\research\image\Prometheus 的整体架构以及生态系统组件.jpg" alt="Prometheus 的整体架构以及生态系统组件" style="zoom: 50%;" />
 
 ​	Prometheus Server 直接从监控目标中或者间接通过推送网关来拉取监控指标，它在本地存储所有抓取到的样本数据，并对此数据执行一系列规则，以汇总和记录现有数据的新时间序列或生成告警。可以通过 [Grafana](https://grafana.com) 或者其他工具来实现监控数据的可视化。
 
@@ -184,7 +184,7 @@ Console Teamplet 虽然能满足一定的可视化需求，但是也仅仅是对
 
 ​	OpenResty 中，每个 `worker` 进程使用一个 LuaVM，当请求被分配到 `worker` 时，将在这个 LuaVM 中创建一个 `coroutine` 协程，协程之间数据隔离，每个协程都具有独立的全局变量。
 
-![OpenResty](D:\desktop\OS\大作业\第三次调研\image\OpenResty.png)
+![OpenResty](D:\desktop\OS\大实验Git\x-TOBEDONE\docs\research\image\OpenResty.png)
 
 ### Lua
 
@@ -222,7 +222,7 @@ Console Teamplet 虽然能满足一定的可视化需求，但是也仅仅是对
 
 ​	其组成：
 
-![image-20220326155837564](C:\Users\86198\AppData\Roaming\Typora\typora-user-images\image-20220326155837564.png)
+![image-20220326155837564](D:\desktop\OS\大实验Git\x-TOBEDONE\docs\research\image\image-20220326155837564.png)
 
 ​	HDFS：Hadoop Distributed File System，是一个分布式文件系统
 
