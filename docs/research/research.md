@@ -130,13 +130,13 @@ DisGraFS分为5个组成部分：索引服务器、分布式存储集群、分�
 
 ​	Prometheus 的整体架构以及生态系统组件如下图所示：
 
-<img src="D:\desktop\OS\大实验Git\x-TOBEDONE\docs\research\image\Prometheus 的整体架构以及生态系统组件.jpg" alt="Prometheus 的整体架构以及生态系统组件" style="zoom: 50%;" />
+<img src="image\Prometheus 的整体架构以及生态系统组件.jpg" alt="Prometheus 的整体架构以及生态系统组件" style="zoom:50%;" />
 
-​	Prometheus Server 直接从监控目标中或者间接通过推送网关来拉取监控指标，它在本地存储所有抓取到的样本数据，并对此数据执行一系列规则，以汇总和记录现有数据的新时间序列或生成告警。可以通过 [Grafana](https://grafana.com) 或者其他工具来实现监控数据的可视化。
+Prometheus Server 直接从监控目标中或者间接通过推送网关来拉取监控指标，它在本地存储所有抓取到的样本数据，并对此数据执行一系列规则，以汇总和记录现有数据的新时间序列或生成告警。可以通过 Grafana 或者其他工具来实现监控数据的可视化。
 
 **工作原理**
 
-​	Prometheus 所有采集的监控数据均以指标（metric）的形式保存在内置的[时间序列](https://www.wikiwand.com/zh/時間序列)数据库当中（TSDB）：属于同一指标名称，同一标签集合的、有时间戳标记的数据流。除了存储的时间序列，Prometheus 还可以根据查询请求产生临时的、衍生的时间序列作为返回结果。
+​	Prometheus 所有采集的监控数据均以指标（metric）的形式保存在内置的时间序列数据库当中（TSDB）：属于同一指标名称，同一标签集合的、有时间戳标记的数据流。除了存储的时间序列，Prometheus 还可以根据查询请求产生临时的、衍生的时间序列作为返回结果。
 
 ​	在 Prometheus 的架构设计中，Prometheus Server 主要负责数据的收集，存储并且对外提供数据查询支持，而实际的监控样本数据的收集则是由 Exporter 完成。因此为了能够监控到某些东西，如主机的 CPU 使用率，我们需要使用到 Exporter。Prometheus 周期性的从 Exporter 暴露的 HTTP 服务地址（通常是 /metrics）拉取监控样本数据。
 
@@ -184,7 +184,7 @@ Console Teamplet 虽然能满足一定的可视化需求，但是也仅仅是对
 
 ​	OpenResty 中，每个 `worker` 进程使用一个 LuaVM，当请求被分配到 `worker` 时，将在这个 LuaVM 中创建一个 `coroutine` 协程，协程之间数据隔离，每个协程都具有独立的全局变量。
 
-![OpenResty](D:\desktop\OS\大实验Git\x-TOBEDONE\docs\research\image\OpenResty.png)
+![OpenResty](image\OpenResty.png)
 
 ### Lua
 
@@ -222,7 +222,7 @@ Console Teamplet 虽然能满足一定的可视化需求，但是也仅仅是对
 
 ​	其组成：
 
-![image-20220326155837564](D:\desktop\OS\大实验Git\x-TOBEDONE\docs\research\image\image-20220326155837564.png)
+<img src="image\image-20220326155837564.png" alt="image-20220326155837564" style="zoom:50%;" />
 
 ​	HDFS：Hadoop Distributed File System，是一个分布式文件系统
 
