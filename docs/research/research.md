@@ -184,7 +184,7 @@ Console Teamplet 虽然能满足一定的可视化需求，但是也仅仅是对
 
 ​	OpenResty 中，每个 `worker` 进程使用一个 LuaVM，当请求被分配到 `worker` 时，将在这个 LuaVM 中创建一个 `coroutine` 协程，协程之间数据隔离，每个协程都具有独立的全局变量。
 
-![OpenResty](image\OpenResty.png)
+<img src="image\OpenResty.png" alt="OpenResty"  />
 
 ### Lua
 
