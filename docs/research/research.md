@@ -412,7 +412,7 @@ Hadoop 是一个由 Apache 基金会所开发的分布式系统基础架构，�
 
 最后，利用 Grafana 实现数据处理和显示。
 
-<img src="C:\Users\86198\AppData\Roaming\Typora\typora-user-images\image-20220405211704167.png" alt="image-20220405211704167" style="zoom:50%;" />
+<img src="image\image-20220405211704167.png" alt="image-20220405211704167" style="zoom:50%;" />
 
 ## 参考文献
 
