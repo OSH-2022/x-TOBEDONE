@@ -75,7 +75,7 @@ DisGraFS ÊÇÓÉ [OSH-2021 x-DisGraFS Ð¡×é](https://github.com/OSH-2021/x-DisGraFS)
 
 RS ±àÂëÒÔ word Îª±àÂëºÍ½âÂëµ¥Î»£¬´óµÄÊý¾Ý¿é²ð·Öµ½×Ö³¤Îª w£¨È¡ÖµÒ»°ãÎª 8 »òÕß 16 Î»£©µÄ word£¬È»ºó¶Ô word ½øÐÐ±à½âÂë¡£Êý¾Ý¿éµÄ±àÂëÔ­ÀíÓë word ±àÂëÔ­ÀíÏàÍ¬¡£°ÑÊäÈëÊý¾ÝÊÓÎªÏòÁ¿ D = (D1, D2, .., Dn), ±àÂëºóÊý¾ÝÊÓÎªÏòÁ¿ (D1, D2, .., Dn, C1, C2, .., Cm)£¬RS ±àÂë¿ÉÊÓÎªÈçÏÂÍ¼ËùÊ¾¾ØÕóÔËËã¡£
 
-![img](image\research-RS-1)
+<img src="image\research-RS-1" alt="img"  />
 
 ÉÏÍ¼×î×ó±ßÊÇ±àÂë¾ØÕó£¨»ò³ÆÎªÉú³É¾ØÕó¡¢·Ö²¼¾ØÕó£¬Distribution Matrix£©£¬±àÂë¾ØÕóÐèÒªÂú×ãÈÎÒâ n\*n ×Ó¾ØÕó¿ÉÄæ¡£Îª·½±ãÊý¾Ý´æ´¢£¬±àÂë¾ØÕóÉÏ²¿ÊÇµ¥Î»Õó£¬ÏÂ²¿ÊÇ m\*n ¾ØÕó¡£ÏÂ²¿¾ØÕó¿ÉÒÔÑ¡Ôñ·¶µÂÃÉµÂ¾ØÕó»ò¿ÂÎ÷¾ØÕó¡£
 
@@ -85,15 +85,15 @@ RS ×î¶àÄÜÈÝÈÌ m ¸öÊý¾Ý¿é±»É¾³ý£¬Êý¾Ý»Ö¸´µÄ¹ý³ÌÈçÏÂ£º
 
 - ¼ÙÉè D1¡¢D4¡¢C2 ¶ªÊ§£¬´Ó±àÂë¾ØÕóÖÐÉ¾µô¶ªÊ§µÄÊý¾Ý¿é/±àÂë¿é¶ÔÓ¦µÄÐÐ¡£¸ù¾Ý RS ±àÂëÔËËãµÈÊ½£¬¿ÉÒÔµÃµ½ B' ÒÔ¼°µÈÊ½£º
 
-![img](image\research-RS-2-new)
+<img src="image\research-RS-2-new" alt="img"  />
 
 - ÓÉÓÚ B' ÊÇ¿ÉÄæµÄ£¬¼Ç B' µÄÄæ¾ØÕóÎª B'^(-1)£¬Ôò B'\*B'^(-1) = I µ¥Î»¾ØÕó¡£Á½±ß×ó³Ë B' Äæ¾ØÕó£º
 
-![img](image\research-RS-4)
+<img src="image\research-RS-4" alt="img"  />
 
 - µÃµ½ÈçÏÂÔ­Ê¼Êý¾Ý D µÄ¼ÆËã¹«Ê½£¬´Ó¶ø»Ö¸´Ô­Ê¼Êý¾Ý D£º
 
-![img](image\research-RS-5-new)
+<img src="image\research-RS-5-new" alt="img"  />
 
 #### ±àÂë¾ØÕó
 
@@ -103,7 +103,7 @@ RS ×î¶àÄÜÈÝÈÌ m ¸öÊý¾Ý¿é±»É¾³ý£¬Êý¾Ý»Ö¸´µÄ¹ý³ÌÈçÏÂ£º
 
 Ò»¸ö m ÐÐ n ÁÐµÄ·¶µÂÃÉµÂ¾ØÕó¶¨ÒåÈçÏÂÍ¼×ó±ß£¬ÆäÖÐ Ai ¾ù²»ÏàÍ¬£¬ÇÒ²»Îª 0¡£Áî A1, A2, .., An ·Ö±ðÎª 1, 2, 3, .., n£¬ÔòµÃµ½·¶µÂÃÉµÂ¾ØÕóÎªÏÂÍ¼ÓÒ±ß£º
 
-![img](image\feasibility-RS-Vandermonde-1)
+<img src="image\feasibility-RS-Vandermonde-1" alt="img"  />
 
 ±àÂë¾ØÕó¾ÍÊÇµ¥Î»¾ØÕóºÍ·¶µÂÃÉµÂ¾ØÕóµÄ×éºÏ¡£ÊäÈëÊý¾Ý D ºÍ±àÂë¾ØÕóµÄ³Ë»ý¾ÍÊÇ±àÂëºóµÄÊý¾Ý¡£
 
@@ -118,7 +118,7 @@ RS ×î¶àÄÜÈÝÈÌ m ¸öÊý¾Ý¿é±»É¾³ý£¬Êý¾Ý»Ö¸´µÄ¹ý³ÌÈçÏÂ£º
 
 ¿ÂÎ÷¾ØÕóµÄÃèÊöÈçÏÂÍ¼×ó±ß£¬Xi ºÍ Yi ¶¼ÊÇåÈÂÞ»ªÓò GF(2^w) ÖÐµÄÔªËØ¡£ÓÒ±ßÊÇ»ùÓÚ¿ÂÎ÷¾ØÕóµÄ±àÂë¾ØÕó£º
 
-![img](image\feasibility-RS-Cauchy-1-new.png)
+<img src="image\feasibility-RS-Cauchy-1-new.png" alt="img" style="zoom:80%;" />
 
 ##### ¿ÂÎ÷±à½âÂë¹ý³ÌÓÅ»¯
 
@@ -128,17 +128,17 @@ RS ×î¶àÄÜÈÝÈÌ m ¸öÊý¾Ý¿é±»É¾³ý£¬Êý¾Ý»Ö¸´µÄ¹ý³ÌÈçÏÂ£º
 
 ´ÓÊýÑ§µÄ½Ç¶È£¬ÔÚåÈÂÞ»ªÓÐÏÞÓòÖÐ£¬ÈÎºÎÒ»¸ö GF(2^w) ÓòÉÏµÄÔªËØ¶¼¿ÉÒÔÓ³Éäµ½ GF(2) ¶þ½øÖÆÓò£¬²¢ÇÒ²ÉÓÃÒ»¸ö¶þ½øÖÆ¾ØÕóµÄ·½Ê½±íÊ¾ GF(2^w) ÖÐµÄÔªËØ¡£ÀýÈç GF(2^3) ÓòÖÐµÄÔªËØ¿ÉÒÔ±íÊ¾³É GF(2) ÓòÖÐµÄ¶þ½øÖÆ¾ØÕó£º
 
-![img](image\feasibility-RS-GF-1)
+<img src="image\feasibility-RS-GF-1" alt="img"  />
 
 ÉÏÍ¼ÖÐ£¬ºÚÉ«·½¿é±íÊ¾Âß¼­ 1£¬°×É«·½¿é±íÊ¾Âß¼­ 0¡£Í¨¹ýÕâÖÖ×ª»»£¬GF(2^w) ÓòÖÐµÄÕóÁÐ¾Í¿ÉÒÔ×ª»»³É GF(2) ÓòÖÐµÄ¶þ½øÖÆÕóÁÐ¡£Éú³É¾ØÕóµÄÕóÁÐ×ª»»±íÊ¾ÈçÏÂ£º
 
-![img](image\feasibility-RS-GF-2)
+<img src="image\feasibility-RS-GF-2" alt="img"  />
 
 ÔÚ GF(2^w) ÓòÖÐµÄ±àÂë¾ØÕóÎª K\*(K+m)£¬×ª»»µ½ GF(2) ÓòÖÐ£¬Ê¹ÓÃ¶þ½øÖÆ¾ØÕó±íÊ¾£¬±àÂë¾ØÕó±ä³ÉÁË wk\*w(k+m) ¶þ½øÖÆ¾ØÕó¡£²ÉÓÃÓò×ª»»µÄÄ¿µÄÊÇ¼ò»¯ GF(2^w) ÓòÖÐµÄ³Ë·¨ÔËËã¡£ÔÚ GF(2) ÓòÖÐ£¬³Ë·¨ÔËËã±ä³ÉÁËÂß¼­ÓëÔËËã£¬¼Ó·¨ÔËËã±ä³ÉÁË XOR ÔËËã£¬¿ÉÒÔ´ó´ó½µµÍÔËËã¸´ÔÓ¶È¡£
 
 ºÍ·¶µÂÃÉ±à½âÂëÖÐ¿ÉÄÜÊ¹ÓÃµÄ¶ÔÊý/·´¶ÔÊý·½·¨Ïà±È£¬ÕâÖÖ·½·¨²»ÐèÒª¹¹½¨¶ÔÊý»ò·´¶ÔÊý±í£¬¿ÉÒÔÖ§³Ö w ÎªºÜ´óµÄ GF Óò¿Õ¼ä¡£²ÉÓÃÕâÖÖÓÐÏÞÓò×ª»»µÄ·½·¨Ö®ºó£¬¿ÂÎ÷±àÂëÔËËã¿ÉÒÔ±íÊ¾ÈçÏÂ£º
 
-![img](image\feasibility-RS-GF-3)
+<img src="image\feasibility-RS-GF-3" alt="img"  />
 
 Ê¹ÓÃ¿ÂÎ÷¾ØÕóÒªÓÅÓÚ·¶µÂÃÉµÂ¾ØÕóµÄ·½·¨£¬¿ÂÎ÷¾ØÕóµÄÔËËã¸´ÔÓ¶ÈÎª O(n*(n-m))£¬½âÂë¸´ÔÓ¶ÈÎª O(n^2)¡£
 
@@ -231,7 +231,7 @@ Zabbix Ò×ÓÚ¹ÜÀíºÍÅäÖÃ£¬ÄÜÉú³É±È½ÏÆ¯ÁÁµÄÊý¾ÝÍ¼£¬Æä×Ô¶¯·¢ÏÖ¹¦ÄÜ´ó´ó¼õÇáÈÕ³£¹ÜÀíµÄ¹
 - ÍøÒ³¶Ë£ºÖ±¹ÛÏÔÊ¾ÎÄ¼þËù¹¹³ÉµÄÍ¼£¬²¢½«ÓÃ»§ÔÚÍ¼ÉÏµÄ²Ù×÷ÒÔÓÑºÃ·½Ê½Õ¹Ê¾¡£
 - ¿Í»§¶Ë£º¿Í»§¶Ë¸ºÔðÖ±½Ó½ÓÊÕÓÃ»§¶ÔÎÄ¼þÏµÍ³µÄ²Ù×÷£¬²¢Õë¶Ô²»Í¬µÄÆ½Ì¨¶ÔÆä½øÐÐÊµÏÖ¡£
 
-<img src="D:\desktop\OS\¸´ÏÖ DisGraFS\image\structure.png" alt="structure" style="zoom: 50%;" />
+<img src="image\structure.png" alt="structure" style="zoom: 50%;" />
 
 ### ÖÐÑëË÷Òý·þÎñÆ÷
 
