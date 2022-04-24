@@ -2,43 +2,44 @@
 
 ## Ä¿Â¼
 
-- [¿ÉÐÐÐÔ±¨¸æ](#¿ÉÐÐÐÔ±¨¸æ)
-  - [Ä¿Â¼](#Ä¿Â¼)
-  - [ÏîÄ¿½éÉÜ](#ÏîÄ¿½éÉÜ)
-  - [ÀíÂÛÒÀ¾Ý](#ÀíÂÛÒÀ¾Ý)
-    - [¼à¿ØÏµÍ³µÄº¬ÒåÓë×÷ÓÃ](#¼à¿ØÏµÍ³µÄº¬ÒåÓë×÷ÓÃ)
-    - [DisGraFS ÊÇÊ²Ã´](#disgrafs-ÊÇÊ²Ã´)
-    - [DisGraFS ÖÐ´æÔÚµÄÎÊÌâ](#disgrafs-ÖÐ´æÔÚµÄÎÊÌâ)
-    - [¼à¿ØµÄÒâÒå¡ª¡ª¹¤Òµ½çÖÐµÄ¼à¿ØÏµÍ³](#¼à¿ØµÄÒâÒå¹¤Òµ½çÖÐµÄ¼à¿ØÏµÍ³)
-      - [·Ö²¼Ê½¼à¿Ø CAT](#·Ö²¼Ê½¼à¿Ø-cat)
-      - [°éÓãÊý¾Ý¿â¼à¿ØÏµÍ³](#°éÓãÊý¾Ý¿â¼à¿ØÏµÍ³)
-      - [Open-falcon](#open-falcon)
-      - [Zabbix](#zabbix)
-  - [¼¼ÊõÒÀ¾Ý](#¼¼ÊõÒÀ¾Ý)
-    - [DisGraFS µÄÏµÍ³¼Ü¹¹](#disgrafs-µÄÏµÍ³¼Ü¹¹)
-    - [ÖÐÑëË÷Òý·þÎñÆ÷](#ÖÐÑëË÷Òý·þÎñÆ÷)
-      - [WebSockets](#websockets)
-      - [asyncio](#asyncio)
-    - [neo4j](#neo4j)
-      - [´¢´æ½á¹¹](#´¢´æ½á¹¹)
-      - [Cypher²éÑ¯ÓïÑÔ](#cypher²éÑ¯ÓïÑÔ)
-      - [Í¼Ëã·¨](#Í¼Ëã·¨)
-    - [Ray](#ray)
-    - [Prometheus](#prometheus)
-    - [InfluxDB](#influxdb)
-    - [Grafana](#grafana)
-    - [Lua](#lua)
-      - [Ð­Í¬³ÌÐò](#Ð­Í¬³ÌÐò)
-  - [¼¼ÊõÂ·Ïß](#¼¼ÊõÂ·Ïß)
-  - [²Î¿¼ÄÚÈÝ](#²Î¿¼ÄÚÈÝ)
+- [Ä¿Â¼](#Ä¿Â¼)
+- [ÏîÄ¿½éÉÜ](#ÏîÄ¿½éÉÜ)
+- [ÀíÂÛÒÀ¾Ý](#ÀíÂÛÒÀ¾Ý)
+  - [¼à¿ØÏµÍ³µÄº¬ÒåÓë×÷ÓÃ](#¼à¿ØÏµÍ³µÄº¬ÒåÓë×÷ÓÃ)
+  - [DisGraFS ÊÇÊ²Ã´](#disgrafs-ÊÇÊ²Ã´)
+  - [DisGraFS ÖÐ´æÔÚµÄÎÊÌâ](#disgrafs-ÖÐ´æÔÚµÄÎÊÌâ)
+  - [¼à¿ØµÄÒâÒå¡ª¡ª¹¤Òµ½çÖÐµÄ¼à¿ØÏµÍ³](#¼à¿ØµÄÒâÒå¹¤Òµ½çÖÐµÄ¼à¿ØÏµÍ³)
+    - [·Ö²¼Ê½¼à¿Ø CAT](#·Ö²¼Ê½¼à¿Ø-cat)
+    - [°éÓãÊý¾Ý¿â¼à¿ØÏµÍ³](#°éÓãÊý¾Ý¿â¼à¿ØÏµÍ³)
+    - [Open-falcon](#open-falcon)
+    - [Zabbix](#zabbix)
+- [¼¼ÊõÒÀ¾Ý](#¼¼ÊõÒÀ¾Ý)
+  - [DisGraFS µÄÏµÍ³¼Ü¹¹](#disgrafs-µÄÏµÍ³¼Ü¹¹)
+  - [ÖÐÑëË÷Òý·þÎñÆ÷](#ÖÐÑëË÷Òý·þÎñÆ÷)
+    - [WebSockets](#websockets)
+    - [asyncio](#asyncio)
+  - [neo4j](#neo4j)
+    - [´¢´æ½á¹¹](#´¢´æ½á¹¹)
+    - [Cypher²éÑ¯ÓïÑÔ](#cypher²éÑ¯ÓïÑÔ)
+    - [Í¼Ëã·¨](#Í¼Ëã·¨)
+  - [Ray](#ray)
+  - [Prometheus](#prometheus)
+  - [InfluxDB](#influxdb)
+  - [Grafana](#grafana)
+  - [Lua](#lua)
+    - [Ð­Í¬³ÌÐò](#Ð­Í¬³ÌÐò)
+- [¼¼ÊõÂ·Ïß](#¼¼ÊõÂ·Ïß)
+- [²Î¿¼ÄÚÈÝ](#²Î¿¼ÄÚÈÝ)
 
 ## ÏîÄ¿½éÉÜ
 
-ÎÒÃÇÕâ¸öÏîÄ¿ÊÇ»ùÓÚ 2021 ÄêµÄ DisGraFS Õ¹¿ª£¬DisGraFS ÊÇÒ»¸ö·Ö²¼Ê½Í¼ÎÄ¼þÏµÍ³£¬¸ÃÏîÄ¿Ñ§Ï°×Ü½áÁËµ±½ñÖ÷Á÷¼¸¸ö·Ö²¼Ê½ÎÄ¼þÏµÍ³µÄÓÅµã£¬²¢ÇÒ½«ÎÄ¼þ±êÇ©ÓëÍ¼½á¹¹ÁªÏµÆðÀ´ÃèÊöÎÄ¼þÖ®¼äµÄ¹ØÏµ£¬Í³Ò»ÁËµ¥»úÎÄ¼þÏµÍ³ºÍ·Ö²¼Ê½ÏµÍ³µÄÓÅµã¡£¸ÃÏîÄ¿½«Í¼½á¹¹ÓëË¼ÏëÓ¦ÓÃÓÚ·Ö²¼Ê½ÎÄ¼þÏµÍ³ÉÏÃæ£¬Ê¹µÃ·Ö²¼Ê½Í¼ÎÄ¼þÏµÍ³¼æ¾ßÍ¼ÎÄ¼þÏµÍ³·½±ãÓÃ»§¿ìËÙËÑË÷¡¢Ä£ºýËÑË÷¡¢²éÕÒÏà¹ØÎÄ¼þµÄÌØµãÒÔ¼°·Ö²¼Ê½ÎÄ¼þÏµÍ³µÄº£Á¿ÎÄ¼þ´æ´¢¡¢ÔÆ´æ´¢µÄÌØµã¡£
+ÎÒÃÇÕâ¸öÏîÄ¿ÊÇ»ùÓÚ 2021 ÄêµÄ x-DisGraFS ÒÔ¼° 2020 ÄêµÄ x-dontpanic Õ¹¿ª¡£DisGraFS ÊÇÒ»¸ö·Ö²¼Ê½Í¼ÎÄ¼þÏµÍ³£¬¸ÃÏîÄ¿Ñ§Ï°×Ü½áÁËµ±½ñÖ÷Á÷¼¸¸ö·Ö²¼Ê½ÎÄ¼þÏµÍ³µÄÓÅµã£¬²¢ÇÒ½«ÎÄ¼þ±êÇ©ÓëÍ¼½á¹¹ÁªÏµÆðÀ´ÃèÊöÎÄ¼þÖ®¼äµÄ¹ØÏµ£¬Í³Ò»ÁËµ¥»úÎÄ¼þÏµÍ³ºÍ·Ö²¼Ê½ÏµÍ³µÄÓÅµã¡£¸ÃÏîÄ¿½«Í¼½á¹¹ÓëË¼ÏëÓ¦ÓÃÓÚ·Ö²¼Ê½ÎÄ¼þÏµÍ³ÉÏÃæ£¬Ê¹µÃ·Ö²¼Ê½Í¼ÎÄ¼þÏµÍ³¼æ¾ßÍ¼ÎÄ¼þÏµÍ³·½±ãÓÃ»§¿ìËÙËÑË÷¡¢Ä£ºýËÑË÷¡¢²éÕÒÏà¹ØÎÄ¼þµÄÌØµãÒÔ¼°·Ö²¼Ê½ÎÄ¼þÏµÍ³µÄº£Á¿ÎÄ¼þ´æ´¢¡¢ÔÆ´æ´¢µÄÌØµã¡£dontpanic ÊµÏÖÁËÈÝÆ÷»¯¡¢¸ß¿ÉÓÃÐÔµÄ·Ö²¼Ê½ÎÄ¼þÏµÍ³¡£
 
-µ«ÊÇ DisGraFS È±ÉÙ±ØÒªµÄ¼à¿Ø×é¼þ£¬¶ø¼à¿ØÔÚÕû¸öÏµÍ³µÄ¿ª·¢ÔËÎ¬ÖÐ¾ßÓÐÖØÒªµÄ×÷ÓÃ£¬Ëü¿ÉÒÔ¶Ô·þÎñ¡¢ÏµÍ³¡¢Æ½Ì¨ÔËÐÐ×´Ì¬ÊµÊ±¼à¿Ø£¬ÊÕ¼¯ÔËÐÐÐÅÏ¢£¬·ÖÎö½á¹û²¢Ô¤Öª´æÔÚµÄ¹ÊÕÏ·çÏÕ£¬Ò»µ©·¢Éú¹ÊÕÏÐèÒªµÚÒ»Ê±¼ä·¢³ö¸æ¾¯ÐÅÏ¢£¬×îÖÕ±£Ö¤ÏµÍ³³ÖÐø¡¢ÎÈ¶¨¡¢°²È«ÔËÐÐ¡£±¾ÏîÄ¿½«ÖÂÁ¦ÓÚÔÚ DisGraFS ÉÏ°²×°·Ö²¼Ê½¼à¿ØÏµÍ³£¬ÁË½âÏµÍ³µÄÔËÐÐ×´Ì¬£¬±£Ö¤·þÎñµÄÕýÈ·ÇÒÎÈ¶¨ÔËÐÐ¡£
+DisGraFS ²¢Î´ÍêÈ«ÊµÏÖÆä×î³õµÄÉèÏë£¬ËüµÄÔ¶³Ì´æ´¢¼¯Èº²¢Ã»ÓÐÕæÕý´î½¨ÆðÀ´£¬DisGraFS Êµ¼ÊµÄÊµÏÖÖÐÒªÇóÓÃ»§Òª½«´æ´¢½Úµã¹ÒÔØµ½±¾µØ£¬ÐÎ³ÉÒ»¸öËùÎ½µÄ¿Í»§¶Ë£¬ÕâÒ»ÏîÔö¼ÓÁËÓÃ»§µÄÊ¹ÓÃÄÑ¶È¡£±¾ÏîÄ¿½«ÒÔ 2020 ÄêµÄ dontpanic Îª²Î¿¼£¬´î½¨Ô¶³Ì·Ö²¼Ê½´æ´¢¼¯Èº£¬ÊµÏÖÔ¶³ÌÍ¨ÐÅºÍÔ¶³ÌÎÄ¼þ´«Êä¡£
 
-´ËÍâ£¬DisGraFS Êµ¼ÊµÄÊµÏÖ»¹ÊÇÒªÇóÓÃ»§Òª½«´æ´¢½Úµã¹ÒÔØµ½±¾µØ£¬ÐÎ³ÉÒ»¸öËùÎ½µÄ¿Í»§¶Ë£¬ÕâÒ»ÏîÔö¼ÓÁËÓÃ»§µÄÊ¹ÓÃÄÑ¶È¡£ÎÒÃÇ×¼±¸¶Ô´ËÓÅ»¯£ºÎÒÃÇ½«Ê¹ÓÃÈÝÆ÷£¬°Ñ·Ö²¼Ê½´æ´¢½Úµã²¿ÊðÔÚÔÆ·þÎñÆ÷ÖÐ£¬´î½¨Ô¶³Ì·Ö²¼Ê½´æ´¢¼¯Èº£¬ÊµÏÖÔ¶³ÌÍ¨ÐÅºÍÔ¶³ÌÎÄ¼þ´«Êä¡£
+´ËÍâ£¬DisGraFS È±ÉÙ±ØÒªµÄ¼à¿Ø×é¼þ£¬¶ø¼à¿ØÔÚÕû¸öÏµÍ³µÄ¿ª·¢ÔËÎ¬ÖÐ¾ßÓÐÖØÒªµÄ×÷ÓÃ£¬Ëü¿ÉÒÔ¶Ô·þÎñ¡¢ÏµÍ³¡¢Æ½Ì¨ÔËÐÐ×´Ì¬ÊµÊ±¼à¿Ø£¬ÊÕ¼¯ÔËÐÐÐÅÏ¢£¬·ÖÎö½á¹û²¢Ô¤Öª´æÔÚµÄ¹ÊÕÏ·çÏÕ£¬Ò»µ©·¢Éú¹ÊÕÏµÚÒ»Ê±¼ä·¢³ö¸æ¾¯ÐÅÏ¢£¬×îÖÕ±£Ö¤ÏµÍ³³ÖÐø¡¢ÎÈ¶¨¡¢°²È«ÔËÐÐ¡£±¾ÏîÄ¿½«ÖÂÁ¦ÓÚÔÚ DisGraFS ÉÏ°²×°·Ö²¼Ê½¼à¿ØÏµÍ³£¬ÁË½âÏµÍ³µÄÔËÐÐ×´Ì¬£¬±£Ö¤·þÎñµÄÕýÈ·ÇÒÎÈ¶¨ÔËÐÐ¡£
+
+
 
 ## ÀíÂÛÒÀ¾Ý
 
@@ -46,7 +47,7 @@
 
 ·Ö²¼Ê½¼à¿ØÊÇ²¿ÊðÔÚ·Ö²¼Ê½ÏµÍ³ÄÚµÄ¼à¿Ø×é¼þ£¬Ëü¿ÉÒÔ¼àÊÓºÍÏÔÊ¾¼¯ÈºÖÐ¸÷½ÚµãµÄ×´Ì¬ÐÅÏ¢£¬ËüÓÐÔËÐÐÔÚ¸÷¸ö½ÚµãµÄ½ø³Ì£¬¿ÉÒÔ²É¼¯²»Í¬½ÚµãÖ®¼äµÄÍ¨ÐÅÏûÏ¢£¬²É¼¯¸÷¸ö½ÚµãµÄ×ÊÔ´ÀûÓÃÂÊ£¬×îºó½«²É¼¯µ½µÄÊý¾Ý»ã×Üµ½Ò»¸öÊý¾Ý¿â£¬½øÐÐ·ÖÎö´¦ÀíºóÒÔÖ±¹ÛµÄÍ¼ÐÎ»¯½çÃæ½øÐÐ³ÊÏÖ¡£
 
-×ÛºÏ¶øÑÔ£¬¼à¿ØÏµÍ³µÄ¹¦ÄÜÖ÷Òª°üÀ¨£º
+¼à¿ØÏµÍ³µÄ¹¦ÄÜÖ÷Òª°üÀ¨£º
 
 * ¶Ô·þÎñ¡¢ÏµÍ³¡¢Æ½Ì¨ÔËÐÐ×´Ì¬ÊµÊ±¼à¿Ø£¬±£Ö¤ÏµÍ³ÄÜ°²È«ÎÈ¶¨µØÔËÐÐ
 * ÊÕ¼¯ÔËÐÐÐÅÏ¢£¬·ÖÎö½á¹û²¢Ô¤Öª´æÔÚµÄ¹ÊÕÏ·çÏÕ£¬Ò»µ©·¢Éú¹ÊÕÏÐèÒªµÚÒ»Ê±¼ä·¢³ö¸æ¾¯ÐÅÏ¢
@@ -62,6 +63,85 @@ DisGraFS ÊÇÓÉ [OSH-2021 x-DisGraFS Ð¡×é](https://github.com/OSH-2021/x-DisGraFS)
 1. DisGraFS µÄÔ¶³Ì´æ´¢¼¯ÈºÊµ¼ÊÃ»ÓÐÊµÏÖ¡£°´ÕÕ DisGraFS ±¾À´µÄÉèÏë£¬µ±Õû¸ö·Ö²¼Ê½ÎÄ¼þÏµÍ³´î½¨ÔËÐÐÆðÀ´ÒÔºó£¬ÓÃ»§Ö»ÐèÒª½øÈëµ½ DisGraFS Ìá¹©µÄÍøÒ³£¬µÇÂ½ÑéÖ¤Í¨¹ýºó£¬¼´¿É¿´µ½Õû¸öÍ¼ÎÄ¼þÏµÍ³£¬²¢ÔÚÍøÒ³ÉÏÊµÏÖÎÄ¼þµÄÉÏ´«¡¢ÒÆ¶¯ºÍÉ¾³ý¡£¶ø DisGraFS ÔÚ¾ßÌåÊµÏÖÖÐ£¬ÎªÁË¼ò»¯¹¤×÷Á¿£¨¹¤×÷Á¿È·Êµ·Ç³£´ó£©£¬DisGraFS Ð¡×é½«Ô¶³Ì´æ´¢½Úµã½øÐÐÁË¼ò»¯£¬Ô¶³Ì´æ´¢¼¯ÈºµÄ Redis Êý¾Ý¿â½öÓÐÒ»Ì¨·þÎñÆ÷£¨OSS ²ÉÓÃ°¢ÀïÔÆÌá¹©µÄ·þÎñ£¬»òÐí´æÔÚ·Ö²¼Ê½¼¯Èº£©£¬¶ø±¾µØÓÃ»§ÐèÒª½«Õâ¸ö´æ´¢¼¯Èº¹ÒÔØµ½±¾µØ£¬²ÅÄÜÊµÏÖÎÄ¼þµÄ´«Êä¡£ÎÒÃÇ¼Æ»®Íê³ÉËûÃÇ×î³õµÄÉèÏë£¬ÖØÐÂ´î½¨´æ´¢¼¯Èº£¬Õâ½«ÊÇÒ»¸öÕæÕý¾ßÓÐ¶à¸ö´æ´¢½ÚµãµÄ¡¢Ô¶³ÌµÄ¼¯Èº£¬ÓÃ»§µÄËùÓÐ²Ù×÷½öÐèÒªÔÚÍøÒ³¶ËÖ´ÐÐ¡£
 2. DisGraFS ²¢²»¾ß±¸¿ÉÔËÎ¬ÐÔ£¬Ò²Ã»ÓÐ½øÐÐ¿ÉÓÃÐÔµÄ±£ÕÏ£¬ËüµÄÈÕÖ¾ÎÄ¼þ·ÖÉ¢£¬¿ª·¢ÈËÔ±ºÜÄÑÍ¬Ê±»ñµÃÕû¸öÏµÍ³µÄÔËÐÐ×´Ì¬£¬Ò²ºÜÄÑ¿´µ½¸÷¸ö½ÚµãµÄ×ÊÔ´Ê¹ÓÃÇé¿ö£¬ÉõÖÁÎÞ·¨¼°Ê±ÁË½âÄ³¸öÎïÀí½ÚµãÊÇ·ñ»¹´¦ÓÚÁ¬½Ó×´Ì¬£¬ÕâÊ¹µÃËüµÄ¿ÉÓÃÐÔ²»ÄÜµÃµ½±£Ö¤¡£ÕâÒ²ÊÇÎÒÃÇÒª´î½¨¼à¿Ø×é¼þµÄÔ­Òò¡£
 
+### Reed-Solomon ±àÂë
+
+¾ÀÉ¾Âë£¨Erasure Code£©ÊÇÒ»ÖÖ±àÂë¼¼Êõ¡£ËüÍ¨¹ý¼ÆËã½« n ·ÝÔ­Ê¼Êý¾ÝÔö¼ÓÖÁ n+m ·ÝÊý¾Ý£¬²¢ÄÜÓÉÆäÖÐµÄÈÎÒâ n ·ÝÊý¾Ý»¹Ô­³öÔ­Ê¼Êý¾Ý£¬¼´¿ÉÒÔÈÝÈÌ²»¶àÓÚ m ·ÝµÄÊý¾ÝÊ§Ð§¡£¾ÀÉ¾ÂëÖ÷ÒªÓ¦ÓÃÔÚÍøÂç´«ÊäÖÐ£¬ÓÃÒÔÌá¸ß´æ´¢ÏµÍ³µÄ¿É¿¿ÐÔ¡£Ïà±È¶à¸±±¾¸´ÖÆ¶øÑÔ£¬ËüÄÜÒÔ¸üÐ¡µÄÊý¾ÝÈßÓà¶È»ñµÃ¸ü¸ßÊý¾Ý¿É¿¿ÐÔ£¬ µ«±àÂë·½Ê½½Ï¸´ÔÓ£¬ÐèÒª´óÁ¿¼ÆËã¡£
+
+ÀïµÂ-ËùÂÞÃÅÂë£¨Reed-Solomon codes£¬RS codes£©ÊÇ¾ÀÉ¾ÂëµÄÒ»Àà£¬³£±»Ó¦ÓÃÔÚ·Ö²¼Ê½ÎÄ¼þÏµÍ³ÖÐ£¬ÎÒÃÇÏ£ÍûÊ¹ÓÃËüÀ´ÌáÉýÎÄ¼þÏµÍ³µÄ¿É¿¿ÐÔ¡£ÏÂÃæ½éÉÜËüµÄ±à½âÂëÔ­Àí¡£
+
+#### ±à½âÂëÔ­Àí
+
+##### ±àÂë
+
+RS ±àÂëÒÔ word Îª±àÂëºÍ½âÂëµ¥Î»£¬´óµÄÊý¾Ý¿é²ð·Öµ½×Ö³¤Îª w£¨È¡ÖµÒ»°ãÎª 8 »òÕß 16 Î»£©µÄ word£¬È»ºó¶Ô word ½øÐÐ±à½âÂë¡£Êý¾Ý¿éµÄ±àÂëÔ­ÀíÓë word ±àÂëÔ­ÀíÏàÍ¬¡£°ÑÊäÈëÊý¾ÝÊÓÎªÏòÁ¿ D = (D1, D2, .., Dn), ±àÂëºóÊý¾ÝÊÓÎªÏòÁ¿ (D1, D2, .., Dn, C1, C2, .., Cm)£¬RS ±àÂë¿ÉÊÓÎªÈçÏÂÍ¼ËùÊ¾¾ØÕóÔËËã¡£
+
+![img](image\research-RS-1)
+
+ÉÏÍ¼×î×ó±ßÊÇ±àÂë¾ØÕó£¨»ò³ÆÎªÉú³É¾ØÕó¡¢·Ö²¼¾ØÕó£¬Distribution Matrix£©£¬±àÂë¾ØÕóÐèÒªÂú×ãÈÎÒâ n\*n ×Ó¾ØÕó¿ÉÄæ¡£Îª·½±ãÊý¾Ý´æ´¢£¬±àÂë¾ØÕóÉÏ²¿ÊÇµ¥Î»Õó£¬ÏÂ²¿ÊÇ m\*n ¾ØÕó¡£ÏÂ²¿¾ØÕó¿ÉÒÔÑ¡Ôñ·¶µÂÃÉµÂ¾ØÕó»ò¿ÂÎ÷¾ØÕó¡£
+
+##### ½âÂë
+
+RS ×î¶àÄÜÈÝÈÌ m ¸öÊý¾Ý¿é±»É¾³ý£¬Êý¾Ý»Ö¸´µÄ¹ý³ÌÈçÏÂ£º
+
+- ¼ÙÉè D1¡¢D4¡¢C2 ¶ªÊ§£¬´Ó±àÂë¾ØÕóÖÐÉ¾µô¶ªÊ§µÄÊý¾Ý¿é/±àÂë¿é¶ÔÓ¦µÄÐÐ¡£¸ù¾Ý RS ±àÂëÔËËãµÈÊ½£¬¿ÉÒÔµÃµ½ B' ÒÔ¼°µÈÊ½£º
+
+![img](image\research-RS-2-new)
+
+- ÓÉÓÚ B' ÊÇ¿ÉÄæµÄ£¬¼Ç B' µÄÄæ¾ØÕóÎª B'^(-1)£¬Ôò B'\*B'^(-1) = I µ¥Î»¾ØÕó¡£Á½±ß×ó³Ë B' Äæ¾ØÕó£º
+
+![img](image\research-RS-4)
+
+- µÃµ½ÈçÏÂÔ­Ê¼Êý¾Ý D µÄ¼ÆËã¹«Ê½£¬´Ó¶ø»Ö¸´Ô­Ê¼Êý¾Ý D£º
+
+![img](image\research-RS-5-new)
+
+#### ±àÂë¾ØÕó
+
+##### »ùÓÚ·¶µÂÃÉµÂ£¨Vandermonde£©¾ØÕó
+
+ÔÚÏßÐÔ´úÊýÖÐÓÐÒ»ÖÖ¾ØÕó³ÆÎª·¶µÂÃÉµÂ¾ØÕó£¬ËüµÄÈÎÒâµÄ×Ó·½Õó¾ùÎª¿ÉÄæ·½Õó¡£
+
+Ò»¸ö m ÐÐ n ÁÐµÄ·¶µÂÃÉµÂ¾ØÕó¶¨ÒåÈçÏÂÍ¼×ó±ß£¬ÆäÖÐ Ai ¾ù²»ÏàÍ¬£¬ÇÒ²»Îª 0¡£Áî A1, A2, .., An ·Ö±ðÎª 1, 2, 3, .., n£¬ÔòµÃµ½·¶µÂÃÉµÂ¾ØÕóÎªÏÂÍ¼ÓÒ±ß£º
+
+![img](image\feasibility-RS-Vandermonde-1)
+
+±àÂë¾ØÕó¾ÍÊÇµ¥Î»¾ØÕóºÍ·¶µÂÃÉµÂ¾ØÕóµÄ×éºÏ¡£ÊäÈëÊý¾Ý D ºÍ±àÂë¾ØÕóµÄ³Ë»ý¾ÍÊÇ±àÂëºóµÄÊý¾Ý¡£
+
+²ÉÓÃÕâÖÖ·½·¨µÄËã·¨¸´ÔÓ¶È»¹ÊÇ±È½Ï¸ßµÄ£¬±àÂë¸´ÔÓ¶ÈÎª O(mn)£¬ÆäÖÐ m ÎªÐ£ÑéÊý¾Ý¸öÊý£¬n ÎªÊäÈëÊý¾Ý¸öÊý¡£½âÂë¸´ÔÓ¶ÈÎª O(n^3)¡£
+
+##### »ùÓÚ¿ÂÎ÷£¨Cauchy£©¾ØÕó
+
+¿ÂÎ÷¾ØÕóµÄÈÎÒâÒ»¸ö×Ó·½Õó¶¼ÊÇÆæÒì¾ØÕó£¬´æÔÚÄæ¾ØÕó¡£¶øÇÒ¿ÂÎ÷¾ØÕóÔÚåÈÂÞ»ªÓòÉÏµÄÇóÄæÔËËã£¬¿ÉÒÔÔÚ O(n^2) µÄÔËËã¸´ÔÓ¶ÈÄÚÍê³É¡£Ê¹ÓÃ¿ÂÎ÷¾ØÕó£¬±È·¶µÂÃÉµÂ¾ØÕóµÄÓÅ»¯Ö÷ÒªÓÐÁ½µã£º
+
+- ½µµÍÁË¾ØÕóÇóÄæµÄÔËËã¸´ÔÓ¶È¡£·¶µÂÃÉ¾ØÕóÇóÄæÔËËãµÄ¸´ÔÓ¶ÈÎª O(n^3)£¬¶ø¿ÂÎ÷¾ØÕóÇóÄæÔËËãµÄ¸´ÔÓ¶È½öÎª O(n^2)¡£
+- Í¨¹ýÓÐÏÞÓò×ª»»£¬½« GF(2^w) ÓòÖÐµÄÔªËØ×ª»»³É¶þ½øÖÆ¾ØÕó£¬½«³Ë·¨×ª»»ÎªÂß¼­Óë£¬½µµÍÁË³Ë·¨ÔËËã¸´ÔÓ¶È¡££¨¶þ½øÖÆµÄ¼Ó·¨¼´ XOR£¬³Ë·¨¼´ AND£©
+
+¿ÂÎ÷¾ØÕóµÄÃèÊöÈçÏÂÍ¼×ó±ß£¬Xi ºÍ Yi ¶¼ÊÇåÈÂÞ»ªÓò GF(2^w) ÖÐµÄÔªËØ¡£ÓÒ±ßÊÇ»ùÓÚ¿ÂÎ÷¾ØÕóµÄ±àÂë¾ØÕó£º
+
+![img](image\feasibility-RS-Cauchy-1-new.png)
+
+##### ¿ÂÎ÷±à½âÂë¹ý³ÌÓÅ»¯
+
+ÔÚ·¶µÂÃÉ±àÂëµÄÊ±ºò£¬ÎÒÃÇ¿ÉÒÔ²ÉÓÃ¶ÔÊý/·´¶ÔÊý±íµÄ·½·¨£¬½«³Ë·¨ÔËËã×ª»»³ÉÁË¼Ó·¨ÔËËã£¬²¢ÇÒÔÚåÈÂÞ»ªÓòÖÐ£¬¼Ó·¨ÔËËã×ª»»³ÉÁË XOR ÔËËã¡£
+
+¿ÂÎ÷±à½âÂëÎªÁË½µµÍ³Ë·¨¸´ÔÓ¶È£¬²ÉÓÃÁËÓÐÏÞÓòÉÏµÄÔªËØ¶¼¿ÉÒÔÊ¹ÓÃ¶þ½øÖÆ¾ØÕó±íÊ¾µÄÔ­Àí£¬½«³Ë·¨ÔËËã×ª»»³ÉÁËåÈÂÞ»ªÓò¡°AND ÔËËã¡±ºÍ¡°XOR Âß¼­ÔËËã¡±£¬Ìá¸ßÁË±à½âÂëÐ§ÂÊ¡£
+
+´ÓÊýÑ§µÄ½Ç¶È£¬ÔÚåÈÂÞ»ªÓÐÏÞÓòÖÐ£¬ÈÎºÎÒ»¸ö GF(2^w) ÓòÉÏµÄÔªËØ¶¼¿ÉÒÔÓ³Éäµ½ GF(2) ¶þ½øÖÆÓò£¬²¢ÇÒ²ÉÓÃÒ»¸ö¶þ½øÖÆ¾ØÕóµÄ·½Ê½±íÊ¾ GF(2^w) ÖÐµÄÔªËØ¡£ÀýÈç GF(2^3) ÓòÖÐµÄÔªËØ¿ÉÒÔ±íÊ¾³É GF(2) ÓòÖÐµÄ¶þ½øÖÆ¾ØÕó£º
+
+![img](image\feasibility-RS-GF-1)
+
+ÉÏÍ¼ÖÐ£¬ºÚÉ«·½¿é±íÊ¾Âß¼­ 1£¬°×É«·½¿é±íÊ¾Âß¼­ 0¡£Í¨¹ýÕâÖÖ×ª»»£¬GF(2^w) ÓòÖÐµÄÕóÁÐ¾Í¿ÉÒÔ×ª»»³É GF(2) ÓòÖÐµÄ¶þ½øÖÆÕóÁÐ¡£Éú³É¾ØÕóµÄÕóÁÐ×ª»»±íÊ¾ÈçÏÂ£º
+
+![img](image\feasibility-RS-GF-2)
+
+ÔÚ GF(2^w) ÓòÖÐµÄ±àÂë¾ØÕóÎª K\*(K+m)£¬×ª»»µ½ GF(2) ÓòÖÐ£¬Ê¹ÓÃ¶þ½øÖÆ¾ØÕó±íÊ¾£¬±àÂë¾ØÕó±ä³ÉÁË wk\*w(k+m) ¶þ½øÖÆ¾ØÕó¡£²ÉÓÃÓò×ª»»µÄÄ¿µÄÊÇ¼ò»¯ GF(2^w) ÓòÖÐµÄ³Ë·¨ÔËËã¡£ÔÚ GF(2) ÓòÖÐ£¬³Ë·¨ÔËËã±ä³ÉÁËÂß¼­ÓëÔËËã£¬¼Ó·¨ÔËËã±ä³ÉÁË XOR ÔËËã£¬¿ÉÒÔ´ó´ó½µµÍÔËËã¸´ÔÓ¶È¡£
+
+ºÍ·¶µÂÃÉ±à½âÂëÖÐ¿ÉÄÜÊ¹ÓÃµÄ¶ÔÊý/·´¶ÔÊý·½·¨Ïà±È£¬ÕâÖÖ·½·¨²»ÐèÒª¹¹½¨¶ÔÊý»ò·´¶ÔÊý±í£¬¿ÉÒÔÖ§³Ö w ÎªºÜ´óµÄ GF Óò¿Õ¼ä¡£²ÉÓÃÕâÖÖÓÐÏÞÓò×ª»»µÄ·½·¨Ö®ºó£¬¿ÂÎ÷±àÂëÔËËã¿ÉÒÔ±íÊ¾ÈçÏÂ£º
+
+![img](image\feasibility-RS-GF-3)
+
+Ê¹ÓÃ¿ÂÎ÷¾ØÕóÒªÓÅÓÚ·¶µÂÃÉµÂ¾ØÕóµÄ·½·¨£¬¿ÂÎ÷¾ØÕóµÄÔËËã¸´ÔÓ¶ÈÎª O(n*(n-m))£¬½âÂë¸´ÔÓ¶ÈÎª O(n^2)¡£
+
 ### ¼à¿ØµÄÒâÒå¡ª¡ª¹¤Òµ½çÖÐµÄ¼à¿ØÏµÍ³
 
 #### ·Ö²¼Ê½¼à¿Ø CAT
@@ -75,14 +155,14 @@ CAT£¨Central Application Tracking£©£¬ÊÇÃÀÍÅµãÆÀ»ùÓÚ Java ¿ª·¢µÄÒ»Ì×¿ªÔ´µÄ·Ö²¼Ê½Ê
 - ÊµÊ±´¦Àí£ºÐÅÏ¢µÄ¼ÛÖµ»áËæÊ±¼äÈñ¼õ£¬ÓÈÆäÊÇÊÂ¹Ê´¦Àí¹ý³ÌÖÐ¡£
 - È«Á¿Êý¾Ý£º×î¿ªÊ¼µÄÉè¼ÆÄ¿±ê¾ÍÊÇÈ«Á¿²É¼¯£¬È«Á¿µÄºÃ´¦ÓÐºÜ¶à¡£
 - ¸ß¿ÉÓÃ£ºËùÓÐÓ¦ÓÃ¶¼µ¹ÏÂÁË£¬ÐèÒª¼à¿Ø»¹Õ¾×Å£¬²¢¸æËß¹¤³ÌÊ¦·¢ÉúÁËÊ²Ã´£¬×öµ½¹ÊÕÏ»¹Ô­ºÍÎÊÌâ¶¨Î»¡£
-- ¹ÊÕÏÈÝÈÌ£ºCAT±¾Éí¹ÊÕÏ²»Ó¦¸ÃÓ°ÏìÒµÎñÕý³£ÔË×ª£¬CAT¹ÒÁË£¬Ó¦ÓÃ²»¸ÃÊÜÓ°Ïì£¬Ö»ÊÇ¼à¿ØÄÜÁ¦ÔÝÊ±¼õÈõ¡£
+- ¹ÊÕÏÈÝÈÌ£ºCAT ±¾Éí¹ÊÕÏ²»Ó¦¸ÃÓ°ÏìÒµÎñÕý³£ÔË×ª£¬CAT ¹ÒÁË£¬Ó¦ÓÃ²»¸ÃÊÜÓ°Ïì£¬Ö»ÊÇ¼à¿ØÄÜÁ¦ÔÝÊ±¼õÈõ¡£
 - ¸ßÍÌÍÂ£ºÒªÏë»¹Ô­ÕæÏà£¬ÐèÒªÈ«·½Î»µØ¼à¿ØºÍ¶ÈÁ¿£¬±ØÐëÒªÓÐ³¬Ç¿µÄ´¦ÀíÍÌÍÂÄÜÁ¦¡£
 - ¿ÉÀ©Õ¹£ºÖ§³Ö·Ö²¼Ê½¡¢¿çIDC²¿Êð£¬ºáÏòÀ©Õ¹µÄ¼à¿ØÏµÍ³¡£
-- ²»±£Ö¤¿É¿¿£ºÔÊÐíÏûÏ¢¶ªÊ§£¬ÕâÊÇÒ»¸öºÜÖØÒªµÄtrade-off£¬Ä¿Ç°CAT·þÎñ¶Ë¿ÉÒÔ×öµ½4¸ö9µÄ¿É¿¿ÐÔ£¬¿É¿¿ÏµÍ³ºÍ²»¿É¿¿ÐÔÏµÍ³µÄÉè¼Æ²î±ð·Ç³£´ó¡£
+- ²»±£Ö¤¿É¿¿£ºÔÊÐíÏûÏ¢¶ªÊ§£¬ÕâÊÇÒ»¸öºÜÖØÒªµÄ trade-off£¬Ä¿Ç° CAT ·þÎñ¶Ë¿ÉÒÔ×öµ½4¸ö9µÄ¿É¿¿ÐÔ£¬¿É¿¿ÏµÍ³ºÍ²»¿É¿¿ÐÔÏµÍ³µÄÉè¼Æ²î±ð·Ç³£´ó¡£
 
-CAT´Ó¿ª·¢ÖÁ½ñ£¬Ò»Ö±±ü³Ð×Å**¼òµ¥µÄ¼Ü¹¹¾ÍÊÇ×îºÃµÄ¼Ü¹¹**Ô­Ôò£¬Ö÷Òª·ÖÎªÈý¸öÄ£¿é£ºCAT-client¡¢CAT-consumer¡¢CAT-home¡£
+CAT ´Ó¿ª·¢ÖÁ½ñ£¬Ò»Ö±±ü³Ð×Å**¼òµ¥µÄ¼Ü¹¹¾ÍÊÇ×îºÃµÄ¼Ü¹¹**Ô­Ôò£¬Ö÷Òª·ÖÎªÈý¸öÄ£¿é£ºCAT-client¡¢CAT-consumer¡¢CAT-home¡£
 
-- Cat-client Ìá¹©¸øÒµÎñÒÔ¼°ÖÐ¼ä²ãÂñµãµÄµ×²ãSDK¡£
+- Cat-client Ìá¹©¸øÒµÎñÒÔ¼°ÖÐ¼ä²ãÂñµãµÄµ×²ã SDK¡£
 - Cat-consumer ÓÃÓÚÊµÊ±·ÖÎö´Ó¿Í»§¶ËÌá¹©µÄÊý¾Ý¡£
 - Cat-home ×÷ÎªÓÃ»§¸øÓÃ»§Ìá¹©Õ¹Ê¾µÄ¿ØÖÆ¶Ë¡£
 
@@ -137,11 +217,13 @@ Zabbix ÊÇÒ»¸ö»ùÓÚWEB½çÃæµÄÌá¹©·Ö²¼Ê½ÏµÍ³¼à¿ØÒÔ¼°ÍøÂç¼à¿Ø¹¦ÄÜµÄÆóÒµ¼¶¿ªÔ´ÔËÎ¬Æ½Ì¨
 
 Zabbix Ò×ÓÚ¹ÜÀíºÍÅäÖÃ£¬ÄÜÉú³É±È½ÏÆ¯ÁÁµÄÊý¾ÝÍ¼£¬Æä×Ô¶¯·¢ÏÖ¹¦ÄÜ´ó´ó¼õÇáÈÕ³£¹ÜÀíµÄ¹¤×÷Á¿£¬·á¸»µÄÊý¾Ý²É¼¯·½Ê½ºÍ API ½Ó¿Ú¿ÉÒÔÈÃÓÃ»§Áé»î½øÐÐÊý¾Ý²É¼¯£¬¶ø·Ö²¼Ê½ÏµÍ³¼Ü¹¹¿ÉÒÔÖ§³Ö¼à¿Ø¸ü¶àµÄÉè±¸¡£ÀíÂÛÉÏ£¬Í¨¹ý Zabbix Ìá¹©µÄ²å¼þÊ½¼Ü¹¹£¬¿ÉÒÔÂú×ãÆóÒµµÄÈÎºÎÐèÇó¡£
 
+
+
 ## ¼¼ÊõÒÀ¾Ý
 
 ### DisGraFS µÄÏµÍ³¼Ü¹¹
 
-ÔÚÈ¥Äê DisGraFS µÄ×îÖÕÊµÏÖ°æ±¾ÖÐ£¬¹²·ÖÎª5¸ö×é³É²¿·Ö£ºË÷Òý·þÎñÆ÷¡¢·Ö²¼Ê½´æ´¢¼¯Èº¡¢·Ö²¼Ê½¼ÆËã¼¯Èº¡¢ÍøÒ³¶ËºÍ¿Í»§¶Ë¡£
+È¥Äê DisGraFS µÄ×îÖÕÊµÏÖ°æ±¾£¬¹²·ÖÎª5¸ö×é³É²¿·Ö£ºË÷Òý·þÎñÆ÷¡¢·Ö²¼Ê½´æ´¢¼¯Èº¡¢·Ö²¼Ê½¼ÆËã¼¯Èº¡¢ÍøÒ³¶ËºÍ¿Í»§¶Ë¡£
 
 - Ë÷Òý·þÎñÆ÷£º½øÐÐ·Ö²¼Ê½´æ´¢¼¯ÈºÓë·Ö²¼Ê½¼ÆËã¼¯ÈºµÄÍ¨ÐÅ¡¢ÍøÒ³¶Ë²¿ÊðµÄÎ»ÖÃ£¬Ä¿Ç°Ò²¸ºÔð¹¹½¨ÓëÎ¬»¤Í¼Êý¾Ý¿â£¨µ«ÈôÓÐÐèÒª£¬Ò²¿É½«Í¼Êý¾Ý¿âµÄ²¿·Ö·ÖÀë³öÈ¥£©£»
 - ·Ö²¼Ê½´æ´¢¼¯Èº£º»ùÓÚ Juicefs µÄ·Ö²¼Ê½´¢´æÏµÍ³£¬¹ÜÀí¡¢´æ´¢ºÍµ÷¶È·Ö²¼Ê½´æ´¢ÏµÍ³ÖÐµÄËùÓÐÎÄ¼þ£»
@@ -182,19 +264,19 @@ websocket.close_connection()
 
 »ù±¾¹Ø¼ü×Ö£º
 
-**event_loop**£ºÊÂ¼þÑ­»·£¬³ÌÐò¿ªÆôÒ»¸öÎÞÏÞÑ­»·£¬°ÑÒ»Ð©º¯Êý×¢²áµ½ÊÂ¼þÑ­»·ÉÏ£¬µ±Âú×ãÊÂ¼þ·¢ÉúµÄÊ±ºò£¬µ÷ÓÃÏàÓ¦µÄÐ­³Ìº¯Êý
++ **event_loop**£ºÊÂ¼þÑ­»·£¬³ÌÐò¿ªÆôÒ»¸öÎÞÏÞÑ­»·£¬°ÑÒ»Ð©º¯Êý×¢²áµ½ÊÂ¼þÑ­»·ÉÏ£¬µ±Âú×ãÊÂ¼þ·¢ÉúµÄÊ±ºò£¬µ÷ÓÃÏàÓ¦µÄÐ­³Ìº¯Êý
 
-**coroutine**£ºÐ­³Ì£¬Ö¸Ò»¸öÊ¹ÓÃ async ¹Ø¼ü×Ö¶¨ÒåµÄº¯Êý£¬ËüµÄµ÷ÓÃ²»»áÁ¢¼´Ö´ÐÐº¯Êý£¬¶øÊÇ»á·µ»ØÒ»¸öÐ­³Ì¶ÔÏó¡£Ð­³Ì¶ÔÏóÐèÒª×¢²áµ½ÊÂ¼þÑ­»·£¬ÓÉÊÂ¼þÑ­»·µ÷ÓÃ
++ **coroutine**£ºÐ­³Ì£¬Ö¸Ò»¸öÊ¹ÓÃ async ¹Ø¼ü×Ö¶¨ÒåµÄº¯Êý£¬ËüµÄµ÷ÓÃ²»»áÁ¢¼´Ö´ÐÐº¯Êý£¬¶øÊÇ»á·µ»ØÒ»¸öÐ­³Ì¶ÔÏó¡£Ð­³Ì¶ÔÏóÐèÒª×¢²áµ½ÊÂ¼þÑ­»·£¬ÓÉÊÂ¼þÑ­»·µ÷ÓÃ
 
-**task**£ºÐ­³Ì¶ÔÏó²»ÄÜÖ±½ÓÔËÐÐ£¬ÔÚ×¢²áÊÂ¼þÑ­»·µÄÊ±ºò£¬ÆäÊµÊÇ run_until_complete ·½·¨½«Ð­³Ì°ü×°³ÉÒ»¸ö task ¶ÔÏó
++ **task**£ºÐ­³Ì¶ÔÏó²»ÄÜÖ±½ÓÔËÐÐ£¬ÔÚ×¢²áÊÂ¼þÑ­»·µÄÊ±ºò£¬ÆäÊµÊÇ run_until_complete ·½·¨½«Ð­³Ì°ü×°³ÉÒ»¸ö task ¶ÔÏó
 
-**future**£º´ú±í½«À´Ö´ÐÐ»òÕßÃ»ÓÐÖ´ÐÐµÄÈÎÎñµÄ½á¹û£¬ËûºÍ task Ã»ÓÐ±¾ÖÊÉÏµÄÇø±ð
++ **future**£º´ú±í½«À´Ö´ÐÐ»òÕßÃ»ÓÐÖ´ÐÐµÄÈÎÎñµÄ½á¹û£¬ËûºÍ task Ã»ÓÐ±¾ÖÊÉÏµÄÇø±ð
 
-**async/await**£º¹Ø¼ü×Ö£¬async ¶¨ÒåÒ»¸öÐ­³Ì£¬await ÓÃÓÚ¹ÒÆð×èÈûµÄÒì²½µ÷ÓÃ½Ó¿Ú
++ **async/await**£º¹Ø¼ü×Ö£¬async ¶¨ÒåÒ»¸öÐ­³Ì£¬await ÓÃÓÚ¹ÒÆð×èÈûµÄÒì²½µ÷ÓÃ½Ó¿Ú
 
-+ await ¼´µÈ´ýÁíÒ»¸öÊÂ¼þ·¢Éú£¬¹ÒÆðµ±Ç°Ð­³Ì£¬ËùÐèÊÂ¼þ·¢Éúºó£¬ÔÙ»Ö¸´µ±Ç°Ð´³ÉµÄÖ´ÐÐ
+  await ¼´µÈ´ýÁíÒ»¸öÊÂ¼þ·¢Éú£¬¹ÒÆðµ±Ç°Ð­³Ì£¬ËùÐèÊÂ¼þ·¢Éúºó£¬ÔÙ»Ö¸´µ±Ç°Ð´³ÉµÄÖ´ÐÐ
 
-+ ×¢£ºasync ºÍ await ÕâÁ½¸ö¹Ø¼ü×ÖÖ»ÄÜÓÃÓÚ Python3.5 ÒÔ¼°ºóÐø°æ±¾
+  ×¢£ºasync ºÍ await ÕâÁ½¸ö¹Ø¼ü×ÖÖ»ÄÜÓÃÓÚ Python3.5 ÒÔ¼°ºóÐø°æ±¾
 
 »ù±¾Ê¹ÓÃ£º
 
@@ -218,7 +300,7 @@ loop.run_until_complete(task)         # Ê¹ÓÃrun_until_complete½«Ð­³Ì×¢²áµ½ÊÂ¼þÑ­
 
 ### neo4j
 
-Neo4jÊÇÒ»¸ö¸ßÐÔÄÜµÄNOSQLÍ¼ÐÎÊý¾Ý¿â£¬Ëü½«½á¹¹»¯Êý¾Ý´æ´¢ÔÚÍ¼ÉÏ¶ø²»ÊÇ±íÖÐ¡£ËüÊÇÒ»¸öÇ¶ÈëÊ½µÄ¡¢»ùÓÚ´ÅÅÌµÄ¡¢¾ß±¸ÍêÈ«µÄÊÂÎñÌØÐÔµÄJava³Ö¾Ã»¯¸ßÐÔÄÜÒýÇæ£¬¸ÃÒýÇæ¾ßÓÐ³ÉÊìÊý¾Ý¿âµÄËùÓÐÌØÐÔ¡£
+Neo4jÊÇÒ»¸ö¸ßÐÔÄÜµÄ NOSQL Í¼ÐÎÊý¾Ý¿â£¬Ëü½«½á¹¹»¯Êý¾Ý´æ´¢ÔÚÍ¼ÉÏ¶ø²»ÊÇ±íÖÐ¡£ËüÊÇÒ»¸öÇ¶ÈëÊ½µÄ¡¢»ùÓÚ´ÅÅÌµÄ¡¢¾ß±¸ÍêÈ«µÄÊÂÎñÌØÐÔµÄ Java ³Ö¾Ã»¯¸ßÐÔÄÜÒýÇæ£¬¸ÃÒýÇæ¾ßÓÐ³ÉÊìÊý¾Ý¿âµÄËùÓÐÌØÐÔ¡£
 
 #### ´¢´æ½á¹¹
 
@@ -310,6 +392,26 @@ Ray µÄ´î½¨ÐèÒªËùÓÐ½ÚµãÔÚÍ¬Ò»¾ÖÓòÍøÄÚ£¬¶ø Ray µÄ head ½ÚµãÐèÒª±£³ÖÔËÐÐ£¬²ÅÄÜ±£Ö¤Æ
 
 
 
+### Docker ÈÝÆ÷»¯·þÎñ¶Ë
+
+ÔÚÉú²ú»·¾³ÉÏ£¬´«Í³µÄÊÖ¹¤²¿Êð·½·¨¿ÉÄÜ»á³öÏÖÏÂÁÐÊÂ¼þ£º
+
+- ÄãµÄ Linux ·¢ÐÐ°æºÜÀÏ£¬¶øÄãÐèÒªÔËÐÐÒ»¸ö¸øÐÂ°æ±¾µÄ Linux »òÕßÍêÈ«²»Í¬µÄ Linux ·¢ÐÐ°æÉè¼ÆµÄ³ÌÐò¡£
+- ÄãºÍÅóÓÑÒ»ÆðÉè¼ÆÒ»¸ö´óÐÍ³ÌÐò£¬ÓÉÓÚÄãÃÇµÄÔËÐÐ»·¾³²»Í¬£¬ÓÐÊ±ºòÔÚÄ³Ì¨»úÆ÷ÉÏÕý³£ÔËÐÐµÄ³ÌÐò£¬ÔÚÁíÒ»Ì¨»úÆ÷ÉÏÃ»·¨Õý³£ÔËÐÐ¡£
+- ÄãÏ£ÍûÔÚ¶àÌ¨·þÎñÆ÷ÉÏ²¿ÊðÍ¬Ò»¸öÏîÄ¿£¬µ«ÊÇÏîÄ¿ÐèÒª·Ç³£¸´ÔÓµÄÅäÖÃ£¬Ò»¸öÒ»¸öÅäÖÃ·þÎñÆ÷µÄ³É±¾·Ç³£´ó¡£
+
+¶øÈÝÆ÷»¯¼¼Êõ¿ÉÒÔ·½±ã½â¾öÉÏÊöÎÊÌâ£¬ÈÝÆ÷¿ÉÒÔ°ÑÓ¦ÓÃ¼°ÆäÒÀÀµÏî¶¼½«´ò°ü³ÉÒ»¸ö¿ÉÒÔ¸´ÓÃµÄ¾µÏñ²¢ÓëÆäËû½ø³Ì»·¾³¸ôÀë¡£
+
+ÔÚÔËÐÐ»·¾³¡¢ÍøÂçÍØÆË¡¢°²È«²ßÂÔºÍ´æ´¢·½°¸±ä»¯Ê±£¬Èí¼þ¿ÉÄÜ»áÏÔÏÖÒ»Ð©³öºõÒâÁÏµÄÎÊÌâ£»¶øÈÝÆ÷Ê¹¿ª·¢»·¾³ºÍÔËÐÐ»·¾³Í³Ò»¡£Í¬Ê±ÈÝÆ÷²¢²»ÏñÐéÄâ»úÄÇÑùÄ£ÄâÈ«²¿Ó²¼þ£¨Õâ¶ÔÓÚºÜ¶àÇáÁ¿ÐÍÓ¦ÓÃÊÇÐ¡Ìâ´ó×ö£©£¬ËüÖ»ÐéÄâ»¯ÁËÎÄ¼þÏµÍ³¡¢ÍøÂç¡¢ÔËÐÐ»·¾³µÈ£¬ÔÚºËÐÄ±¾µØÔËÐÐÖ¸Áî£¬²»ÐèÒªÈÎºÎ×¨ÃÅµÄ½Ó¿Ú·­ÒëºÍÏµÍ³µ÷ÓÃÌæ»»»úÖÆ£¬¼õÉÙÁËºÜ¶àÐéÄâ»¯¿ªÏú¡£
+
+Ê¹ÓÃÈÝÆ÷¼¼ÊõºÜºÃµØ¼ò»¯ÁËÄ¿Â¼½ÚµãµÄÅäÖÃ£¬Í¬Ê±»¹¿ÉÒÔ¼õÉÙ¿ª·¢»·¾³ºÍ²¿Êð»·¾³²»Í¬´øÀ´µÄÎÊÌâ¡£
+
+ºÜ¶àÊ±ºòÈËÃÇ¿ÉÄÜÒòÎªÅäÖÃÎÄµµ¹ýÓÚ¸´ÔÓ»òÕßÒòÎª»·¾³ÎÊÌâÅäÖÃÊ§°Ü£¬¾Í·ÅÆúÁËÒ»¸öÏîÄ¿¡£Ìá¹©Ò»¼ü²¿ÊðµÄ·½°¸£¬½µµÍÁË²¿ÊðµÄ³É±¾ºÍÑ§Ï°ÃÅ¼÷£¬·Ç³£ÓÐÀûÓÚÏîÄ¿µÄÍÆ¹ã¡£
+
+### ÎÄ¼þ±à½âÂë
+
+dontpanic ²ÉÓÃ¾ÀÉ¾Âë¼¼ÊõÖÐµÄÀïµÂ-ËùÂÞÃÅËã·¨£¨Reed-Solomon Code£©¶ÔÎÄ¼þ½øÐÐÈßÓà£¬²¢Ê¹ÓÃÐÔÄÜÏà±ÈÓÚ·¶µÂÃÉ¾ØÕó¸üºÃµÄ¿ÂÎ÷¾ØÕó×÷Îª±àÂë¾ØÕó¡£
+
 ### Prometheus
 
 Prometheus ÊÇÒ»¸ö¿ªÔ´ÏµÍ³¼à¿ØºÍ¾¯±¨¹¤¾ß°ü£¬Ëü½«ÊµÊ±µÄÖ¸±êÊý¾Ý£¨metrics£©¼ÇÂ¼²¢´æ´¢ÔÚÍ¨¹ý Http À­È¡Ä£ÐÍ¹¹½¨µÄÊ±¼äÐòÁÐÊý¾Ý¿âÖÐ£¬ÓÐ×Å½ÏÁé»îµÄÑ¯ÎÊ¹¦ÄÜºÍÊµÊ±¸æ¾¯¹¦ÄÜ¡£
@@ -352,8 +454,6 @@ Exporter ¿ÉÒÔÊÇÒ»¸öÏà¶Ô¿ª·ÅµÄ¸ÅÄî£¬Æä¿ÉÒÔÊÇÒ»¸ö¶ÀÁ¢ÔËÐÐµÄ³ÌÐò¶ÀÁ¢ÓÚ¼à¿ØÄ¿±êÒÔÍâ£
 
 ÎªÁËÄÜ¹»²É¼¯µ½Ö÷»úµÄÔËÐÐÖ¸±êÈç CPU, ÄÚ´æ£¬´ÅÅÌµÈÐÅÏ¢¡£ÎÒÃÇ¿ÉÒÔÊ¹ÓÃ Node Exporter¡£
 
-
-
 ### InfluxDB
 
 Prometheus Server ±¾Éí¾ÍÊÇÒ»¸öÊ±ÐòÊý¾Ý¿â£¬½«²É¼¯µ½µÄ¼à¿ØÊý¾Ý°´ÕÕÊ±¼äÐòÁÐµÄ·½Ê½´æ´¢ÔÚ±¾µØ´ÅÅÌµ±ÖÐ¡£Prometheus µÄ±¾µØ´æ´¢Éè¼Æ¿ÉÒÔ¼õÉÙÆä×ÔÉíÔËÎ¬ºÍ¹ÜÀíµÄ¸´ÔÓ¶È£¬Í¬Ê±ÄÜ¹»Âú×ã´ó²¿·ÖÓÃ»§¼à¿Ø¹æÄ£µÄÐèÇó¡£µ«ÊÇ±¾µØ´æ´¢Ò²ÒâÎ¶×Å Prometheus ÎÞ·¨³Ö¾Ã»¯Êý¾Ý£¬ÎÞ·¨´æ´¢´óÁ¿ÀúÊ·Êý¾Ý£¬Í¬Ê±Ò²ÎÞ·¨Áé»îÀ©Õ¹ºÍÇ¨ÒÆ¡£
@@ -388,8 +488,6 @@ InfluxDB ÊÇÒ»¸öÓÉ InfluxData ¿ª·¢µÄ¿ªÔ´Ê±ÐòÐÍÊý¾Ý¿â£¬×ÅÁ¦ÓÚ¸ßÐÔÄÜµØ²éÑ¯Óë´æ´¢Ê±Ð
 8. µÍ³É±¾´æ´¢£¬²ÉÑùÊ±ÐòÊý¾Ý£¬Ñ¹Ëõ´æ´¢¡£
 9. ·á¸»µÄ¾ÛºÏº¯Êý£¬Ö§³Ö AVG¡¢SUM¡¢MAX¡¢MIN µÈ¾ÛºÏº¯Êý¡£
 
-
-
 ### Grafana
 
 Prometheus ÖÐµÄ Graph Ãæ°å¿É²éÑ¯Êý¾ÝÐÎ³ÉÍ¼±í¡£µ«ÊÇÈ±µãÒ²ºÜÃ÷ÏÔ£¬ÕâÐ©²éÑ¯½á¹û¶¼ÊÇÁÙÊ±µÄ£¬ÎÞ·¨³Ö¾Ã»¯µÄ£¬¸ü±ðËµÎÒÃÇÏëÊµÊ±¹Ø×¢Ä³Ð©ÌØ¶¨¼à¿ØÖ¸±êµÄ±ä»¯Ç÷ÊÆ¡£
@@ -406,8 +504,6 @@ Grafana ÊÇÒ»¸ö¿çÆ½Ì¨µÄ¿ªÔ´µÄ¶ÈÁ¿·ÖÎöºÍ¿ÉÊÓ»¯¹¤¾ß£¬¿ÉÒÔÍ¨¹ý½«²É¼¯µÄÊý¾Ý²éÑ¯È»ºó¿É
 - »ìºÏÕ¹Ê¾£ºÔÚÍ¬Ò»Í¼±íÖÐ»ìºÏÊ¹ÓÃ²»Í¬µÄÊý¾ÝÔ´£¬¿ÉÒÔ»ùÓÚÃ¿¸ö²éÑ¯Ö¸¶¨Êý¾ÝÔ´£¬ÉõÖÁ×Ô¶¨ÒåÊý¾ÝÔ´£»
 - ×¢ÊÍ£ºÊ¹ÓÃÀ´×Ô²»Í¬Êý¾ÝÔ´µÄ·á¸»ÊÂ¼þ×¢ÊÍÍ¼±í£¬½«Êó±êÐüÍ£ÔÚÊÂ¼þÉÏ»áÏÔÊ¾ÍêÕûµÄÊÂ¼þÔªÊý¾ÝºÍ±ê¼Ç£»
 - ¹ýÂËÆ÷£ºAd-hoc ¹ýÂËÆ÷ÔÊÐí¶¯Ì¬´´½¨ÐÂµÄ¼ü/Öµ¹ýÂËÆ÷£¬ÕâÐ©¹ýÂËÆ÷»á×Ô¶¯Ó¦ÓÃÓÚÊ¹ÓÃ¸ÃÊý¾ÝÔ´µÄËùÓÐ²éÑ¯¡£
-
-
 
 ### Lua
 
@@ -476,7 +572,7 @@ thread: 0x7fb801c04c88    true
 
 µÚ¶þ²½£¬ÀûÓÃ Prometheus ²¿Êð¼à¿Ø£¬¶Ô¼à¿Øµ½µÄÐÅÏ¢½øÐÐ´¦Àí£¬×îºóÓÃ Grafana ½øÐÐÍ¼ÐÎ»¯³ÊÏÖ¡£
 
-µÚÈý²½£¬´î½¨Ô¶³Ì·Ö²¼Ê½´æ´¢¼¯Èº£¬ÊµÏÖÔ¶³ÌÍ¨ÐÅºÍÔ¶³ÌÎÄ¼þ´«Êä
+µÚÈý²½£¬²Î¿¼ dontpanic£¬´î½¨ÈÝÆ÷»¯Ô¶³Ì·Ö²¼Ê½´æ´¢¼¯Èº£¬ÊµÏÖÔ¶³ÌÍ¨ÐÅºÍÔ¶³ÌÎÄ¼þ´«Êä
 
 µÚËÄ²½£¬¸ù¾Ý¼à¿Øµ½µÄÐÅÏ¢£¬¶Ô DisGraFS ½øÐÐÐÔÄÜÉÏµÄÓÅ»¯
 
@@ -491,3 +587,8 @@ https://tech.ipalfish.com/blog/2020/07/21/tidb_monitor/
 https://tech.meituan.com/2018/11/01/cat-in-depth-java-application-monitoring.html
 
 https://tech.meituan.com/2018/11/01/cat-pr.html
+
+[OSH-2021/x-DisGraFS: Distributed Graph Filesystem (github.com)](https://github.com/OSH-2021/x-DisGraFS)
+
+[OSH-2020/x-dontpanic: team dontpanic in ustc-osh-2020 (github.com)](https://github.com/OSH-2020/x-dontpanic)
+
