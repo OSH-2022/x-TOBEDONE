@@ -418,3 +418,35 @@ Hadoop 是一个由 Apache 基金会所开发的分布式系统基础架构，�
 
 ## 参考文献
 
+[Anyscale - The Future of Computing is Distributed](https://www.anyscale.com/blog/the-future-of-computing-is-distributed)
+
+[Introduction - prometheus-book ](https://yunlzheng.gitbook.io/prometheus-book/)
+
+[neo4j documentation](http://neo4j.com.cn/public/docs/index.html)
+
+[HDFS Architecture Guide](https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html)
+
+[Apache Hadoop ](https://en.wikipedia.org/wiki/Apache_Hadoop)
+
+[Prometheus (software)](https://en.wikipedia.org/wiki/Prometheus_(software))
+
+[Lua (programming language)](https://en.wikipedia.org/wiki/Lua_(programming_language))
+
+[What is Hadoop](https://aws.amazon.com/cn/emr/details/hadoop/what-is-hadoop/)
+
+[OpenResty](https://en.wikipedia.org/wiki/OpenResty)
+
+[InfluxDB: Open Source Time Series Database | InfluxData](https://www.influxdata.com/)
+
+[prometheus-lua-nginx: API Gateway monitoring tools](https://github.com/zrbcool/prometheus-lua-nginx)
+
+[深度剖析开源分布式监控CAT - 美团技术团队 ](https://tech.meituan.com/2018/11/01/cat-in-depth-java-application-monitoring.html)
+
+[Mt-Falcon——Open-Falcon在美团点评的应用与实践 - 美团技术团队 (meituan.com)](https://tech.meituan.com/2017/02/24/mt-falcon-monitoring-system.html)
+
+[伴鱼数据库之监控系统 | 伴鱼技术团队 (ipalfish.com)](https://tech.ipalfish.com/blog/2020/07/21/tidb_monitor/)
+
+[Grafana Cloud | Grafana Labs](https://go2.grafana.com/grafana-cloud.html?src=ggl-s&mdm=cpc&camp=b-grafana-exac-apac&cnt=118051266643&trm=grafana&device=c&gclid=EAIaIQobChMI2KK3n56s9wIVSVlgCh2NGwJKEAAYASAAEgIOq_D_BwE)
+
+
+
