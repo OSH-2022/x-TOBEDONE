@@ -54,7 +54,7 @@ vim prometheus.yml
 **Step4：** 尝试启动
 
 ```shell
-./node_exporter
+./prometheus
 ```
 
 保持终端，到网页访问`http://192.168.116.129:9090/targets`，若显示当前Server及Client在线状态说明运行成功：
@@ -66,7 +66,7 @@ vim prometheus.yml
 [prometheus、node_exporter设置开机自启动 - 葛老头 - 博客园](https://www.cnblogs.com/gltou/p/15153878.html)
 
 ```shell
-sudo cp -R prometheus-2.35.0.linux-amd64 /usr/local/prometheus
+sudo mv -R prometheus-2.35.0.linux-amd64 /usr/local/prometheus
 cd /usr/local/prometheus
 vim prometheus.yml
 ```
@@ -74,8 +74,8 @@ vim prometheus.yml
 **Remark：** prometheus.yml配置文件如果在前面修改过，这里就不用再修改。
 
 ```shell
-sudo touch /usr/lib/systemd/system/prometheus.service
-sudo vim /usr/lib/systemd/system/prometheus.service
+sudo touch /etc/systemd/system/prometheus.service
+sudo vim /etc/systemd/system/prometheus.service
 ```
 
 将如下配置写入prometheus.service
@@ -107,7 +107,7 @@ systemctl status prometheus.service
 
 ![](images/image7.png)
 
-保持终端，到网页访问`http://192.168.116.129:9090/targets`，若显示当前Server及Client在线状态说明运行成功：
+到网页访问`http://192.168.116.129:9090/targets`，若显示当前Server及Client在线状态说明运行成功：
 
 ![](images/image8.png)
 
@@ -181,10 +181,10 @@ kill <process_id>
 **Step4：** 启动 node_exporter 服务并设置开机启动
 
 ```shell
-sudo cp -R node_exporter-1.3.1.linux-amd64 /usr/local/node_exporter
+sudo mv -R node_exporter-1.3.1.linux-amd64 /usr/local/node_exporter
 cd /usr/local/node_exporter
-sudo touch /usr/lib/systemd/system/node_exporter.service 
-sudo vim /usr/lib/systemd/system/node_exporter.service
+sudo touch /etc/systemd/system/node_exporter.service 
+sudo vim /etc/systemd/system/node_exporter.service
 ```
 
 **Remark：**
@@ -221,7 +221,7 @@ systemctl status node_exporter.service
 
 ![](images/image4.png)
 
-保持终端，到网页访问`http://192.168.116.131:9100/metrics`，若显示当前 node_exporter 获取到的当前主机的所有监控数据说明运行成功：
+到网页访问`http://192.168.116.131:9100/metrics`，若显示当前 node_exporter 获取到的当前主机的所有监控数据说明运行成功：
 
 ![](images/image5.png)
 
