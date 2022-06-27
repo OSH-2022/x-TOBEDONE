@@ -170,7 +170,7 @@ function_table = {
 
 def tagging(filePath: str):
     print(filePath)
-    filePath = "/usr/jfs/mnt/" + filePath
+    filePath = "/tmp/raytest" + filePath
     filePath = filePath.lower()
     print(filePath)
     return ray.get(function_table[path.splitext(filePath)[-1][1:]].remote(filePath))

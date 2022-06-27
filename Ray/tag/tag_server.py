@@ -11,7 +11,7 @@ from collections import deque
 import _thread
 import queue
 import _thread
-#import tagging
+import tagging
 
 taskQueue = queue.Queue()
 sendQueue = queue.Queue()
@@ -20,8 +20,8 @@ if __name__ == "__main__":
 
     print("Ray")
 
-    mountPointNoSlash = "D:"
-    mountPointSlash = "D:/"
+    mountPointNoSlash = "/tmp/raytest"
+    mountPointSlash = "/tmp/raytest"
     wsUrl = "ws://localhost:9090"
 
     ############
@@ -59,14 +59,13 @@ if __name__ == "__main__":
         # try:
         cmd_dict = eval(cmd_text)
         if cmd_dict["type"] == "create":
-            # tag_recv = tagging.tagging(cmd_dict["path1"])
-            tag_recv = "OJBK"
+            tag_recv = tagging.tagging(cmd_dict["path1"])
             result = ("create", tag_recv)
         else:
             result = ("invalid",)
 
         # return str(result)
-        print("-----------------------",result)
+        print("-----------            ",result)
         sendQueue.put(str(result))
 
 
@@ -110,11 +109,10 @@ if __name__ == "__main__":
             while sendQueue.empty():
                 await asyncio.sleep(0.1)
             result = sendQueue.get()
-            result = """('create', {'labels': ['xxa'], 'property': "{name: '1.txt', ext: 'txt', size: '12', owner: 'xxa'}"})"""
+            # result = """('create', {'labels': ['xxa'], 'property': "{name: '1.txt', ext: 'txt', size: '12', owner: 'xxa'}"})"""
             print("sending: ", result)
 
             await wsClient.send(result)
-            print("$$$$")
 
     async def wsReceiver(wsClient):
         while True:
