@@ -54,7 +54,7 @@ async def main_logic(websocket, path):
             user_item.username = tag_split[0]
             user_item.web_websocket = websocket
             
-            user_array.append(tag_split[1])
+            user_array.append(user_item)
             user_num = user_num + 1
             
             while True:
