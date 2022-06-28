@@ -122,7 +122,7 @@
     #delete_node(node.name)用于删去名为node.name的结点
     
     #连接数据库 
-    scheme = "neo4j"  # Connecting to Aura, use the "neo4j+s" URI scheme
+    scheme = "bolt"  # Connecting to Aura, use the "neo4j+s" URI scheme
     host_name = "localhost"
     port = 7474
     url = "bolt://47.119.121.73:7687".format(scheme=scheme, host_name=host_name, port=port)
@@ -139,7 +139,7 @@
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
     ```
-    - 将url修改为服务器的公网ip `bolt`字段意义暂时不清楚。若为本机部署请修改为`neo4j://0.0.0.0:7687` 7687为默认端口 如果使用的不是默认端口请自行修改
+    - 将url修改为服务器的公网ip `bolt`字段为neo4j廉洁协议。若为本机部署请修改为`neo4j://0.0.0.0:7687` 7687为默认端口 如果使用的不是默认端口请自行修改
     - `user`和`password`修改为前文登录`neo4j://0.0.0.0:7474`使用的账号与密码
     - 目前print功能仅表示程序运行至此 **不代表成功连接**
 + 最后到 DisGraFS: /web&serer/main_server 下，运行服务器端：
