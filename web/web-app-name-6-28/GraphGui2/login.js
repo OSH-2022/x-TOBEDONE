@@ -29,6 +29,6 @@
         }
         
         function ExitClient(){
-            ws.send("{'command': 'exit', 'parameter': []}");
+            //ws.send("{'command': 'exit', 'parameter': []}");
         }
         
