@@ -503,7 +503,7 @@ function fileDelete() {
 			form.append("isfolder", isfolder);
 			form.append("whose", whose);
 
-			let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
+			//let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
 			
 			if(isfolder == 0) //网页端的删除文件行为需要同步到图数据库上
 				ws2.onopen = function()
@@ -652,7 +652,7 @@ function fileRename() {
 			form.append("whose", $.cookie("username"));
 
 			// 网页端的重命名行为需要同步到图数据库上
-			let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
+			//let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
 			
 			ws2.onopen = function()
 			{
@@ -693,6 +693,7 @@ $(document).ready(function(){
 	curr_path_array = [];
 	curr_path_array[0] = "/";
 	curr_path_html = "<li>ROOT</li>";
+	ws2 = new WebSocket("ws://101.33.236.114:9090");
 	
 	//面包屑式访问路径显示  初始化
 	$("#curr_path").html(curr_path_html);
