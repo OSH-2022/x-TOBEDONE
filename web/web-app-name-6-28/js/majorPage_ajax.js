@@ -338,7 +338,7 @@ function encodeCallBack(fileInfo, selectedFile){
 		content_x = new Uint8Array(fileString);
 		digest_x = objectHash.MD5(content_x);
 
-		WebSocketUpload(ip, port, "test_fragment_xxa", content_x, digest_x);
+		WebSocketUpload(ip, port, selectedFile.name, content_x, digest_x);
 	}
 
 	var reader = new FileReader();
