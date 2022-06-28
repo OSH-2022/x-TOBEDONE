@@ -505,8 +505,8 @@ function fileDelete() {
 
 			//let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
 			
-			if(isfolder == 0) //网页端的删除文件行为需要同步到图数据库上
-				w2.send("('delete', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "'})");
+			//if(isfolder == 0) //网页端的删除文件行为需要同步到图数据库上
+			//	w2.send("('delete', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "'})");
 
 			$.ajax({
 				url:"FileDownloader!deleteRegister.action",
@@ -651,8 +651,8 @@ function fileRename() {
 			// 网页端的重命名行为需要同步到图数据库上
 			//let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
 			
-			ws2.send("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
-			console.log("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
+			//ws2.send("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
+			//console.log("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
 			
 
 			console.log(path + " " + name + " " + new_name);
@@ -687,7 +687,7 @@ $(document).ready(function(){
 	curr_path_array = [];
 	curr_path_array[0] = "/";
 	curr_path_html = "<li>ROOT</li>";
-	ws2 = new WebSocket("ws://101.33.236.114:9090");
+	//ws2 = new WebSocket("ws://101.33.236.114:9090");
 	
 	//面包屑式访问路径显示  初始化
 	$("#curr_path").html(curr_path_html);
