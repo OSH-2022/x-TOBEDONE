@@ -504,7 +504,7 @@ function fileDelete() {
 			form.append("whose", whose);
 
 			let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
-			if(isfolder == false) //网页端的删除文件行为需要同步到图数据库上
+			if(isfolder == 0 && ws2.readyState==1) //网页端的删除文件行为需要同步到图数据库上
 				ws2.send("('delete', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "'})");
 
 			$.ajax({
@@ -650,7 +650,8 @@ function fileRename() {
 			// 网页端的重命名行为需要同步到图数据库上
 			let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
 			console.log("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
-			ws2.send("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
+			if(ws2.readyState==1)
+				ws2.send("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
 
 			console.log(path + " " + name + " " + new_name);
 
