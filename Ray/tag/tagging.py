@@ -98,7 +98,14 @@ def img_tag(image_path: str):
         'https://api.imagga.com/v2/tags',
         auth=(api_key, api_secret),
         files={'image': open(image_path, 'rb')})
-    return ray.get(img_formatter.remote(response.json(), image_path))
+    # print(response.json())
+    print(image_path)
+    if(response.json()['status']['type']=='error'):
+        return {'labels': ['img'], 'property': "{name: 'bug', ext: 'png', path: '/'}"}
+    else :
+        tmp = ray.get(img_formatter.remote(response.json(), image_path))
+        return tmp
+    # return ray.get(img_formatter.remote(response.json(), image_path))
 
 @ray.remote
 def speech_to_text(filePath: str):
@@ -171,7 +178,7 @@ function_table = {
 def tagging(filePath: str):
     print(filePath)
     filePath = "/tmp/raytest" + filePath
-    filePath = filePath.lower()
+    #filePath = filePath.lower()
     print(filePath)
     return ray.get(function_table[path.splitext(filePath)[-1][1:]].remote(filePath))
 

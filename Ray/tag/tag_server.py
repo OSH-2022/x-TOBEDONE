@@ -12,6 +12,17 @@ import _thread
 import queue
 import _thread
 import tagging
+import mysql.connector
+
+config = {   
+    'host': "43.142.97.10",
+    'user': "root",
+    'passwd': "201314",
+    'database': "DFS"
+}
+
+
+sql = "SELECT WHOSE,PATH FROM FILE WHERE NAME = %s ORDER BY ID"
 
 taskQueue = queue.Queue()
 sendQueue = queue.Queue()
@@ -59,15 +70,44 @@ if __name__ == "__main__":
         # try:
         cmd_dict = eval(cmd_text)
         if cmd_dict["type"] == "create":
+
+            try:
+                mydb = mysql.connector.connect(**config)
+            except mysql.connector.Error as e:
+                print('connect fail!{}'.format(e))
+            mycursor = mydb.cursor()
+
+            name = cmd_dict["path1"][1:]
+            name_res = (name,)
+            mycursor.execute(sql, name_res)
+            myresult = mycursor.fetchall()
+            owner = myresult[-1][0]
+            path = myresult[-1][1]
+
             tag_recv = tagging.tagging(cmd_dict["path1"])
+            # os.remove("/tmp/raytest/" + cmd_dict["path1"][1:])
             result = ("create", tag_recv)
+
+            # 把文件名的拓展名删掉
+            point_split = result[1]["property"].split('.')
+            point_split[1] = point_split[1][point_split[1].find('\''):]
+
+            res = ''.join(point_split)
+            res = res[:-1] + ", owner: '" + owner + "', path: '" + path + "'}"
+            result[1]["property"] = str(res)
         else:
             result = ("invalid",)
 
         # return str(result)
-        print("-----------            ",result)
-        sendQueue.put(str(result))
+        # 此处做了修改
+        # 1. 将name中拓展名部分去除 拓展名仅记录在ext中
+        # 2. 在property中增加owner一项
 
+        # 获取owner
+        # 根据文件名识别 重名的话读最新的
+
+        print("-----------------------", result)
+        sendQueue.put(str(result))
 
     def on_created(event):
         if event.src_path.find("digest") != -1:
@@ -77,7 +117,6 @@ if __name__ == "__main__":
         if not event.is_directory:
             message = "file "
             message += f"{event.src_path} created"
-            cmd_text = str()
             cmd_text = str(createDatapack("create", event.src_path))
             taskQueue.put(cmd_text)
 
@@ -98,9 +137,9 @@ if __name__ == "__main__":
     print("Watchdog observer established")
 
     async def login():
-        wsClient = await websockets.connect('ws://localhost:9090')
+        wsClient = await websockets.connect('ws://101.33.236.114:9090')
         # 发送服务器姓名
-        await wsClient.send("PYT_tag")
+        await wsClient.send("Ray_tag")
         print("Connected")
         return wsClient
 
