@@ -508,7 +508,9 @@ function fileDelete() {
 			if(isfolder == 0) //网页端的删除文件行为需要同步到图数据库上
 				ws2.onopen = function()
 				{
-					w2.send("('delete', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "'})");
+					ws2.send($.cookie("username")+"_web");
+					console.log("('delete', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "'})");
+					ws2.send("('delete', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "'})");
 				}
 				
 			$.ajax({
@@ -656,6 +658,7 @@ function fileRename() {
 			
 			ws2.onopen = function()
 			{
+				ws2.send($.cookie("username")+"_web");
 				ws2.send("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
 				console.log("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
 			}
