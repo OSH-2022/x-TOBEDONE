@@ -78,12 +78,12 @@ async def main_logic(websocket, path):
                     print(recv_list[1])
                     # Neo4jServer.share_node(recv_list[1])
                 
-                elif recv_list[0] == "refloder":
+                elif recv_list[0] == "refolder":
                     print("正在重命名目录")
                     print(recv_list[1])
                     Neo4jServer.rename_floder(recv_list[1])
                 
-                elif recv_list[0] == "delfloder":
+                elif recv_list[0] == "delfolder":
                     print("正在删除文件夹")
                     print(recv_list[1])
                     Neo4jServer.delete_floder(recv_list[1])
