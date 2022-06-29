@@ -144,8 +144,8 @@ public class WebSocket {
         }
     }
     public void sendText(byte[] payload) throws IOException {
-        System.out.println(String.format("send text: %s", new String(payload)));
         byte[] head = createHead((payload.length), 1);
+        System.out.println(head.length);
         out.write(head, 0, head.length);
         out.write(payload, 0, payload.length);
     }
@@ -154,7 +154,16 @@ public class WebSocket {
         System.out.println(String.format("send binary length: %d", (payload.length)));
         byte[] head = createHead((payload.length), 2);
         out.write(head, 0, head.length);
+        System.out.println("===================================================");
+        System.out.println("===================================================");
+        System.out.println("xxa: begin to send payload");
+        System.out.println(payload);
+        System.out.println("xxa: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   ");
+        System.out.println(payload.length);
         out.write(payload, 0, payload.length);
+        System.out.println("finish sending");
+        System.out.println("===================================================");
+        System.out.println("===================================================");
     }
 
     public void sendMessage(String msg) throws IOException {
