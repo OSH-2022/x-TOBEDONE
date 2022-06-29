@@ -3,6 +3,8 @@ var main = new autoComplete({
     minChars: 0,
 
     source: function (term, suggest) {
+        var FS_username = window.location.href.split("username=")[1];
+        // use: decodeURIComponent(FS_username), 一个 str
         var query_tag = "match (p:FILE)-[r]->(m:Label) WHERE (toLower(m.name) contains $term) return DISTINCT m.name AS name, type(r) as rel order by name LIMIT 20";
 
         // var query_file = "match (p:Label)-[r]->(m:FILE) WHERE (toLower(m.name) contains $term) return DISTINCT m.name AS name, type(r) as rel order by name LIMIT 20";
