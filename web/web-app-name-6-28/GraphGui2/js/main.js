@@ -5,7 +5,8 @@ var main = new autoComplete({
     source: function (term, suggest) {
         var FS_username = window.location.href.split("username=")[1];
         // use: decodeURIComponent(FS_username), 一个 str
-        var query_tag = "match (p:FILE)-[r]->(m:Label) WHERE (toLower(m.name) contains $term) return DISTINCT m.name AS name, type(r) as rel order by name LIMIT 20";
+        var query_tag = "match (p:FILE{owner:\""+decodeURIComponent(FS_username)+"\"})-[r]->(m:Label{owner:\""+decodeURIComponent(FS_username)+"\"}) \
+        WHERE (toLower(m.name) contains $term) return DISTINCT m.name AS name, type(r) as rel order by name LIMIT 20";
 
         // var query_file = "match (p:Label)-[r]->(m:FILE) WHERE (toLower(m.name) contains $term) return DISTINCT m.name AS name, type(r) as rel order by name LIMIT 20";
 
