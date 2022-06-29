@@ -55,12 +55,6 @@ public class WebSocket {
         int total_len = 0;
         while (true) {
             in.read(head, 0, 2);
-            System.out.println("xxa__head__begin");
-            System.out.println("head[0]");
-            System.out.println(head[0]);
-            System.out.println("head[1]");
-            System.out.println(head[1]);
-            System.out.println("xxa__head__begin");
             boolean fin = head[0] < 0;
             int opcode = head[0] & 0xf;
             /*
@@ -75,32 +69,24 @@ public class WebSocket {
             if (payload_len == 0x7e) {
                 in.read(head, 2, 2);
                 payload_len = ((head[2]) & 0xff) << 8 | ((head[3]) & 0xff);
-                System.out.println("xxa__126__paypayload_len == 0x7e__begin");
-                System.out.println(payload_len);
-                System.out.println("xxa__126__paypayload_len == 0x7e__end");
+                //System.out.println("126");
+                //System.out.println(payload_len);
             } else if (payload_len == 0x7f) {
                 in.read(head, 2, 8);
                 payload_len = ((head[6]) & 0xff) << 24 | ((head[7]) & 0xff) << 16 | ((head[8]) & 0xff) << 8 | ((head[9]) & 0xff);
-                System.out.println("xxa__127__paypayload_len == 0x7f__begin");
-                System.out.println(payload_len);
-                System.out.println("xxa__127__paypayload_len == 0x7f__end");
+                //System.out.println("127");
+                //System.out.println(payload_len);
             }
-		
-		
-	        byte[] key = new byte[4];
+            byte[] key = new byte[4];
             in.read(key, 0, 4);
             byte[] encoded = new byte[payload_len];
-
-	        int recv_len = 0;
+            
+            int recv_len = 0;
             while(recv_len != payload_len){
                 recv_len = recv_len + in.read(encoded, recv_len, payload_len - recv_len);
             }
 
-	        // int recv_len = in.read(encoded, 0, payload_len);
-	        System.out.println("xxa__recv_len__begin");
-            System.out.println(recv_len);
-            System.out.println("xxa__recv_len__end");
-
+            //int recv_len = in.read(encoded, 0, payload_len);
 
             System.out.println(String.format("opcode is %d, payload len is %d", opcode, payload_len));
             if (opcode == 0x9) {
