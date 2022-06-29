@@ -19,10 +19,10 @@ def main():
     hostname = '124.220.19.232'
     port = 22
     username = 'ubuntu'
-    password = '[your passwd]'
-    execmd = "ls"
-
-    sshclient_execmd(hostname, port, username, password, execmd)
+    password = 'yQX*m3-J3.jyd*xrMXY3EqQ'
+    while True:
+        execmd = input()
+        sshclient_execmd(hostname, port, username, password, execmd)
 
 
 if __name__ == "__main__":
