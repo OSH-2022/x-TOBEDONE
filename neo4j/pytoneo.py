@@ -1,6 +1,7 @@
 import logging
 import queue
 import string
+from unittest import result
 from neo4j import GraphDatabase
 from neo4j.exceptions import ServiceUnavailable
 
@@ -56,6 +57,10 @@ class App:
         with self.driver.session() as session:
             session.write_transaction(self._delete_node, deletenode)
 
+    def delete_floder(self,node):
+        with self.driver.session() as session:
+            session.write_transaction(self._delete_floder, node)
+            
     def delete_all(self):
         with self.driver.session() as session:
             session.write_transaction(self._delete_all)
@@ -63,6 +68,15 @@ class App:
     def rename_node(self,node):
         with self.driver.session() as session:
             session.write_transaction(self._rename_node,node)
+            
+    def share_node(self,node):
+        with self.driver.session() as session:
+            session.write_transaction(self._share_node,node)
+            
+    def rename_floder(self,node):
+        with self.driver.session() as session:
+            session.write_transaction(self._rename_floder,node)
+            
 
     @staticmethod
     def _createnamenode(tx,id):
@@ -140,6 +154,34 @@ class App:
         tx.run(query)
 
     @staticmethod
+    def _delete_floder(tx,node):
+        path = node['path']# 与newpath一起对应重命名的文件夹
+        owner = node['owner']
+        query = (
+            "match (p{owner: \""+owner+"\"}) where p.path starts with \""+path+"\" "
+            "return p"
+        )
+        data = tx.run(query).data()
+        for node in data:
+            property = node['p']
+            #print(property)
+            name = property['name']
+            ext = property['ext']
+            # 下面对应节点的path
+            nodepath = property['path']
+            query=(
+                "match (n{name: \""+name+"\", owner: \""+owner+"\", path:\""+path+"\", ext:\"" +ext +"\"}) "
+                "detach delete n"
+            ) 
+            tx.run(query)
+        # 删除孤立标签
+        query = (
+            "MATCH (n) where not exists((n)--()) detach delete n"
+        )
+        tx.run(query)
+        return
+        
+    @staticmethod
     def _delete_all(tx):
         tx.run("match (n) detach delete n")
         
@@ -186,6 +228,50 @@ class App:
             "RETURN p,m"
         )
         tx.run(query)
+        return
+        
+    @staticmethod
+    def _share_node(tx,node):
+        nodename_split = node['name'].split('.')
+        nodename = nodename_split[0]
+        nodeext = nodename_split[1]
+        path = node['path']
+        owner = node['owner']
+        newname_split = node['newname'].split('.')
+        newname = newname_split[0]
+        newext = newname_split[1]
+        new_owner = node["newowner"]
+        new_path = node["newpath"]
+        
+        # TODO:拷贝节点 拷贝label 拷贝关系
+        
+        
+    @staticmethod
+    def _rename_floder(tx,node):
+        path = node['path']# 与newpath一起对应重命名的文件夹
+        owner = node['owner']
+        newpath = node['newpath']
+        query = (
+            "match (p{owner: \""+owner+"\"}) where p.path starts with \""+path+"\" "
+            "return p"
+        )
+        data = tx.run(query).data()
+        for node in data:
+            property = node['p']
+            #print(property)
+            name = property['name']
+            ext = property['ext']
+            # 下面两个对应节点的前后path
+            originpath = property['path']
+            finalpath = newpath + originpath[len(path):]
+            query=(
+                "match (n{name: \""+name+"\", owner: \""+owner+"\", path:\""+path+"\", ext:\"" +ext +"\"}) "
+                "set n.path = \""+finalpath+"\""
+            )
+            tx.run(query)
+        return
+        
+        
 
 if __name__ == "__main__":
     #端口名、用户名、密码根据需要改动
@@ -197,8 +283,9 @@ if __name__ == "__main__":
     url = "{scheme}://{host_name}:7687".format(scheme=scheme, host_name=host_name, port=port)
     user = "neo4j"
     password = "11"
-    node = {"nodename":"ipadpro.pdf","path":"home/","owner":"zzy","newname":"hi"}
+    #node = {"nodename":"ipadpro.pdf","path":"home/","owner":"zzy","newname":"hi.txt"}
+    node = {"newpath":"home/","path":"dsa/","owner":"zzy"}
     app = App(url, user, password)
-    app.rename_node(node)
+    app.delete_floder(node)
     app.close()
     

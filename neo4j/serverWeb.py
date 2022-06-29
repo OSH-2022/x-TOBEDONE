@@ -72,9 +72,24 @@ async def main_logic(websocket, path):
                     print("正在删除")
                     print(recv_list[1])
                     Neo4jServer.delete_node(recv_list[1])
-                    
+                
+                elif recv_list[0] == "share":
+                    print("正在共享文件")
+                    print(recv_list[1])
+                    # Neo4jServer.share_node(recv_list[1])
+                
+                elif recv_list[0] == "refloder":
+                    print("正在重命名目录")
+                    print(recv_list[1])
+                    Neo4jServer.rename_floder(recv_list[1])
+                
+                elif recv_list[0] == "delfloder":
+                    print("正在删除文件夹")
+                    print(recv_list[1])
+                    Neo4jServer.delete_floder(recv_list[1])
+                                           
                 else:
-                    print("网页端传输有误:"+recv_list)
+                    print("网页端传输有误")
                 
         #标签端连接逻辑
         elif tag_split[1] == "tag":
@@ -130,8 +145,8 @@ async def main_logic(websocket, path):
                 tag_array.pop(tag_index)
                 tag_num = tag_num - 1
                 
-            print("打标服务器[",tag_index,"]已退出")
-            return
+                print("打标服务器[",tag_index,"]已退出")
+                return
         
         #未找到这个websocket    
         print("没见过的神奇websocket")
