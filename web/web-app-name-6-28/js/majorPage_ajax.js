@@ -508,10 +508,24 @@ function fileDelete() {
 			if(isfolder == 0) //网页端的删除文件行为需要同步到图数据库上
 				ws2.onopen = function()
 				{
-					ws2.send($.cookie("username")+"_web");
+					ws2.send(whose + "_web");
 					console.log("('delete', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "'})");
 					ws2.send("('delete', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "'})");
 				}
+			else //删目录
+			{
+				var dirpath = path + name + "/";
+				if(path == "/"){
+					dirpath = name + "/";
+				}
+
+				ws2.onopen = function()
+				{
+					ws2.send(whose + "_web");
+					console.log("('delfolder', {'path': '" + dirpath + "', 'owner': '" + whose + "'})");
+					ws2.send("('delfolder', {'path': '" + dirpath + "', 'owner': '" + whose + "'})");
+				}
+			}
 				
 			$.ajax({
 				url:"FileDownloader!deleteRegister.action",
@@ -656,11 +670,33 @@ function fileRename() {
 			// 网页端的重命名行为需要同步到图数据库上
 			let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
 			
-			ws2.onopen = function()
-			{
-				ws2.send($.cookie("username")+"_web");
-				ws2.send("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
-				console.log("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
+			if(isfolder == 0)
+			{ //重命名文件
+				ws2.onopen = function()
+				{
+					ws2.send($.cookie("username")+"_web");
+					ws2.send("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
+					console.log("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
+				}
+			}
+			else
+			{   //重命名目录
+				var dirpath = path + name + "/";
+				if(path == "/"){ //根目录
+					dirpath = name + "/";
+				}
+				
+				var newdirpath = path + new_name + "/";
+				if(path == "/"){
+					newdirpath = new_name + "/";
+				}
+				
+				ws2.onopen = function()
+				{
+					ws2.send($.cookie("username")+"_web");
+					ws2.send("('refolder', {'newpath': '" + newdirpath + "', 'path': '" + dirpath + "', 'owner': '" + $.cookie("username") + "'})");
+					console.log("('refolder', {'newpath': '" + newdirpath + "', 'path': '" + dirpath + "', 'owner': '" + $.cookie("username") + "'})");
+				}
 			}
 
 			console.log(path + " " + name + " " + new_name);
