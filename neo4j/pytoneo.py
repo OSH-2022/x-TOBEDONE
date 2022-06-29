@@ -26,7 +26,8 @@ class App:
                 i=i+1
             # 获取owner给label
             owner = newnode['property']
-            owner = owner[owner.find('owner')+8:]
+            owner = owner[owner.find('owner'):]
+            owner = owner[owner.find('\'')+1:]#去掉第一个引号
             owner = owner[:owner.find('\'')]
             
             result=session.write_transaction(
@@ -170,7 +171,7 @@ class App:
             # 下面对应节点的path
             nodepath = property['path']
             query=(
-                "match (n{name: \""+name+"\", owner: \""+owner+"\", path:\""+path+"\", ext:\"" +ext +"\"}) "
+                "match (n{name: \""+name+"\", owner: \""+owner+"\", path:\""+nodepath+"\", ext:\"" +ext +"\"}) "
                 "detach delete n"
             ) 
             tx.run(query)
@@ -252,20 +253,20 @@ class App:
         owner = node['owner']
         newpath = node['newpath']
         query = (
-            "match (p{owner: \""+owner+"\"}) where p.path starts with \""+path+"\" "
+            "match (p:FILE{owner: \""+owner+"\"}) where p.path starts with \""+path+"\" "
             "return p"
         )
         data = tx.run(query).data()
+        # print(data)
         for node in data:
             property = node['p']
-            #print(property)
             name = property['name']
             ext = property['ext']
             # 下面两个对应节点的前后path
             originpath = property['path']
             finalpath = newpath + originpath[len(path):]
             query=(
-                "match (n{name: \""+name+"\", owner: \""+owner+"\", path:\""+path+"\", ext:\"" +ext +"\"}) "
+                "match (n:FILE{name: \""+name+"\", owner: \""+owner+"\", path:\""+originpath+"\", ext:\"" +ext +"\"}) "
                 "set n.path = \""+finalpath+"\""
             )
             tx.run(query)
@@ -284,8 +285,8 @@ if __name__ == "__main__":
     user = "neo4j"
     password = "11"
     #node = {"nodename":"ipadpro.pdf","path":"home/","owner":"zzy","newname":"hi.txt"}
-    node = {"newpath":"home/","path":"dsa/","owner":"zzy"}
+    node = {"newpath":"home/","path":"TIME/","owner":"tanjf"}
     app = App(url, user, password)
-    app.delete_floder(node)
+    app.rename_floder(node)
     app.close()
     
