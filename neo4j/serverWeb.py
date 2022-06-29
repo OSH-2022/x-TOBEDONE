@@ -153,6 +153,9 @@ async def main_logic(websocket, path):
         
         return
     
+    except Exception as e:
+        print(e)
+    
 
 if __name__ == "__main__":
     #端口名、用户名、密码根据需要改动
