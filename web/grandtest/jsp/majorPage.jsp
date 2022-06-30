@@ -22,7 +22,7 @@
     <!-- jQuery Scripts -->    
     <script src="../js/jquery/jquery.js"></script>
     <script src="js/jquery.mb.YTPlayer.js"></script>
-    <script src="js/jquery.min.js"></script>
+    <%-- <script src="js/jquery.min.js"></script> --%>
     <script src="js/jquery.validate.js"></script>
     <script src="js/masonry.pkgd.js"></script>
     <script src="js/imagesloaded.pkgd.js"></script>
