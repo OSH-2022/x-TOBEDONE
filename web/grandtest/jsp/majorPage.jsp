@@ -99,7 +99,7 @@
         <div class="container">
             <!-- Section Started -->
             <div class="section started" id="homeimage">
-                <div class="slide" style="background-image: url(images/background.jpg);"></div>
+                <div class="slide" style="background-image: url(images/background.jpeg);"></div>
                 <div class="centrize full-width">
                     <div class="vertical-center">
                         <div class="st-title align-center">
