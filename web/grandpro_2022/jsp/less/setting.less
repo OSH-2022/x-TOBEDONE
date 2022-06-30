@@ -1,0 +1,78 @@
+﻿/* Setting */
+
+/* Colors */
+@default-color: #898989;
+@extra-color: #999999;
+@dark-color: #292929;
+@light-color: #f9f9f9;
+@white-color: #fff;
+@extra-white-color: rgba(0,0,0,0.1);
+@active-color: #fdd912;
+@error-color: red;
+
+/* Fonts */
+@default-font: 'Poppins', helvetica;
+@extra2-font: 'Kaushan Script', helvetica;
+@icons-font: 'Ionicons';
+
+/* Fonts Size */
+@large-size: 24px;
+@default-size: 15px;
+@small-size: 13px;
+@extra-small-size: 12px;
+@title-size: 100px;
+@subtitle-size: 16px;
+@h1-size: 44px;
+@h2-size: 38px;
+@h3-size: 34px;
+@h4-size: 30px;
+@h5-size: 26px;
+@h6-size: 22px;
+
+/* Icons Size */
+@default-icon-size: 24px;
+@extra-icon-size: 18px;
+
+/* Letter-Spacing */
+@default-letter-spacing: 0.02em;
+@extra-letter-spacing: -0.045em;
+
+/* Line Height */
+@line-height: 28px;
+@extra-line-height: 22px;
+
+/* Box Shadow */
+@default-box-shadow: 0 25px 50px rgba(0,0,0,0.045);
+@hover-box-shadow: 0 10px 15px rgba(0,0,0,0.08);
+
+/* Transitions */
+@default-transition: all 0.4s ease 0s;
+
+/* Params */
+.border-radius(@radius) {
+	border-radius: @radius;
+	-moz-border-radius: @radius;
+	-webkit-border-radius: @radius;
+	-khtml-border-radius: @radius;
+}
+
+.transition(@param){
+	transition: @param;
+	-moz-transition: @param;
+	-webkit-transition: @param;
+	-o-transition: @param;
+}
+
+.transform(@param) {
+	transform: @param;
+	-webkit-transform: @param;
+	-moz-transform: @param;
+	-o-transform: @param;
+}
+
+.box-shadow(@param){
+	box-shadow: @param;
+	-moz-box-shadow: @param;
+	-webkit-box-shadow: @param;
+	-khtml-box-shadow: @param;
+}
