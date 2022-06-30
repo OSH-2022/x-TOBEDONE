@@ -34,12 +34,12 @@ async def main_logic(websocket, path):
         
         for id in lis:  # 遍历要删除的文件碎片的 id
             for frag_id in range(100*id , 100*id+7):
-                execmd = "rm " + '/home/ubuntu/Documents/OSH_2022/Project/client_test/t1/'+ frag_id
+                execmd = "rm " + '/home/ubuntu/Documents/OSH_2022/Project/client_test/t1/'+ str(frag_id)
                 print(execmd)
                 stdin, stdout, stderr = s.exec_command(execmd)
                 stdin.write("Y")
                 
-                execmd = "rm " + '/home/ubuntu/Documents/OSH_2022/Project/client_test/t1/' +frag_id + ".digest"
+                execmd = "rm " + '/home/ubuntu/Documents/OSH_2022/Project/client_test/t1/' + str(frag_id) + ".digest"
                 print(execmd)
                 stdin, stdout, stderr = s.exec_command(execmd)
                 stdin.write("Y") 
