@@ -267,8 +267,8 @@
 
     <div id="dirname_dialog" style="width:200px; height:30px; margin:0 auto; display: none;" title="新建文件夹">
         <form>
-            <span class="close">&times;</span>
-            <p><input type="text" id="dir_name" value="请输入目录的名字" style="display: none;"></p>
+            <span class="dirclose">&times;</span>
+            <p><input type="text" id="dir_name" value="请输入目录的名字"></p>
             <button class="btn" type="button" style="float: right" id="button_confirm2">确认</button>
         </form>
     </div>
