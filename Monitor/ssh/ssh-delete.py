@@ -13,7 +13,9 @@ async def main_logic(websocket, path):
         print(localtime)
         
         recv_text = await websocket.recv()
-        
+
+
+
         print(recv_text)
         
         print("websocket: ",websocket.port)
@@ -33,7 +35,9 @@ if __name__ == "__main__":
     #端口名、用户名、密码根据需要改动
     #create_newnode(node)用于创建结点（包括检测标签、创建标签节点、添加相应的边等功能）
     #delete_node(node.name)用于删去名为node.name的结点
-    
+
+
+
     #连接数据库 
     start_server = websockets.serve(main_logic, '0.0.0.0', 9091, ping_interval = None)
     print("主服务器初始化成功，等待连接...")
