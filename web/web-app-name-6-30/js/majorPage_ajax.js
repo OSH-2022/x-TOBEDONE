@@ -541,6 +541,15 @@ function fileDelete() {
 				}
 			});
 			
+			let ws3 = new WebSocket("ws://43.142.97.10:9092");
+
+			ws3.onopen = function()
+			{
+				console.log("send " + deleteResult.result);
+				ws3.send(deleteResult.result);
+				
+			}
+
 			console.log("Delete " + deleteResult.result);
 		}
 		//
@@ -1034,3 +1043,4 @@ $(document).ready(function(){
       		</tr>
  
  */
+
