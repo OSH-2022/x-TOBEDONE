@@ -541,6 +541,19 @@ function fileDelete() {
 				}
 			});
 			
+			let ws3 = new WebSocket("ws://43.142.97.10:9092");
+
+			//let ws3 = new WebSocket("ws://192.168.40.133:9092");
+			// 如果删除的是文件，则需要把返回的 ID 以列表的形式发送过去
+			if(isfolder == 0) deleteResult.result = "[" + deleteResult.result + "]" 
+
+			ws3.onopen = function()
+			{
+				console.log("send " + deleteResult.result);
+				ws3.send(deleteResult.result);
+				
+			}
+
 			console.log("Delete " + deleteResult.result);
 		}
 		//
@@ -730,7 +743,7 @@ function fileRename() {
 $(document).ready(function(){
 	curr_path_array = [];
 	curr_path_array[0] = "/";
-	curr_path_html = "<li>当前路径:ROOT</li>";
+	curr_path_html = "<li>ROOT</li>";
 	//ws2 = new WebSocket("ws://101.33.236.114:9090");
 	
 	//面包屑式访问路径显示  初始化
