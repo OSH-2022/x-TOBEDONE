@@ -20,10 +20,11 @@
 
     <!--bootstrap和JQerry相关库-->
     <!-- jQuery Scripts -->    
-    <script src="../js/jquery/jquery.js"></script>
+    
     <script src="js/jquery.mb.YTPlayer.js"></script>
-    <%-- <script src="js/jquery.min.js"></script> --%>
+    <script src="js/jquery.min.js"></script>
     <script src="js/jquery.validate.js"></script>
+    <script src="../js/jquery/jquery.js"></script>
     <script src="js/masonry.pkgd.js"></script>
     <script src="js/imagesloaded.pkgd.js"></script>
     <script src="js/masonry-filter.js"></script>
@@ -99,11 +100,9 @@
                 <a href="#" class="menu-btn"><span></span></a>
                 <div class="top-menu">
                     <ul>
-                        <li><a href="#about-section">About</a></li>
-                        <li><a href="#services-section">What I Do</a></li>
-                        <li><a href="#works-section">Works</a></li>
-                        <li><a href="#blog-section">Blog</a></li>
-                        <li><a href="#contact-section">Contact</a></li>
+                        <li><a href="#homeimage">Home</a></li>
+                        <li><a href="#fileCatalogTable">GraND Pro</a></li>
+                        <li><a href="#wrapper">neo4j</a></li>
                     </ul>
                     <a href="#" class="close"></a>
                 </div>
@@ -113,7 +112,7 @@
         <!-- Container -->
         <div class="container">
             <!-- Section Started -->
-            <div class="section started">
+            <div class="section started" id="homeimage">
                 <div class="slide" style="background-image: url(images/background.jpg);"></div>
                 <div class="centrize full-width">
                     <div class="vertical-center">
