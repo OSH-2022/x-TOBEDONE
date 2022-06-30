@@ -10,7 +10,7 @@
 
 <head>
     <!-- meta message -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html" />
     <!-- Load Fonts -->
@@ -105,11 +105,9 @@
                     <div class="vertical-center">
                         <div class="st-title align-center">
                             <div class="typing-title">
-                                <p>Developer</p>
-                                <p>Photographer</p>
-                                <p>Coder</p>
-                                <p>Blogger</p>
-                                <p>Freelancer</p>
+                                <p>Prometheus</p>
+                                <p>Ray</p>
+                                <p>Neo4j + MySQL</p>
                             </div>
                             <span class="typed-title"></span>
                         </div>
