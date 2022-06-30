@@ -11,7 +11,7 @@ def sshclient_execmd(hostname, port, username, password, command):
     # ssh = s.invoke_shell()
 
     if command == 'start':
-        # execmd = "java -jar /home/ubuntu/Documents/OSH_2022/Project/x-dontpanic/demo/normal/client.jar"
+        # execmd = "cd /home/ubuntu/Documents/OSH_2022/Project/x-dontpanic/demo/normal/ && java -jar client.jar"
         # execmd = "cd /home/nwj1804/github/x-dontpanic/demo/normal/ && java -jar client.jar"
         s.exec_command("cd /home/nwj1804/github/x-dontpanic/demo/normal/ && java -jar client.jar")
     elif command == 'stop':
@@ -31,10 +31,10 @@ def sshclient_execmd(hostname, port, username, password, command):
 
 
 def main():
-    hostname = '192.168.116.132'
+    hostname = '43.142.97.10'
     port = 22
-    username = 'nwj1804'
-    password = '99'
+    username = 'ubuntu'
+    password = 'nuwhyx-kYgqiq-7qifza'
     while True:
         command = input()
         # if execmd == 'start':
