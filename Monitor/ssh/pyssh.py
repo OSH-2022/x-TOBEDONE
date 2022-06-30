@@ -13,7 +13,7 @@ def sshclient_execmd(hostname, port, username, password, command):
     if command == 'start':
         # execmd = "cd /home/ubuntu/Documents/OSH_2022/Project/x-dontpanic/demo/normal/ && java -jar client.jar"
         # execmd = "cd /home/nwj1804/github/x-dontpanic/demo/normal/ && java -jar client.jar"
-        s.exec_command("cd /home/nwj1804/github/x-dontpanic/demo/normal/ && java -jar client.jar")
+        s.exec_command("cd /home/ubuntu/Documents/OSH_2022/Project/x-dontpanic/demo/normal/ && java -jar client.jar")
     elif command == 'stop':
         stdin, stdout, stderr = s.exec_command("ps -aux | grep java")
         # print(stdout.read().decode())
