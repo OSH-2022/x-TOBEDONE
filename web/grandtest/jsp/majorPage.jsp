@@ -19,21 +19,20 @@
         rel="stylesheet">
 
     <!--bootstrap和JQerry相关库-->
-    <!-- jQuery Scripts -->
+    <!-- jQuery Scripts -->    
+    <script src="../js/jquery/jquery.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.validate.js"></script>
     <script src="js/masonry.pkgd.js"></script>
     <script src="js/imagesloaded.pkgd.js"></script>
     <script src="js/masonry-filter.js"></script>
     <script src="js/magnific-popup.js"></script>
-    <script src="js/jquery.mb.YTPlayer.js"></script>
     <script src="js/particles.js"></script>
     <script src="js/typed.js"></script>
 
     <!-- Main Scripts -->
     <script src="js/main.js"></script>
-    
-    <script src="../js/jquery/jquery.js"></script>
+
     <script src="../js/jquery/jquery.cookie.js"></script>
     <script src="../js/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 
