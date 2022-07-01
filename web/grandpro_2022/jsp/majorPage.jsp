@@ -166,7 +166,7 @@
                     <td></td>
                     <td>
                         <label>
-                            <input class="ion-android-checkbox" type="checkbox">&emsp;&emsp;
+                            <input style="height: 20px; width:20px; margin: 0 auto; display: inline; float:left;" type="checkbox">&emsp;&emsp;
                         </label>
                         <i class="ion-android-folder"></i>&emsp;../
                         <!--<i>标签显示斜体文本效果-->
@@ -224,13 +224,13 @@
                             if(files[i].isFolder()==false)
                             {
                                 out.println("<td>");
-                                out.println("<label><input class=\"ion-android-checkbox\" type=\"checkbox\">&emsp;&emsp;</label>");
+                                out.println("<label><input style=\"height: 20px; width:20px; margin: 0 auto; display: inline; float:left;\" type=\"checkbox\">&emsp;&emsp;</label>");
                                 out.println("<i class=\"glyphicon glyphicon-file\"> "+ files[i].getFileName() + "</i>&emsp;</td>");
                             }
                             else
                             {
                                 out.println("<td>");
-                                out.println("<label><input class=\"ion-android-checkbox\" type=\"ion-android-checkbox\">&emsp;&emsp;</label>");
+                                out.println("<label><input style=\"height: 20px; width:20px; margin: 0 auto; display: inline; float:left;\" type=\"checkbox\">&emsp;&emsp;</label>");
                                 out.println("<i class=\"ion-android-folder\"> "+ files[i].getFileName() + "</i>&emsp;</td>");
                             }
                             out.println("<td>"+files[i].getAttribute()+"</td>");
