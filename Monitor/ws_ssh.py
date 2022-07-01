@@ -6,6 +6,9 @@ import paramiko
 
 # 服务器端主逻辑
 # websocket和path是该函数被回调时自动传过来的，不需要自己传
+
+client_path = [""] # path[i] 表示 ID 为 1 的 client 存碎片的路径
+
 async def main_logic(websocket, path):
     print("server begin")
     #引用全局变量
@@ -32,7 +35,18 @@ async def main_logic(websocket, path):
         
         s.connect(hostname=hostname, port=port, username=username, password=password)
         
-        for id in lis:  # 遍历要删除的文件碎片的 id
+        for pair in lis:  # 遍历要删除的文件碎片的 id
+            frag_id = pair[0]
+            device_id = pair[1]
+            execmd = "rm " + client_path[device_id] + str(frag_id)
+            stdin, stdout, stderr = s.exec_command(execmd)
+            stdin.write("Y")
+            
+            execmd = "rm " + client_path[device_id] + str(frag_id) + ".digest"
+            stdin, stdout, stderr = s.exec_command(execmd)
+            stdin.write("Y")
+            
+            '''
             for frag_id in range(100*id , 100*id+7):
                 execmd = "rm " + '/home/ubuntu/Documents/OSH_2022/Project/client_test/t1/'+ str(frag_id)
                 print(execmd)
@@ -42,7 +56,8 @@ async def main_logic(websocket, path):
                 execmd = "rm " + '/home/ubuntu/Documents/OSH_2022/Project/client_test/t1/' + str(frag_id) + ".digest"
                 print(execmd)
                 stdin, stdout, stderr = s.exec_command(execmd)
-                stdin.write("Y") 
+                stdin.write("Y")
+            '''
             
         
         
