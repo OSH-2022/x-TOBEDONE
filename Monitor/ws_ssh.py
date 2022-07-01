@@ -7,7 +7,7 @@ import paramiko
 # 服务器端主逻辑
 # websocket和path是该函数被回调时自动传过来的，不需要自己传
 
-client_path = [""] # path[i] 表示 ID 为 1 的 client 存碎片的路径
+client_path = ["", "/home/ubuntu/Documents/OSH_2022/Project/client_test/t1/", "/home/ubuntu/Documents/OSH_2022/Project/client_test/t2/"] # path[i] 表示 ID 为 1 的 client 存碎片的路径
 
 async def main_logic(websocket, path):
     print("server begin")
