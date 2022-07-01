@@ -810,6 +810,17 @@ function fileShare(){
 			form.append("whose", $.cookie("username"));
 			form.append("share_user", share_username);
 
+			var whose = $.cookie("username");
+
+			let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
+
+			ws2.onopen = function()
+			{
+				ws2.send($.cookie("username")+"_web");
+				console.log("('share', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "', 'newowner':" + share_username + "'})");
+				ws2.send("('share', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "', 'newowner':" + share_username + "'})");
+			}
+
 			$.ajax({
 				url:"FileDownloader!shareRegister.action",
 				type:"POST",
