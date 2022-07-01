@@ -738,7 +738,7 @@ function fileRename() {
 	}
 }
 
-function check_fileShare() {
+function Check_fileShare() {
 	var path;
 	var name;
 	var item=$("#file_list_body").children();
