@@ -225,13 +225,13 @@
                             {
                                 out.println("<td>");
                                 out.println("<label><input style=\"height: 20px; width:20px; margin: 0 auto; display: inline; float:left;\" type=\"checkbox\">&emsp;&emsp;</label>");
-                                out.println("<i class=\"glyphicon glyphicon-file\"> "+ files[i].getFileName() + "</i>&emsp;</td>");
+                                out.println("<i class=\"glyphicon glyphicon-file\">&emsp;"+ files[i].getFileName() + "</i>&emsp;</td>");
                             }
                             else
                             {
                                 out.println("<td>");
                                 out.println("<label><input style=\"height: 20px; width:20px; margin: 0 auto; display: inline; float:left;\" type=\"checkbox\">&emsp;&emsp;</label>");
-                                out.println("<i class=\"ion-android-folder\"> "+ files[i].getFileName() + "</i>&emsp;</td>");
+                                out.println("<i class=\"ion-android-folder\">&emsp;"+ files[i].getFileName() + "</i>&emsp;</td>");
                             }
                             out.println("<td>"+files[i].getAttribute()+"</td>");
                             out.println("<td>"+files[i].getTime()+"</td>");
