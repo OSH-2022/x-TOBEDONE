@@ -396,8 +396,9 @@ function fileDownload() {
 			var	form=new FormData();
 			var deviceArray;
 			var fileInfo;
-			form.append("path",path);
-			form.append("name",name);
+			form.append("path", path);
+			form.append("name", name);
+			form.append("whose", $.cookie("username"));
 			$.ajax({
 				url:"FileDownloader!downloadRegister.action",
 				type:"POST",
