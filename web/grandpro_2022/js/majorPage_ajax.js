@@ -738,6 +738,60 @@ function fileRename() {
 	}
 }
 
+function fileShare(){
+	var share_username = $("#share_name").val();
+	console.log("the user shared to is " + share_username);
+	var path;
+	var name;
+	var item=$("#file_list_body").children();
+	item = item.next();
+	while(item.length!=0)
+	{
+		name = "";
+		path = "";
+		//如果ｉｔｅｍ不为空，则进行处理
+		var children=item.children();
+		if( children[1].children[0].children[0].checked && children[1].children[1].className=="glyphicon glyphicon-file")
+		{
+			//文件路径
+			path = path + "/";
+			/*********/					
+			if(curr_path_array.length>1)
+				path="";
+			for(var i=1;i<curr_path_array.length;i++)
+				path = path + curr_path_array[i] + "/" ;
+			
+			//文件名
+			name = name + $.trim(children[1].innerText);
+			
+			var form = new FormData();
+			form.append("path", path);
+			form.append("name", name);
+			form.append("whose", $.cookie("username"));
+			form.append("share_user", share_username);
+
+			$.ajax({
+				url:"FileDownloader!shareRegister.action",
+				type:"POST",
+				data:form,
+				dataType:"text",
+				processData:false,
+				contentType:false,
+				async:false,
+				success:function(databack){
+					renameResult = $.parseJSON(databack);
+				}
+			});
+
+			console.log("Share " + renameResult.result);
+			break;
+			
+		}
+		//
+		item = item.next();
+	}
+}
+
 $(document).ready(function(){
 	curr_path_array = [];
 	curr_path_array[0] = "/";
@@ -789,6 +843,20 @@ $(document).ready(function(){
 	$("#button_confirm2").click(function(){
 		add_dir();
 		document.getElementById("dirname_dialog").style.display="none";
+		location.reload();
+	})
+
+	$(".shareclose").click(function(){
+		document.getElementById("share_dialog").style.display="none";
+	})
+
+	$("#button_share").click(function(){
+		document.getElementById("share_dialog").style.display="block";
+	})
+
+	$("#button_confirm3").click(function(){
+		fileShare();
+		document.getElementById("share_dialog").style.display="none";
 		location.reload();
 	})
 	/*
