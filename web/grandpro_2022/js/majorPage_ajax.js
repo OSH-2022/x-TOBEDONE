@@ -738,6 +738,42 @@ function fileRename() {
 	}
 }
 
+function check_fileShare() {
+	var path;
+	var name;
+	var item=$("#file_list_body").children();
+	var flag = false;
+	item = item.next();
+	while(item.length!=0)
+	{
+		name = "";
+		path = "";
+		//如果ｉｔｅｍ不为空，则进行处理
+		var children=item.children();
+		if(children[1].children[0].children[0].checked && children[1].children[1].className=="glyphicon glyphicon-file")
+		{
+			//文件路径
+			path = path + "/";
+			/*********/					
+			if(curr_path_array.length>1)
+				path="";
+			for(var i=1;i<curr_path_array.length;i++)
+				path = path + curr_path_array[i] + "/" ;
+			//文件名
+			name = name + $.trim(children[1].innerText);
+			flag = true;
+			console.log(path+"-"+name);
+			break;
+		}
+		//
+		item = item.next();
+	}
+	if(flag){  //表明有选中文件
+		console.log("Share action detected.");
+		document.getElementById("share_dialog").style.display="block";
+	}
+}
+
 function fileShare(){
 	var share_username = $("#share_name").val();
 	console.log("the user shared to is " + share_username);
@@ -851,13 +887,13 @@ $(document).ready(function(){
 	})
 
 	$("#button_share").click(function(){
-		document.getElementById("share_dialog").style.display="block";
+		Check_fileShare();
 	})
 
 	$("#button_confirm3").click(function(){
-		fileShare();
 		document.getElementById("share_dialog").style.display="none";
-		location.reload();
+		fileShare();
+		//location.reload();
 	})
 	/*
 		<tr id="file_list_first">
