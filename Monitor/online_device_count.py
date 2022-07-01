@@ -15,12 +15,9 @@ if __name__ == "__main__":
         myresult = mycursor.fetchall()
         print(myresult)
         fo = open("online_device_count.txt","w+")
-        for item in myresult:
-            s="dontpanic_device_leftrs{id=\""
-            s+=str(item[0])
-            s+="\"} "
-            s+=str(item[6])
-            s+='\n'
+        s="dontpanic_online_device_count "
+        s+=str(len(myresult))
+        s+='\n'
         fo.write(s)
         fo.close()
         sleep(5)
