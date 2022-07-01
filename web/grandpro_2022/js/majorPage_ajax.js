@@ -808,7 +808,7 @@ $(document).ready(function(){
 	
 	
 	//点击文件目录进入其子目录　　刷新文件目录列表
-	$("#file_list_body").on("click","i.glyphicon-folder-open",
+	$("#file_list_body").on("click","i.ion-android-folder",
 			function(){
 			//如果是文件而不是文件夹，点击不刷新目录，提示信息
 			/*if(this.children[1].children[1].className=="glyphicon glyphicon-file")
