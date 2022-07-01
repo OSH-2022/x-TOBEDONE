@@ -71,26 +71,11 @@ CREATE UNIQUE INDEX `idx_FILE_PATH_NAME`  ON `DFS`.`FILE` (PATH, NAME, WHOSE) CO
 
 CREATE UNIQUE INDEX `idx_USER_NAME`  ON `DFS`.`USER` (NAME) COMMENT '' ALGORITHM DEFAULT LOCK DEFAULT;
 
-INSERT INTO `FILE` VALUES (9, '1.txt', 'TIM/hello/', 'rw-r--r--', '20170420', 5,0, false, 'xixi','txt',0);
-
-INSERT INTO `FILE` VALUES (10, '2.txt', 'TIM/hello/', 'rw-r--r--', '20170421', 3, 0,false, 'xixi','txt',0);
-
-INSERT INTO `FILE` VALUES (11, '3', 'TIM/hello/', 'rwxr-xr-x', '20170421', 5, 0,true, 'xixi','',0);
-
-INSERT INTO `FILE` VALUES (12, '4.txt', '233/hi/', 'rw-r--r--', '20170421', 5, 0,false, 'haha','txt',0);
-
-INSERT INTO `FILE` VALUES (1, 'TIM', '/', 'rwxrwxrwx', '20170419', 0,0, true, 'xixi','',0);
-
-INSERT INTO `FILE` VALUES (4, '233', '/', 'rwxrwxrwx', '20170419', 0,0, true, 'haha','',0);
-
-INSERT INTO `FILE` VALUES (2, 'hi', '233/', 'rwxrwxrwx', '20170419', 0,0, true, 'haha','',0);
-
-INSERT INTO `FILE` VALUES (3, 'hello', 'TIM/', 'rwxrwxrwx', '20170419', 0,0, true, 'xixi','',0);
 
 
 INSERT INTO `DEVICE` VALUES (1, '127.0.0.1', 9998, true, 1, 524287, 104857600);
 
-INSERT INTO `DEVICE` VALUES (2, '127.0.0.1', 9999, true, 2, 33554431, 78643200);
+INSERT INTO `DEVICE` VALUES (2, '127.0.0.1', 9999, true, 2, 33554431, 104807600);
 
 INSERT INTO `DEVICE` VALUES (3, '127.0.0.1', 10000, true, 2, 0, 2097152);
 
