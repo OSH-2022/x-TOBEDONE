@@ -243,19 +243,19 @@
         </table>
     </div>
 
-    <div id="rename_dialog" style="width:200px; height:30px; margin:0 auto; display: none;" title="重命名">
+    <div id="rename_dialog" style="width:270px; height:30px; margin:0 auto; border:none; display:none;" title="重命名">
         <form>
-            <span class="close">&times;</span>
-            <input type="text" id="new_name" value="在这里输入新的文件名">
-            <button class="btn" type="button" style="float: right" id="button_confirm">确认</button>
+            <span class="close" style="display:inline; float: right;">&times;</span>
+            <input type="text" id="new_name" placeholder="请输入新文件名" style="width:200px; display:inline; float:left;">
+            <button class="btn" type="button" style="width:50px; display:inline; float:right;" id="button_confirm">确认</button>
         </form>
     </div>
 
-    <div id="dirname_dialog" style="width:200px; height:30px; margin:0 auto; display: none;" title="新建文件夹">
+    <div id="dirname_dialog" style="width:270px; height:30px; margin:0 auto; display: none; border:none;" title="新建目录">
         <form>
-            <span class="dirclose">&times;</span>
-            <p><input type="text" id="dir_name" value="请输入目录的名字"></p>
-            <button class="btn" type="button" style="float: right" id="button_confirm2">确认</button>
+            <span class="dirclose" style="display:inline; float: right;">&times;</span>
+            <input type="text" id="dir_name" placeholder="请输入目录的名字" style="width:200px; display:inline; float:left;">
+            <button class="btn" type="button" style="width:50px; display:inline; float:right;" id="button_confirm2">确认</button>
         </form>
     </div>
 
