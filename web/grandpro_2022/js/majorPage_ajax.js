@@ -564,9 +564,6 @@ function fileDelete() {
 
 function dialog_display(){
 	document.getElementById("rename_dialog").style.display = "block";
-	document.getElementById("rename_dialog").style.width = "200px";
-	document.getElementById("rename_dialog").style.height = "100px";
-	document.getElementById("rename_dialog").style.border = "1px solid #00f";
 }
 
 function add_dir(){
@@ -786,9 +783,6 @@ $(document).ready(function(){
 
 	$("#button_adddir").click(function(){
 		document.getElementById("dirname_dialog").style.display="block";
-		document.getElementById("dirname_dialog").style.width = "200px";
-		document.getElementById("dirname_dialog").style.height = "100px";
-		document.getElementById("dirname_dialog").style.border = "1px solid #00f";
 	})
 
 	$("#button_confirm2").click(function(){
@@ -808,7 +802,7 @@ $(document).ready(function(){
 	
 	
 	//点击文件目录进入其子目录　　刷新文件目录列表
-	$("#file_list_body").on("click","i.glyphicon-folder-open",
+	$("#file_list_body").on("click","i.ion-android-folder",
 			function(){
 			//如果是文件而不是文件夹，点击不刷新目录，提示信息
 			/*if(this.children[1].children[1].className=="glyphicon glyphicon-file")
