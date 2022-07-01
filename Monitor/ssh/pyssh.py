@@ -14,7 +14,7 @@ def sshclient_execmd(hostname, port, username, password, command):
         # execmd = "cd /home/ubuntu/Documents/OSH_2022/Project/x-dontpanic/demo/normal/ && java -jar client.jar"
         # execmd = "cd /home/nwj1804/github/x-dontpanic/demo/normal/ && java -jar client.jar"
         s.exec_command("cd /home/ubuntu/Documents/OSH_2022/Project/x-dontpanic/demo/normal/ && java -jar client.jar")
-    elif command == 'start device2'
+    elif command == 'start device2':
         s.exec_command("cd /home/ubuntu/Documents/OSH_2022/Project/x-dontpanic/demo/normal/storage2/ && java -jar client2.jar")
     elif command == 'stop device1':
         stdin, stdout, stderr = s.exec_command("ps -aux | grep java")
@@ -24,7 +24,7 @@ def sshclient_execmd(hostname, port, username, password, command):
             if item.find('client.jar')!=-1:
                 pid = item.split()
                 s.exec_command("kill "+str(pid[1]))
-    elif command == 'stop device2'
+    elif command == 'stop device2':
         stdin, stdout, stderr = s.exec_command("ps -aux | grep java")
         # print(stdout.read().decode())
         pidset = stdout.read().decode().split('\n')
