@@ -817,8 +817,8 @@ function fileShare(){
 			ws2.onopen = function()
 			{
 				ws2.send($.cookie("username")+"_web");
-				console.log("('share', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "', 'newowner':" + share_username + "'})");
-				ws2.send("('share', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "', 'newowner':" + share_username + "'})");
+				console.log("('share', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "', 'newowner':'" + share_username + "'})");
+				ws2.send("('share', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "', 'newowner':'" + share_username + "'})");
 			}
 
 			$.ajax({
