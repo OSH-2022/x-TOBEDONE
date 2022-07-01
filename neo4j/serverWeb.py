@@ -77,7 +77,7 @@ async def main_logic(websocket, path):
                 elif recv_list[0] == "share":
                     print("正在共享文件")
                     print(recv_list[1])
-                    # Neo4jServer.share_node(recv_list[1])
+                    Neo4jServer.share_node(recv_list[1])
                 
                 elif recv_list[0] == "refolder":
                     print("正在重命名目录")
