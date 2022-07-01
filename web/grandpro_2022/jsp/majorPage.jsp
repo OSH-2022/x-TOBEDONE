@@ -159,6 +159,7 @@
                     <th>&emsp;&emsp;&emsp;&emsp;文件名</th>
                     <th>读写权限</th>
                     <th>修改时间</th>
+                    <th>是否为共享文件</th>
                 </tr>
             </thead>
             <tbody id="file_list_body">
@@ -235,6 +236,7 @@
                             }
                             out.println("<td>"+files[i].getAttribute()+"</td>");
                             out.println("<td>"+files[i].getTime()+"</td>");
+                            out.println("<td>"+files[i].getIsShare()+"</td>");
                             out.println("</tr>");
                         }
                     }
