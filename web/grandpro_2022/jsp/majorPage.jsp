@@ -159,6 +159,7 @@
                     <th>&emsp;&emsp;&emsp;&emsp;文件名</th>
                     <th>读写权限</th>
                     <th>修改时间</th>
+                    <th>是否为共享文件</th>
                 </tr>
             </thead>
             <tbody id="file_list_body">
@@ -235,6 +236,7 @@
                             }
                             out.println("<td>"+files[i].getAttribute()+"</td>");
                             out.println("<td>"+files[i].getTime()+"</td>");
+                            out.println("<td>"+files[i].getIsShare()+"</td>");
                             out.println("</tr>");
                         }
                     }
@@ -246,7 +248,7 @@
     <div id="rename_dialog" style="width:270px; height:30px; margin:0 auto; border:none; display:none;" title="重命名">
         <form>
             <span class="close" style="display:inline; float: right;">&times;</span>
-            <input type="text" id="new_name" placeholder="请输入新文件名" style="width:200px; display:inline; float:left;">
+            <input type="text" id="new_name" placeholder="请输入新文件名或目录" style="width:200px; display:inline; float:left;">
             <button class="btn" type="button" style="width:50px; display:inline; float:right;" id="button_confirm">确认</button>
         </form>
     </div>
@@ -254,8 +256,16 @@
     <div id="dirname_dialog" style="width:270px; height:30px; margin:0 auto; display: none; border:none;" title="新建目录">
         <form>
             <span class="dirclose" style="display:inline; float: right;">&times;</span>
-            <input type="text" id="dir_name" placeholder="请输入目录的名字" style="width:200px; display:inline; float:left;">
+            <input type="text" id="dir_name" placeholder="请输入目录字" style="width:200px; display:inline; float:left;">
             <button class="btn" type="button" style="width:50px; display:inline; float:right;" id="button_confirm2">确认</button>
+        </form>
+    </div>
+
+    <div id="share_dialog" style="width:270px; height:30px; margin:0 auto; display: none; border:none;" title="新建目录">
+        <form>
+            <span class="shareclose" style="display:inline; float: right;">&times;</span>
+            <input type="text" id="share_name" placeholder="请输入要分享用户的用户名" style="width:200px; display:inline; float:left;">
+            <button class="btn" type="button" style="width:50px; display:inline; float:right;" id="button_confirm3">确认</button>
         </form>
     </div>
 
@@ -267,6 +277,7 @@
         <button class="btn" type="button" id="button_delete">删除</button>
         <button class="btn" type="button" id="button_rename">重命名</button>
         <button class="btn" type="button" id="button_adddir">新建目录</button>
+        <button class="btn" type="button" id="button_share">分享文件</button>
     </div>
 
     <!-- ghx -->

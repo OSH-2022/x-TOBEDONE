@@ -21,6 +21,6 @@ if __name__ == "__main__":
             s+="\"} "
             s+=str(item[6])
             s+='\n'
-        fo.write(s)
+            fo.write(s)
         fo.close()
         sleep(5)

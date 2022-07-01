@@ -1,6 +1,6 @@
 import os
 import time
 while 1:
-    os.system('curl -XPOST --data-binary @leftrs.txt http://192.168.116.132:9091/metrics/job/leftrs')
-    os.system('curl -XPOST --data-binary @online_device_count.txt http://192.168.116.132:9091/metrics/job/online_device_count')
+    os.system('curl -XPOST --data-binary @device_leftrs.txt http://43.142.97.10:9091/metrics/job/device_leftrs')
+    os.system('curl -XPOST --data-binary @online_device_count.txt http://43.142.97.10:9091/metrics/job/online_device_count')
     time.sleep(5)

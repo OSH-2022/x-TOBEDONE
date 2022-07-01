@@ -1,0 +1,2 @@
+dontpanic_device_leftrs{id="1"} 104823322
+dontpanic_device_leftrs{id="2"} 78597496
