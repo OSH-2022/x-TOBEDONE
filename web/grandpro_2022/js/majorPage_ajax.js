@@ -545,7 +545,7 @@ function fileDelete() {
 
 			//let ws3 = new WebSocket("ws://192.168.40.133:9092");
 			// 如果删除的是文件，则需要把返回的 ID 以列表的形式发送过去
-			if(isfolder == 0) deleteResult.result = "[" + deleteResult.result + "]" 
+			/// if(isfolder == 0) deleteResult.result = "[" + deleteResult.result + "]" 
 
 			ws3.onopen = function()
 			{
@@ -564,6 +564,9 @@ function fileDelete() {
 
 function dialog_display(){
 	document.getElementById("rename_dialog").style.display = "block";
+	document.getElementById("rename_dialog").style.width = "200px";
+	document.getElementById("rename_dialog").style.height = "100px";
+	document.getElementById("rename_dialog").style.border = "1px solid #00f";
 }
 
 function add_dir(){
@@ -783,6 +786,9 @@ $(document).ready(function(){
 
 	$("#button_adddir").click(function(){
 		document.getElementById("dirname_dialog").style.display="block";
+		document.getElementById("dirname_dialog").style.width = "200px";
+		document.getElementById("dirname_dialog").style.height = "100px";
+		document.getElementById("dirname_dialog").style.border = "1px solid #00f";
 	})
 
 	$("#button_confirm2").click(function(){
@@ -802,7 +808,7 @@ $(document).ready(function(){
 	
 	
 	//点击文件目录进入其子目录　　刷新文件目录列表
-	$("#file_list_body").on("click","i.ion-android-folder",
+	$("#file_list_body").on("click","i.glyphicon-folder-open",
 			function(){
 			//如果是文件而不是文件夹，点击不刷新目录，提示信息
 			/*if(this.children[1].children[1].className=="glyphicon glyphicon-file")
