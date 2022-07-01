@@ -54,7 +54,18 @@ Neo4j ÊÇÒ»¸ö¸ßÐÔÄÜµÄ NOSQL Í¼ÐÎÊý¾Ý¿â¡£Neo4j»ùÓÚÆäÌØÊâµÄ´¢´æ½á¹¹ÓëCypher ²éÑ¯ÓïÑ
 
 3. ¶Ô¶àÓÃ»§µÄÖ§³Ö£º
 
-    DisGraFS
+    DisGraFSËùÓÐÓÃ»§¹²ÏíÒ»¸öÍøÅÌ¡£
+
+    ÎÒÃÇ¶ÔËùÓÐ½Úµã£¬°üÀ¨FILEºÍLABEL¶¼Ìí¼ÓÁËownerÊôÐÔ£¬±êÊ¶¸ÃÎÄ¼þµÄËùÓÐÕß¡£ÔÚÊ¹ÓÃGraND ProµÄ¹ý³ÌÖÐ£¬ÓÃ»§µÄ²Ù×÷ÔÚÍ¼Êý¾Ý¿âÀïÖ»Éæ¼°µ½ÐÞ¸Ä×Ô¼ºµÄ½ÚµãºÍ¹ØÏµ¡£ÎÒÃÇ¶ÔÇ°¶ËÒ³Ãæ²é¿´Í¬Ñù×öÁË¸ôÀë£¬Ê¹µÃËùÓÐÓÃ»§¶¼Ö»ÄÜ¿´µ½×Ô¼ºËùÓÐµÄÎÄ¼þºÍ±êÇ©£¬´Ó¶øÊµÏÖGraND Pro¶Ô¶àÓÃ»§µÄÖ§³Ö¡£
+
+4. Ö§³Ö¸ü¶à²Ù×÷£º
+
+    Ö§³Ö¶ÔÎÄ¼þ½øÐÐÉ¾³ý£¬ÖØÃüÃû£¬Ö§³Ö¹²ÏíÎÄ¼þ¸øÆäËûÓÃ»§¡£
+
+5. ¸ü¸ßµÄÖ´ÐÐÐ§ÂÊ£º
+
+    ¸Ä½ø´úÂë½á¹¹£¬Ê¹ÓÃ¸ü¸ßÐ§ÂÊµÄcypher²éÑ¯ÓïÑÔÃüÁî¡£ÎÒÃÇÍ¨¹ýÖØÐÂ°²ÅÅpython´úÂë½á¹¹¼°ÆäÓëcypher²éÑ¯ÓïÑÔÖ®¼äµÄÅäºÏ£¬Ìá¸ßÁËÍ¼Êý¾Ý¿â²Ù×÷µÄÖ´ÐÐÐ§ÂÊ¡£
+
 
 
 ### Ray
