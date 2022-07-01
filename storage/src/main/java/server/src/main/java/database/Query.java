@@ -725,7 +725,7 @@ public class Query {
             online_device_cnt=rs.getRow();
             monitor.close();
 
-            String filePath = "/home/nwj1804/online_device_count.txt";
+            String filePath = "online_device_count.txt";
             String fileContent="";
             try{
                 File file = new File(filePath);
