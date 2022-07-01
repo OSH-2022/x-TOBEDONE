@@ -542,18 +542,22 @@ function fileDelete() {
 				}
 			});
 			
-			let ws3 = new WebSocket("ws://43.142.97.10:9092");
-
-			//let ws3 = new WebSocket("ws://192.168.40.133:9092");
-			// 如果删除的是文件，则需要把返回的 ID 以列表的形式发送过去
-			/// if(isfolder == 0) deleteResult.result = "[" + deleteResult.result + "]" 
-
-			ws3.onopen = function()
+			if(result != "share del success")  // 表明不是共享文件夹
 			{
-				console.log("send " + deleteResult.result);
-				ws3.send(deleteResult.result);
-				
+				let ws3 = new WebSocket("ws://43.142.97.10:9092");
+
+				//let ws3 = new WebSocket("ws://192.168.40.133:9092");
+				// 如果删除的是文件，则需要把返回的 ID 以列表的形式发送过去
+				/// if(isfolder == 0) deleteResult.result = "[" + deleteResult.result + "]" 
+
+				ws3.onopen = function()
+				{
+					console.log("send " + deleteResult.result);
+					ws3.send(deleteResult.result);
+					
+				}
 			}
+			
 
 			console.log("Delete " + deleteResult.result);
 		}
