@@ -2,6 +2,52 @@
 
 ## Ä¿Â¼
 
+- [½áÌâ±¨¸æ](#½áÌâ±¨¸æ)
+  - [Ä¿Â¼](#Ä¿Â¼)
+  - [ÏîÄ¿½éÉÜ](#ÏîÄ¿½éÉÜ)
+  - [Ð¡×é³ÉÔ±ÒÔ¼°·Ö¹¤](#Ð¡×é³ÉÔ±ÒÔ¼°·Ö¹¤)
+  - [Á¢ÏîÒÀ¾Ý](#Á¢ÏîÒÀ¾Ý)
+    - [ÏîÄ¿±³¾°](#ÏîÄ¿±³¾°)
+    - [DisGraFS](#disgrafs)
+      - [DisGraFS ÖÐ´æÔÚµÄÎÊÌâ](#disgrafs-ÖÐ´æÔÚµÄÎÊÌâ)
+    - [dontpanic](#dontpanic)
+      - [ÎÄ¼þ±à½âÂë](#ÎÄ¼þ±à½âÂë)
+    - [¼à¿ØÄ£¿é](#¼à¿ØÄ£¿é)
+      - [¼à¿ØµÄº¬ÒåÓë¼ÛÖµ](#¼à¿ØµÄº¬ÒåÓë¼ÛÖµ)
+      - [Prometheus](#prometheus)
+      - [Grafana](#grafana)
+  - [ÏîÄ¿Éè¼Æ](#ÏîÄ¿Éè¼Æ)
+    - [ÏµÍ³¼Ü¹¹](#ÏµÍ³¼Ü¹¹)
+    - [Neo4j](#neo4j)
+      - [Neo4j ÊÇÊ²Ã´](#neo4j-ÊÇÊ²Ã´)
+      - [¸Ä½øÄÚÈÝ](#¸Ä½øÄÚÈÝ)
+    - [¼ÆËã¼¯Èº](#¼ÆËã¼¯Èº)
+      - [¸ÅÊö](#¸ÅÊö)
+      - [´î½¨ Ray cluster](#´î½¨-ray-cluster)
+      - [¼ì²âÓÐÐÂÎÄ¼þ´«µ½¼ÆËã¼¯Èº](#¼ì²âÓÐÐÂÎÄ¼þ´«µ½¼ÆËã¼¯Èº)
+      - [´ò±ê²Ù×÷](#´ò±ê²Ù×÷)
+      - [´ò±êÐÅÏ¢´«¸øÍ¼Êý¾Ý¿â](#´ò±êÐÅÏ¢´«¸øÍ¼Êý¾Ý¿â)
+    - [Monitor](#monitor)
+    - [Ç°¶ËÃÀ»¯](#Ç°¶ËÃÀ»¯)
+      - [Ö÷Ò³Ãæ](#Ö÷Ò³Ãæ)
+    - [Ç°¶ËÔö¼Ó¹¦ÄÜ](#Ç°¶ËÔö¼Ó¹¦ÄÜ)
+      - [Ôö¼ÓµÚ¶þ¸öÍ¼½á¹¹Ò³Ãæ](#Ôö¼ÓµÚ¶þ¸öÍ¼½á¹¹Ò³Ãæ)
+      - [ÎÄ¼þ²Ù×÷](#ÎÄ¼þ²Ù×÷)
+      - [Ä¿Â¼²Ù×÷](#Ä¿Â¼²Ù×÷)
+    - [Storage](#storage)
+      - [ËéÆ¬É¾³ý](#ËéÆ¬É¾³ý)
+    - [Docker](#docker)
+    - [Websockets](#websockets)
+    - [ÓÃ»§²Ù×÷](#ÓÃ»§²Ù×÷)
+    - [ÔËÎ¬²Ù×÷](#ÔËÎ¬²Ù×÷)
+  - [Ð§¹ûÕ¹Ê¾](#Ð§¹ûÕ¹Ê¾)
+    - [ÓÃ»§ÊÓ½Ç](#ÓÃ»§ÊÓ½Ç)
+    - [ÔËÎ¬ÊÓ½Ç](#ÔËÎ¬ÊÓ½Ç)
+  - [ÏîÄ¿×Ü½á](#ÏîÄ¿×Ü½á)
+  - [ÖÂÐ»](#ÖÂÐ»)
+  - [²Î¿¼ÎÄÏ×](#²Î¿¼ÎÄÏ×)
+
+
 ## ÏîÄ¿½éÉÜ
 
 ±¾ÏîÄ¿ÃûÎª **GraND Pro**£¬È«³ÆÎª Graph Network Disk with Prometheus£¬´øÓÐÍ¼½á¹¹µÄ·Ö²¼Ê½ÍøÅÌ£¬¼ÓÓÐ¼à¿ØÔËÎ¬Ä£¿é¡£
@@ -16,7 +62,7 @@
 - ¹ØºÆÏé£º
 - Å£Îç¼×£º
 - Ì·¿¥·É£º
-- ÕÔ×ÓÒã£º
+- ÕÔ×ÓÒã£ºÎ¬»¤Í¼Êý¾Ý¿â£¬²¿·ÖÇ°¶ËÃÀ»¯
 
 ´ËÍâ£¬¶Ô DisGraFS ºÍ dontpanic µÄÔ´ÂëÔÄ¶ÁÓë¸´ÏÖ¾ùÓÉÎåÃû³ÉÔ±ºÏ×÷Íê³É
 
@@ -148,7 +194,32 @@ Ray µÄ´î½¨ÐèÒªËùÓÐ½ÚµãÔÚÍ¬Ò»¾ÖÓòÍøÄÚ£¬¶ø Ray µÄ head ½ÚµãÐèÒª±£³ÖÔËÐÐ£¬²ÅÄÜ±£Ö¤Æ
 
 ### Ç°¶ËÃÀ»¯
 
+#### Ö÷Ò³Ãæ
+
+Ê¹ÓÃÍøÉÏ¿ªÔ´¿ò¼ÜHendrix ½«ÆäÓëx-dontpanicµÄÖ÷Ò³ÃæÕûºÏ
+
+¾ßÌå¸Ä½øÈçÏÂ£º
+
+1. Ôö¼ÓÒ³ÃæÄÚ±êÌâx-TOBEDONE
+2. Ôö¼Ó±³¾°Í¼Æ¬£¬Ôö¼ÓÍ¼Æ¬ÉÏµÄÂÖ»»¹ö¶¯×ÖÌå
+3. ÏîÄ¿Ãû×Ö×ÖÌåÑùÊ½¸Ä½ø£¬Ôö¼Ó½¥±äÉ«
+4. ¸÷°´Å¥ÃÀ»¯
+
+![majorpage](image/%E4%B8%BB%E9%A1%B5%E9%9D%A2%E6%88%AA%E5%9B%BE1.png)
+
+![majorpage 2](image/Ö÷Ò³Ãæ½ØÍ¼2.png)
+
 ### Ç°¶ËÔö¼Ó¹¦ÄÜ
+
+#### Ôö¼ÓµÚ¶þ¸öÍ¼½á¹¹Ò³Ãæ
+
+¿¼ÂÇµ½Ô­À´µÄÍ¼½çÃæÊÇÓÃÓÚÖªµÀ±êÇ©Ö®ºóÓÐÄ¿µÄÐÔµØ½øÐÐÉ¸Ñ¡µÄ²Ù×÷½çÃæ£¬²»ÀûÓÚÓÃ»§°ÑÎÕÕû¸öÎÄ¼þÏµÍ³µÄÍ¼½á¹¹£¬ÎÒÃÇÒýÈëÁË»ùÓÚneovis.js¿ò¼ÜµÄµÚ¶þ¸ö½çÃæ
+
+¸Ã½çÃæ¹¦ÄÜÓëneo4j¹Ù·½Ìá¹©µÄ¹ÜÀíÔ±½çÃæÀàËÆ£¬ÄÜ¿´µ½ËùÓÐÎÄ¼þºÍ±êÇ©ÒÔ¼°ËüÃÇÖ®¼äµÄ¹ØÏµ
+
+Ð§¹ûÈçÏÂËùÊ¾£º
+
+![secondgraph](image/secondgraphshow.png)
 
 #### ÎÄ¼þ²Ù×÷
 
