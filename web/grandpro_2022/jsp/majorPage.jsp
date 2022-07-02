@@ -290,12 +290,32 @@
                 <form method="GET" action="../GraphGui2/index.html" id="myform">
                     <input type="hidden" name="pos" id="pos" value="Z:"><br>
                     <input type="hidden" name="username" id="username" value=""><br>
-                    <input class="btn" type="button" value="Graph"
+                    <input class="btn" type="button" value="GraphS"
                         style="width: 100px;height: 50px; display:block;margin:0 auto;" onclick="mySubmitForm()">
                 </form>
             </nav>
         </div>
     </div>
+    <!-- ghx -->
+
+    <!-- ghx -->
+    <div id="wrapper">
+        <%-- <div id="bg"></div>
+	    <div id="overlay"></div> --%>
+        <div id="main" ,style="text-align:center">
+            <!-- Header -->
+            <nav>
+                <form method="GET" action="../WholeGraph/whole_graph.html" id="myform2">
+                    <input type="hidden" name="pos2" id="pos2" value="D:"><br>
+                    <input type="hidden" name="username2" id="username2" value=""><br>
+                    <input class="btn" type="button" value="GraphW"
+                        style="width: 100px;height: 50px; display:block;margin:0 auto;" onclick="mySubmitForm2()">
+                </form>
+            </nav>
+        </div>
+    </div>
+    <!-- ghx -->
+
     <div
         style="margin:10px auto 100px; text-align:center; width:60%; font-family:Microsoft YaHei,微软雅黑,Microsoft JhengHei,华文细黑,STHeiti,MingLiu; font-size: 2.5rem;">
         <p id="statusFeedback">欢迎使用</p>
@@ -328,6 +348,13 @@
             var uname = $.cookie("username");
             document.getElementById("username").value = uname;
             document.getElementById("myform").submit();
+        }
+    </script>
+    <script>
+        function mySubmitForm2() {
+            var uname = $.cookie("username");
+            document.getElementById("username2").value = uname;
+            document.getElementById("myform2").submit();
         }
     </script>
         <!-- jQuery Scripts -->
