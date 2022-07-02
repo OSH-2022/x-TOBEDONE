@@ -143,9 +143,15 @@ class App:
         owner = deletenode['owner']
         query = (
             "MATCH (p:FILE{name:\""+nodename+"\", ext: \""+nodeext +
-            "\", path: \""+path+"\",owner: \""+owner+"\"})"
-            " DETACH DELETE p"
-
+            "\", path: \""+path+"\",owner: \""+owner+"\"}) "
+            " detach delete p"
+            " return id(p)"
+        )
+        # 获取ip以删除共享的文件 如果自己删的就是别人共享过来的文件 id匹配不上则不会进一步删除
+        id = tx.run(query).data()[0]["id(p)"]
+        query = (
+            "match (p:FILE{id:"+str(id)+"}) "
+            "detach delete p"
         )
         tx.run(query)
         # 记得删除孤立节点
@@ -228,8 +234,8 @@ class App:
         query = (
             "MATCH (p:FILE{name:\""+newname+"\", ext: \""+newext +
             "\", path: \""+path+"\",owner: \""+owner+"\"})"
-            " MATCH (m:Label) WHERE m.name=\'" + newname +
-            "\' and m.owner = \'"+owner+"\'"
+            " merge (m:Label{name: \'" + newname +
+            "\', owner: \'"+owner+"\'})"
             " CREATE (p)-[r1:tag]->(m) "
             "RETURN p,m"
         )
@@ -244,21 +250,21 @@ class App:
         path = node['path']
         owner = node['owner']
         new_owner = node["newowner"]
-        new_path = "\\\\"  # 两个\  因为在neo4j里面还会转义一次
+        new_path = "/"
 
         # TODO:拷贝节点 拷贝label 拷贝关系
         query = (
             "match (p:FILE{name: \""+name+"\", owner: \""+owner +
             "\", path:\""+path+"\", ext:\"" + ext + "\"})"
-            " return labels(p),p.size"
+            " return labels(p),p.size,id(p)"
         )
         nodedata = tx.run(query).data()[0]
-        print(nodedata)
         # 拷贝一个节点
         # 直接假设没重名的
         size = nodedata['p.size']
         labellist = nodedata['labels(p)']
-        query_node = "Create (p:FILE"
+        id = nodedata['id(p)']
+        query_node = "Create (p"
         for labelname in labellist:
             query_node = query_node+':'+labelname
         query_node = query_node+"{name: \""+name+"\", owner: \""+new_owner + \
@@ -266,22 +272,33 @@ class App:
         # 创节点 后面match可以更快
         query = (
             query_node +
-            "SET p.id=id(p) "
-            "return p.id"
+            "SET p.id = "+str(id)
         )
-        id = tx.run(query).data()[0]['p.id']
+        tx.run(query)
         # 加LABEL 加关系
         for labelname in labellist:
+            if(labelname == "FILE"):
+                continue
             query = (
-                "match (p{id:" + str(id) +"})"
+                " match (p:FILE{name: \""+name+"\", owner: \""+new_owner +
+                "\", path:\""+new_path+"\", ext:\"" + ext + "\"})"
                 " merge (m:Label{name: \'" + labelname +
-                "\', owner: \'"+new_owner+"\'})"
+                "\', owner: \'"+new_owner+"\'}) "
                 " CREATE (p)-[r1:tag]->(m) "
             )
-            print(query)
             tx.run(query)
 
-        
+        # 与文件名重名的label不在labels里 得手动再加一次
+        query = (
+            "MATCH (p:FILE{name:\""+name+"\", ext: \""+ext +
+            "\", path: \""+new_path+"\",owner: \""+new_owner+"\"})"
+            " merge (m:Label{name: \'" + name +
+            "\', owner: \'"+new_owner+"\'})"
+            " CREATE (p)-[r1:tag]->(m) "
+            "RETURN p,m"
+        )
+        tx.run(query)
+        return
 
     @staticmethod
     def _rename_floder(tx, node):
@@ -322,9 +339,11 @@ if __name__ == "__main__":
         scheme=scheme, host_name=host_name, port=port)
     user = "neo4j"
     password = "11"
-    node = {"name": "ipadpro.pdf", "path": "home/",
-            "owner": "zzy", "newowner": "USTC"}
+    node = {"name": "frame.png", "path": "USTC/",
+            "owner": "tanjf", "newowner": "zzy"}
+    # node = {"name": "frame.png", "path": "USTC/",
+    #         "owner": "tanjf", "newowner": "zzy"}
     # node = {"newpath":"home/","path":"TIME/","owner":"tanjf"}
     app = App(url, user, password)
-    app.share_node(node)
+    app.delete_node(node)
     app.close()
