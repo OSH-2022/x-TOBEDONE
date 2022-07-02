@@ -199,7 +199,7 @@ Ray 的搭建需要所有节点在同一局域网内，而 Ray 的 head 节点�
 
 本项目采用Prometheus+influxDB+Grafana进行了对存储节点、计算节点的指标监控。本项目的监控逻辑如下图所示：
 
-![](file://C:\Users\lenovo\Desktop\final_report\image\Monitor逻辑.png?msec=1656772407855)
+![](image/Monitor逻辑.png)
 
 #### Prometheus
 
@@ -207,7 +207,7 @@ Prometheus 是一个开源系统监控和警报工具包，它将实时的指标
 
 Prometheus 的整体架构以及生态系统组件如下图所示：
 
-![](file://C:\Users\lenovo\Desktop\final_report\image\Prometheus_framework.png?msec=1656772407857)
+![](image/Prometheus_framework.png)
 
 在本项目中，使用到了Prometheus server、pushgateway、node_exporter：
 
