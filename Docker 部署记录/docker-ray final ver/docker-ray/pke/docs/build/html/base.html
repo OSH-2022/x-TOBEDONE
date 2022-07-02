@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Base classes &#8212; pke 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Unsupervised models" href="unsupervised.html" />
+    <link rel="prev" title="Training supervised models" href="tutorials/training.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="unsupervised.html" title="Unsupervised models"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorials/training.html" title="Training supervised models"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Base classes</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-pke.base">
+<span id="base-classes"></span><h1>Base classes<a class="headerlink" href="#module-pke.base" title="Permalink to this headline">¶</a></h1>
+<p>Base classes for the pke module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.base.LoadFile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.base.</span></span><span class="sig-name descname"><span class="pre">LoadFile</span></span><a class="headerlink" href="#pke.base.LoadFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>The LoadFile class that provides base functions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.base.LoadFile.add_candidate">
+<span class="sig-name descname"><span class="pre">add_candidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">words</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stems</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentence_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.base.LoadFile.add_candidate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a keyphrase candidate to the candidates container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>words</strong> (<em>list</em>) – the words (surface form) of the candidate.</p></li>
+<li><p><strong>stems</strong> (<em>list</em>) – the stemmed words of the candidate.</p></li>
+<li><p><strong>pos</strong> (<em>list</em>) – the Part-Of-Speeches of the words in the candidate.</p></li>
+<li><p><strong>offset</strong> (<em>int</em>) – the offset of the first word of the candidate.</p></li>
+<li><p><strong>sentence_id</strong> (<em>int</em>) – the sentence id of the candidate.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.base.LoadFile.candidate_filtering">
+<span class="sig-name descname"><span class="pre">candidate_filtering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minimum_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_word_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_punctuation_marks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_word_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_alphanum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos_blacklist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.base.LoadFile.candidate_filtering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter the candidates containing strings from the stoplist. Only
+keep the candidates containing alpha-numeric characters (if the
+non_latin_filter is set to True) and those length exceeds a given
+number of characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>minimum_length</strong> (<em>int</em>) – minimum number of characters for a
+candidate, defaults to 3.</p></li>
+<li><p><strong>minimum_word_size</strong> (<em>int</em>) – minimum number of characters for a
+token to be considered as a valid word, defaults to 2.</p></li>
+<li><p><strong>valid_punctuation_marks</strong> (<em>str</em>) – punctuation marks that are valid
+for a candidate, defaults to ‘-‘.</p></li>
+<li><p><strong>maximum_word_number</strong> (<em>int</em>) – maximum length in words of the
+candidate, defaults to 5.</p></li>
+<li><p><strong>only_alphanum</strong> (<em>bool</em>) – filter candidates containing non (latin)
+alpha-numeric characters, defaults to True.</p></li>
+<li><p><strong>pos_blacklist</strong> (<em>list</em>) – list of unwanted Part-Of-Speeches in
+candidates, defaults to [].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.base.LoadFile.candidates">
+<span class="sig-name descname"><span class="pre">candidates</span></span><a class="headerlink" href="#pke.base.LoadFile.candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keyphrase candidates container (dict of Candidate objects).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.base.LoadFile.get_n_best">
+<span class="sig-name descname"><span class="pre">get_n_best</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redundancy_removal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stemming</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.base.LoadFile.get_n_best" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the n-best candidates given the weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – the number of candidates, defaults to 10.</p></li>
+<li><p><strong>redundancy_removal</strong> (<em>bool</em>) – whether redundant keyphrases are
+filtered out from the n-best list, defaults to False.</p></li>
+<li><p><strong>stemming</strong> (<em>bool</em>) – whether to extract stems or surface forms
+(lowercased, first occurring form of candidate), default to
+False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.base.LoadFile.grammar_selection">
+<span class="sig-name descname"><span class="pre">grammar_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grammar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.base.LoadFile.grammar_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select candidates using nltk RegexpParser with a grammar defining
+noun phrases (NP).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>grammar</strong> (<em>str</em>) – grammar defining POS patterns of NPs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.base.LoadFile.is_redundant">
+<span class="sig-name descname"><span class="pre">is_redundant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">candidate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.base.LoadFile.is_redundant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if one candidate is redundant with respect to a list of already
+selected candidates. A candidate is considered redundant if it is
+included in another candidate that is ranked higher in the list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>candidate</strong> (<em>str</em>) – the lexical form of the candidate.</p></li>
+<li><p><strong>prev</strong> (<em>list</em>) – the list of already selected candidates (lexical
+forms).</p></li>
+<li><p><strong>minimum_length</strong> (<em>int</em>) – minimum length (in words) of the candidate
+to be considered, defaults to 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.base.LoadFile.language">
+<span class="sig-name descname"><span class="pre">language</span></span><a class="headerlink" href="#pke.base.LoadFile.language" title="Permalink to this definition">¶</a></dt>
+<dd><p>Language of the input file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.base.LoadFile.load_document">
+<span class="sig-name descname"><span class="pre">load_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stoplist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'stemming'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacy_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.base.LoadFile.load_document" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the content of a document/string/stream in a given language.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>str</em>) – input.</p></li>
+<li><p><strong>language</strong> (<em>str</em>) – language of the input, defaults to ‘en’.</p></li>
+<li><p><strong>stoplist</strong> (<em>list</em>) – custom list of stopwords, defaults to
+pke.lang.stopwords[language].</p></li>
+<li><p><strong>normalization</strong> (<em>str</em>) – word normalization method, defaults to
+‘stemming’. Other possible value is ‘none’
+for using word surface forms instead of stems/lemmas.</p></li>
+<li><p><strong>spacy_model</strong> (<em>spacy.lang</em>) – preloaded spacy model when input is a
+string.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.base.LoadFile.longest_sequence_selection">
+<span class="sig-name descname"><span class="pre">longest_sequence_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.base.LoadFile.longest_sequence_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select the longest sequences of given POS tags as candidates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>func</em>) – function that given a sentence return an iterable</p></li>
+<li><p><strong>valid_values</strong> (<em>set</em>) – the set of valid values, defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.base.LoadFile.ngram_selection">
+<span class="sig-name descname"><span class="pre">ngram_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.base.LoadFile.ngram_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select all the n-grams and populate the candidate container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – the n-gram length, defaults to 3.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.base.LoadFile.normalization">
+<span class="sig-name descname"><span class="pre">normalization</span></span><a class="headerlink" href="#pke.base.LoadFile.normalization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Word normalization method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.base.LoadFile.sentences">
+<span class="sig-name descname"><span class="pre">sentences</span></span><a class="headerlink" href="#pke.base.LoadFile.sentences" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sentence container (list of Sentence objects).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.base.LoadFile.stoplist">
+<span class="sig-name descname"><span class="pre">stoplist</span></span><a class="headerlink" href="#pke.base.LoadFile.stoplist" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of stopwords.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.base.LoadFile.weights">
+<span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="#pke.base.LoadFile.weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Weight container (can be either word or candidate weights).</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pke.data_structures"></span><dl class="py class">
+<dt class="sig sig-object py" id="pke.data_structures.Candidate">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.data_structures.</span></span><span class="sig-name descname"><span class="pre">Candidate</span></span><a class="headerlink" href="#pke.data_structures.Candidate" title="Permalink to this definition">¶</a></dt>
+<dd><p>The keyphrase candidate data structure.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.data_structures.Candidate.lexical_form">
+<span class="sig-name descname"><span class="pre">lexical_form</span></span><a class="headerlink" href="#pke.data_structures.Candidate.lexical_form" title="Permalink to this definition">¶</a></dt>
+<dd><p>the lexical form of the candidate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.data_structures.Candidate.offsets">
+<span class="sig-name descname"><span class="pre">offsets</span></span><a class="headerlink" href="#pke.data_structures.Candidate.offsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>the offsets of the surface forms.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.data_structures.Candidate.pos_patterns">
+<span class="sig-name descname"><span class="pre">pos_patterns</span></span><a class="headerlink" href="#pke.data_structures.Candidate.pos_patterns" title="Permalink to this definition">¶</a></dt>
+<dd><p>the Part-Of-Speech patterns of the candidate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.data_structures.Candidate.sentence_ids">
+<span class="sig-name descname"><span class="pre">sentence_ids</span></span><a class="headerlink" href="#pke.data_structures.Candidate.sentence_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>the sentence id of each surface form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.data_structures.Candidate.surface_forms">
+<span class="sig-name descname"><span class="pre">surface_forms</span></span><a class="headerlink" href="#pke.data_structures.Candidate.surface_forms" title="Permalink to this definition">¶</a></dt>
+<dd><p>the surface forms of the candidate.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.data_structures.Sentence">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.data_structures.</span></span><span class="sig-name descname"><span class="pre">Sentence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">words</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.data_structures.Sentence" title="Permalink to this definition">¶</a></dt>
+<dd><p>The sentence data structure.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.data_structures.Sentence.length">
+<span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#pke.data_structures.Sentence.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>length (number of tokens) of the sentence.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.data_structures.Sentence.meta">
+<span class="sig-name descname"><span class="pre">meta</span></span><a class="headerlink" href="#pke.data_structures.Sentence.meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>meta-information of the sentence.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.data_structures.Sentence.pos">
+<span class="sig-name descname"><span class="pre">pos</span></span><a class="headerlink" href="#pke.data_structures.Sentence.pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of Part-Of-Speeches.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.data_structures.Sentence.stems">
+<span class="sig-name descname"><span class="pre">stems</span></span><a class="headerlink" href="#pke.data_structures.Sentence.stems" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of stems.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.data_structures.Sentence.words">
+<span class="sig-name descname"><span class="pre">words</span></span><a class="headerlink" href="#pke.data_structures.Sentence.words" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of words (tokens) in the sentence.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="tutorials/training.html"
+                          title="previous chapter">Training supervised models</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="unsupervised.html"
+                          title="next chapter">Unsupervised models</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/base.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="unsupervised.html" title="Unsupervised models"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tutorials/training.html" title="Training supervised models"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Base classes</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018-2022, pke Contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

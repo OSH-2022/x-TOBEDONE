@@ -1,0 +1,9 @@
+pdfplumber
+sphinx
+ffmpeg
+SpeechRecognition
+tinytag
+pydub
+nltk
+spacy
+websockets

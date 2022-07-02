@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Document frequency counts &#8212; pke 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Input formats" href="input.html" />
+    <link rel="prev" title="pke documentation" href="../index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="input.html" title="Input formats"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="pke documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Document frequency counts</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="document-frequency-counts">
+<h1>Document frequency counts<a class="headerlink" href="#document-frequency-counts" title="Permalink to this headline">¶</a></h1>
+<p>pke ships with document frequency (DF) counts computed on the SemEval-2010
+benchmark dataset. These counts are used in various models (for example TfIdf
+and Kea).</p>
+<section id="computing-df-counts">
+<h2>Computing DF counts<a class="headerlink" href="#computing-df-counts" title="Permalink to this headline">¶</a></h2>
+<p>The following code illustrates how to compute new document frequency
+counts from another (or a larger) document collection:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pke</span> <span class="kn">import</span> <span class="n">compute_document_frequency</span>
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span>
+
+<span class="sd">&quot;&quot;&quot;Compute Document Frequency (DF) counts from a collection of documents.</span>
+
+<span class="sd">N-grams up to 3-grams are extracted and converted to their n-stems forms.</span>
+<span class="sd">Those containing a token that occurs in a stoplist are filtered out.</span>
+<span class="sd">Output file is in compressed (gzip) tab-separated-values format (tsv.gz).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># stoplist for filtering n-grams</span>
+<span class="n">stoplist</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">punctuation</span><span class="p">)</span>
+
+<span class="c1"># compute df counts and store as n-stem -&gt; weight values</span>
+<span class="n">compute_document_frequency</span><span class="p">(</span><span class="n">input_dir</span><span class="o">=</span><span class="s1">&#39;/path/to/collection/of/documents/&#39;</span><span class="p">,</span>
+                           <span class="n">output_file</span><span class="o">=</span><span class="s1">&#39;/path/to/output.tsv.gz&#39;</span><span class="p">,</span>
+                           <span class="n">extension</span><span class="o">=</span><span class="s1">&#39;xml&#39;</span><span class="p">,</span>           <span class="c1"># input file extension</span>
+                           <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>                <span class="c1"># language of files</span>
+                           <span class="n">normalization</span><span class="o">=</span><span class="s2">&quot;stemming&quot;</span><span class="p">,</span>    <span class="c1"># use porter stemmer</span>
+                           <span class="n">stoplist</span><span class="o">=</span><span class="n">stoplist</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>DF counts are stored as a compressed (gzip), tab-separated-values file.
+The number of documents in the collection, used to compute Inverse Document
+Frequency (IDF) weights, is stored as an extra line
+<code class="docutils literal notranslate"><span class="pre">--NB_DOC--</span> <span class="pre">tab</span> <span class="pre">number_of_documents</span></code>.
+Below is an example of such a file (uncompressed):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">NB_DOC</span><span class="o">--</span>  <span class="mi">100</span>
+<span class="n">greedi</span> <span class="n">alloc</span>  <span class="mi">1</span>
+<span class="n">sinc</span> <span class="n">trial</span> <span class="n">structur</span> <span class="mi">1</span>
+<span class="nb">complex</span> <span class="n">question</span>  <span class="mi">1</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Newly computed DF counts should be loaded and given as parameter to the
+<code class="docutils literal notranslate"><span class="pre">candidate_weighting()</span></code> method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+
+<span class="sd">&quot;&quot;&quot;Keyphrase extraction using TfIdf and newly computed DF counts.&quot;&quot;&quot;</span>
+
+<span class="c1"># initialize TfIdf model</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">TfIdf</span><span class="p">()</span>
+
+<span class="c1"># load the DF counts from file</span>
+<span class="n">df_counts</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">load_document_frequency_file</span><span class="p">(</span><span class="n">input_file</span><span class="o">=</span><span class="s1">&#39;/path/to/df_counts&#39;</span><span class="p">)</span>
+
+<span class="c1"># load the content of the document</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">&#39;/path/to/input.txt&#39;</span><span class="p">)</span>
+
+<span class="c1"># keyphrase candidate selection</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_selection</span><span class="p">()</span>
+
+<span class="c1"># candidate weighting with the provided DF counts</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df_counts</span><span class="p">)</span>
+
+<span class="c1"># N-best selection, keyphrases contains the 10 highest scored candidates as</span>
+<span class="c1"># (keyphrase, score) tuples</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Document frequency counts</a><ul>
+<li><a class="reference internal" href="#computing-df-counts">Computing DF counts</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../index.html"
+                          title="previous chapter">pke documentation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="input.html"
+                          title="next chapter">Input formats</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorials/df.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="input.html" title="Input formats"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="pke documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Document frequency counts</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018-2022, pke Contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

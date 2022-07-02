@@ -1,0 +1,3 @@
+2 : wavelength services,fiber optic networks,Looking Glass Networks,PointEast Research
+6 : SBC Communications,regulatory compliance,telecom carrier
+7 : Sprint,telecom service providers,regulations,anti-spam act,lawsuit

@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Training supervised models &#8212; pke 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Base classes" href="../base.html" />
+    <link rel="prev" title="Non English languages" href="non-english.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../base.html" title="Base classes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="non-english.html" title="Non English languages"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Training supervised models</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="training-supervised-models">
+<h1>Training supervised models<a class="headerlink" href="#training-supervised-models" title="Permalink to this headline">¶</a></h1>
+<p>pke ships with a collection of already trained models (for supervised
+keyphrase extraction approaches) and document frequency counts that were
+computed on the training set of the SemEval-2010 benchmark dataset. These
+resources are located into the <code class="docutils literal notranslate"><span class="pre">pke/models/</span></code> directory.</p>
+<p><strong>Note that already trained models/DF counts are used by default if no parameters
+are given.</strong></p>
+<p>The following snippet of code illustrates how to train a new supervised model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+
+<span class="sd">&quot;&quot;&quot;Train a Kea model given a collection of document, a document frequency</span>
+<span class="sd">counts file and a reference file (gold keyphrases).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># load the DF counts from file</span>
+<span class="n">df_counts</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">load_document_frequency_file</span><span class="p">(</span><span class="n">input_file</span><span class="o">=</span><span class="s1">&#39;/path/to/df_counts&#39;</span><span class="p">)</span>
+
+<span class="c1"># train a new Kea model</span>
+<span class="n">pke</span><span class="o">.</span><span class="n">train_supervised_model</span><span class="p">(</span><span class="n">input_dir</span><span class="o">=</span><span class="s1">&#39;/path/to/collection/of/documents/&#39;</span><span class="p">,</span>
+                           <span class="n">reference_file</span><span class="o">=</span><span class="s1">&#39;/path/to/reference/file&#39;</span><span class="p">,</span>
+                           <span class="n">model_file</span><span class="o">=</span><span class="s1">&#39;/path/to/model/file&#39;</span><span class="p">,</span>
+                           <span class="n">df</span><span class="o">=</span><span class="n">df_counts</span><span class="p">,</span>
+                           <span class="n">extension</span><span class="o">=</span><span class="s1">&#39;xml&#39;</span><span class="p">,</span>
+                           <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+                           <span class="n">normalization</span><span class="o">=</span><span class="s2">&quot;stemming&quot;</span><span class="p">,</span>
+                           <span class="n">model</span><span class="o">=</span><span class="n">pke</span><span class="o">.</span><span class="n">supervised</span><span class="o">.</span><span class="n">Kea</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The training data consists of a set of documents along with a reference file
+containing annotated keyphrases in the following formats:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="http://docs.google.com/Doc?id=ddshp584_46gqkkjng4">SemEval-2010 format</a>,
+i.e. <code class="docutils literal notranslate"><span class="pre">FILENAME\s:\sKEYPHRASE_LIST</span></code></p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="o">-</span><span class="mi">41</span> <span class="p">:</span> <span class="n">hybrid</span> <span class="n">system</span><span class="p">,</span><span class="n">quality</span> <span class="n">of</span> <span class="n">service</span><span class="o">+</span><span class="n">service</span> <span class="n">quality</span><span class="p">,</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>json format</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;C-41&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span>
+      <span class="s2">&quot;hybrid system&quot;</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+      <span class="s2">&quot;quality of service&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;service quality&quot;</span>
+    <span class="p">],</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="non-english.html"
+                          title="previous chapter">Non English languages</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../base.html"
+                          title="next chapter">Base classes</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorials/training.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../base.html" title="Base classes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="non-english.html" title="Non English languages"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Training supervised models</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018-2022, pke Contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

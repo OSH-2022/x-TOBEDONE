@@ -1,0 +1,1020 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Unsupervised models &#8212; pke 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Supervised models" href="supervised.html" />
+    <link rel="prev" title="Base classes" href="base.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="supervised.html" title="Supervised models"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="base.html" title="Base classes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Unsupervised models</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-pke.unsupervised">
+<span id="unsupervised-models"></span><h1>Unsupervised models<a class="headerlink" href="#module-pke.unsupervised" title="Permalink to this headline">¶</a></h1>
+<section id="statistical-models">
+<h2>Statistical models<a class="headerlink" href="#statistical-models" title="Permalink to this headline">¶</a></h2>
+<section id="tfidf">
+<h3>TfIdf<a class="headerlink" href="#tfidf" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.unsupervised.TfIdf">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.unsupervised.</span></span><span class="sig-name descname"><span class="pre">TfIdf</span></span><a class="headerlink" href="#pke.unsupervised.TfIdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>TF*IDF keyphrase extraction model.</p>
+<p>Parameterized example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">pke</span>
+
+<span class="c1"># 1. create a TfIdf extractor.</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">TfIdf</span><span class="p">()</span>
+
+<span class="c1"># 2. load the content of the document.</span>
+<span class="n">stoplist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)</span>
+<span class="n">stoplist</span> <span class="o">+=</span> <span class="n">pke</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">&#39;path/to/input&#39;</span><span class="p">,</span>
+                        <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+                        <span class="n">stoplist</span><span class="o">=</span><span class="n">stoplist</span><span class="p">,</span>
+                        <span class="n">normalization</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># 3. select {1-3}-grams not containing punctuation marks as candidates.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_selection</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># 4. weight the candidates using a `tf` x `idf`</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">load_document_frequency_file</span><span class="p">(</span><span class="n">input_file</span><span class="o">=</span><span class="s1">&#39;path/to/df.tsv.gz&#39;</span><span class="p">)</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># 5. get the 10-highest scored candidates as keyphrases</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TfIdf.candidate_selection">
+<span class="sig-name descname"><span class="pre">candidate_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TfIdf.candidate_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select 1-3 grams as keyphrase candidates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – the length of the n-grams, defaults to 3.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TfIdf.candidate_weighting">
+<span class="sig-name descname"><span class="pre">candidate_weighting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TfIdf.candidate_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidate weighting function using document frequencies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>dict</em>) – document frequencies, the number of documents should be
+specified using the “–NB_DOC–” key.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="kpminer">
+<h3>KPMiner<a class="headerlink" href="#kpminer" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.unsupervised.KPMiner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.unsupervised.</span></span><span class="sig-name descname"><span class="pre">KPMiner</span></span><a class="headerlink" href="#pke.unsupervised.KPMiner" title="Permalink to this definition">¶</a></dt>
+<dd><p>KP-Miner keyphrase extraction model.</p>
+<p>Parameterized example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+
+<span class="c1"># 1. create a KPMiner extractor.</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">KPMiner</span><span class="p">()</span>
+
+<span class="c1"># 2. load the content of the document.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">&#39;path/to/input&#39;</span><span class="p">,</span>
+                        <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+                        <span class="n">normalization</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+
+<span class="c1"># 3. select {1-5}-grams that do not contain punctuation marks or</span>
+<span class="c1">#    stopwords as keyphrase candidates. Set the least allowable seen</span>
+<span class="c1">#    frequency to 5 and the number of words after which candidates are</span>
+<span class="c1">#    filtered out to 200.</span>
+<span class="n">lasf</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">cutoff</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_selection</span><span class="p">(</span><span class="n">lasf</span><span class="o">=</span><span class="n">lasf</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">cutoff</span><span class="p">)</span>
+
+<span class="c1"># 4. weight the candidates using KPMiner weighting function.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">load_document_frequency_file</span><span class="p">(</span><span class="n">input_file</span><span class="o">=</span><span class="s1">&#39;path/to/df.tsv.gz&#39;</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">2.3</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+
+<span class="c1"># 5. get the 10-highest scored candidates as keyphrases</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.KPMiner.candidate_selection">
+<span class="sig-name descname"><span class="pre">candidate_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lasf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.KPMiner.candidate_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>The candidate selection as described in the KP-Miner paper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lasf</strong> (<em>int</em>) – least allowable seen frequency, defaults to 3.</p></li>
+<li><p><strong>cutoff</strong> (<em>int</em>) – the number of words after which candidates are
+filtered out, defaults to 400.</p></li>
+<li><p><strong>stoplist</strong> (<em>list</em>) – the stoplist for filtering candidates, defaults
+to the nltk stoplist. Words that are punctuation marks from
+string.punctuation are not allowed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.KPMiner.candidate_weighting">
+<span class="sig-name descname"><span class="pre">candidate_weighting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.KPMiner.candidate_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidate weight calculation as described in the KP-Miner paper.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>w = tf * idf * B * P_f
+with</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>B = N_d / (P_d * alpha) and B = min(sigma, B)</p></li>
+<li><p>N_d = the number of all candidate terms</p></li>
+<li><p>P_d = number of candidates whose length exceeds one</p></li>
+<li><p>P_f = 1</p></li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>dict</em>) – document frequencies, the number of documents should
+be specified using the “–NB_DOC–” key.</p></li>
+<li><p><strong>sigma</strong> (<em>int</em>) – parameter for boosting factor, defaults to 3.0.</p></li>
+<li><p><strong>alpha</strong> (<em>int</em>) – parameter for boosting factor, defaults to 2.3.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="yake">
+<h3>YAKE<a class="headerlink" href="#yake" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.unsupervised.YAKE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.unsupervised.</span></span><span class="sig-name descname"><span class="pre">YAKE</span></span><a class="headerlink" href="#pke.unsupervised.YAKE" title="Permalink to this definition">¶</a></dt>
+<dd><p>YAKE keyphrase extraction model.</p>
+<p>Parameterized example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+<span class="kn">from</span> <span class="nn">pke.lang</span> <span class="kn">import</span> <span class="n">stopwords</span>
+
+<span class="c1"># 1. create a YAKE extractor.</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">YAKE</span><span class="p">()</span>
+
+<span class="c1"># 2. load the content of the document.</span>
+<span class="n">stoplist</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">&#39;path/to/input&#39;</span><span class="p">,</span>
+                        <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+                        <span class="n">stoplist</span><span class="o">=</span><span class="n">stoplist</span><span class="p">,</span>
+                        <span class="n">normalization</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+
+<span class="c1"># 3. select {1-3}-grams not containing punctuation marks and not</span>
+<span class="c1">#    beginning/ending with a stopword as candidates.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_selection</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># 4. weight the candidates using YAKE weighting scheme, a window (in</span>
+<span class="c1">#    words) for computing left/right contexts can be specified.</span>
+<span class="n">window</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">use_stems</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># use stems instead of words for weighting</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span>
+                              <span class="n">use_stems</span><span class="o">=</span><span class="n">use_stems</span><span class="p">)</span>
+
+<span class="c1"># 5. get the 10-highest scored candidates as keyphrases.</span>
+<span class="c1">#    redundant keyphrases are removed from the output using levenshtein</span>
+<span class="c1">#    distance and a threshold.</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.YAKE.candidate_selection">
+<span class="sig-name descname"><span class="pre">candidate_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.YAKE.candidate_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select 1-3 grams as keyphrase candidates. Candidates beginning or
+ending with a stopword are filtered out. Words that do not contain
+at least one alpha-numeric character are not allowed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – the n-gram length, defaults to 3.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.YAKE.candidate_weighting">
+<span class="sig-name descname"><span class="pre">candidate_weighting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_stems</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.YAKE.candidate_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidate weight calculation as described in the YAKE paper.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>use_stems</strong> (<em>bool</em>) – whether to use stems instead of lowercase words
+for weighting, defaults to False.</p></li>
+<li><p><strong>window</strong> (<em>int</em>) – the size in words of the window used for computing
+co-occurrence counts, defaults to 2.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.unsupervised.YAKE.contexts">
+<span class="sig-name descname"><span class="pre">contexts</span></span><a class="headerlink" href="#pke.unsupervised.YAKE.contexts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container for word contexts.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.unsupervised.YAKE.features">
+<span class="sig-name descname"><span class="pre">features</span></span><a class="headerlink" href="#pke.unsupervised.YAKE.features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container for word features.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.YAKE.get_n_best">
+<span class="sig-name descname"><span class="pre">get_n_best</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redundancy_removal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stemming</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.YAKE.get_n_best" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the n-best candidates given the weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – the number of candidates, defaults to 10.</p></li>
+<li><p><strong>redundancy_removal</strong> (<em>bool</em>) – whether redundant keyphrases are
+filtered out from the n-best list using levenshtein
+distance, defaults to True.</p></li>
+<li><p><strong>stemming</strong> (<em>bool</em>) – whether to extract stems or surface forms
+(lowercased, first occurring form of candidate), default to
+stems.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – the threshold used when computing the
+levenshtein distance, defaults to 0.8.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.YAKE.is_redundant">
+<span class="sig-name descname"><span class="pre">is_redundant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">candidate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.YAKE.is_redundant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if one candidate is redundant with respect to a list of already
+selected candidates. A candidate is considered redundant if its
+levenshtein distance, with another candidate that is ranked higher in
+the list, is greater than a threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>candidate</strong> (<em>str</em>) – the lexical form of the candidate.</p></li>
+<li><p><strong>prev</strong> (<em>list</em>) – the list of already selected candidates.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – the threshold used when computing the
+levenshtein distance, defaults to 0.8.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.unsupervised.YAKE.surface_to_lexical">
+<span class="sig-name descname"><span class="pre">surface_to_lexical</span></span><a class="headerlink" href="#pke.unsupervised.YAKE.surface_to_lexical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mapping from surface form to lexical form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.unsupervised.YAKE.words">
+<span class="sig-name descname"><span class="pre">words</span></span><a class="headerlink" href="#pke.unsupervised.YAKE.words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container for the vocabulary.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="graph-based-models">
+<h2>Graph-based models<a class="headerlink" href="#graph-based-models" title="Permalink to this headline">¶</a></h2>
+<section id="textrank">
+<h3>TextRank<a class="headerlink" href="#textrank" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.unsupervised.TextRank">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.unsupervised.</span></span><span class="sig-name descname"><span class="pre">TextRank</span></span><a class="headerlink" href="#pke.unsupervised.TextRank" title="Permalink to this definition">¶</a></dt>
+<dd><p>TextRank for keyword extraction.</p>
+<p>This model builds a graph that represents the text. A graph based ranking
+algorithm is then applied to extract the lexical units (here the words) that
+are most important in the text.</p>
+<p>In this implementation, nodes are words of certain part-of-speech (nouns
+and adjectives) and edges represent co-occurrence relation, controlled by
+the distance between word occurrences (here a window of 2 words). Nodes
+are ranked by the TextRank graph-based ranking algorithm in its unweighted
+variant.</p>
+<p>Parameterized example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+
+<span class="c1"># define the set of valid Part-of-Speeches</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;PROPN&#39;</span><span class="p">,</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">}</span>
+
+<span class="c1"># 1. create a TextRank extractor.</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">TextRank</span><span class="p">()</span>
+
+<span class="c1"># 2. load the content of the document.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">&#39;path/to/input&#39;</span><span class="p">,</span>
+                        <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+                        <span class="n">normalization</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># 3. build the graph representation of the document and rank the words.</span>
+<span class="c1">#    Keyphrase candidates are composed from the 33-percent</span>
+<span class="c1">#    highest-ranked words.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                              <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span>
+                              <span class="n">top_percent</span><span class="o">=</span><span class="mf">0.33</span><span class="p">)</span>
+
+<span class="c1"># 4. get the 10-highest scored candidates as keyphrases</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TextRank.build_word_graph">
+<span class="sig-name descname"><span class="pre">build_word_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TextRank.build_word_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a graph representation of the document in which nodes/vertices
+are words and edges represent co-occurrence relation. Syntactic filters
+can be applied to select only words of certain Part-of-Speech.
+Co-occurrence relations can be controlled using the distance between
+word occurrences in the document.</p>
+<p>As the original paper does not give precise details on how the word
+graph is constructed, we make the following assumptions from the example
+given in Figure 2: 1) sentence boundaries <strong>are not</strong> taken into account
+and, 2) stopwords and punctuation marks <strong>are</strong> considered as words when
+computing the window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>int</em>) – the window for connecting two words in the graph,
+defaults to 2.</p></li>
+<li><p><strong>pos</strong> (<em>set</em>) – the set of valid pos for words to be considered as nodes
+in the graph, defaults to (‘NOUN’, ‘PROPN’, ‘ADJ’).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TextRank.candidate_selection">
+<span class="sig-name descname"><span class="pre">candidate_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TextRank.candidate_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidate selection using longest sequences of PoS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<em>set</em>) – set of valid POS tags, defaults to (‘NOUN’, ‘PROPN’,
+‘ADJ’).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TextRank.candidate_weighting">
+<span class="sig-name descname"><span class="pre">candidate_weighting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_percent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TextRank.candidate_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tailored candidate ranking method for TextRank. Keyphrase candidates
+are either composed from the T-percent highest-ranked words as in the
+original paper or extracted using the <cite>candidate_selection()</cite> method.
+Candidates are ranked using the sum of their (normalized?) words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>int</em>) – the window for connecting two words in the graph,
+defaults to 2.</p></li>
+<li><p><strong>pos</strong> (<em>set</em>) – the set of valid pos for words to be considered as nodes
+in the graph, defaults to (‘NOUN’, ‘PROPN’, ‘ADJ’).</p></li>
+<li><p><strong>top_percent</strong> (<em>float</em>) – percentage of top vertices to keep for phrase
+generation.</p></li>
+<li><p><strong>normalized</strong> (<em>False</em>) – normalize keyphrase score by their length,
+defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.unsupervised.TextRank.graph">
+<span class="sig-name descname"><span class="pre">graph</span></span><a class="headerlink" href="#pke.unsupervised.TextRank.graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>The word graph.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="singlerank">
+<h3>SingleRank<a class="headerlink" href="#singlerank" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.unsupervised.SingleRank">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.unsupervised.</span></span><span class="sig-name descname"><span class="pre">SingleRank</span></span><a class="headerlink" href="#pke.unsupervised.SingleRank" title="Permalink to this definition">¶</a></dt>
+<dd><p>SingleRank keyphrase extraction model.</p>
+<p>This model is an extension of the TextRank model that uses the number of
+co-occurrences to weigh edges in the graph.</p>
+<p>Parameterized example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+
+<span class="c1"># define the set of valid Part-of-Speeches</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;PROPN&#39;</span><span class="p">,</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">}</span>
+
+<span class="c1"># 1. create a SingleRank extractor.</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">SingleRank</span><span class="p">()</span>
+
+<span class="c1"># 2. load the content of the document.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">&#39;path/to/input&#39;</span><span class="p">,</span>
+                        <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+                        <span class="n">normalization</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># 3. select the longest sequences of nouns and adjectives as candidates.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_selection</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span>
+
+<span class="c1"># 4. weight the candidates using the sum of their word&#39;s scores that are</span>
+<span class="c1">#    computed using random walk. In the graph, nodes are words of</span>
+<span class="c1">#    certain part-of-speech (nouns and adjectives) that are connected if</span>
+<span class="c1">#    they occur in a window of 10 words.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                              <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span>
+
+<span class="c1"># 5. get the 10-highest scored candidates as keyphrases</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.SingleRank.build_word_graph">
+<span class="sig-name descname"><span class="pre">build_word_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.SingleRank.build_word_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a graph representation of the document in which nodes/vertices
+are words and edges represent co-occurrence relation. Syntactic filters
+can be applied to select only words of certain Part-of-Speech.
+Co-occurrence relations can be controlled using the distance (window)
+between word occurrences in the document.</p>
+<p>The number of times two words co-occur in a window is encoded as <em>edge
+weights</em>. Sentence boundaries <strong>are not</strong> taken into account in the
+window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>int</em>) – the window for connecting two words in the graph,
+defaults to 10.</p></li>
+<li><p><strong>pos</strong> (<em>set</em>) – the set of valid pos for words to be considered as nodes
+in the graph, defaults to (‘NOUN’, ‘PROPN’, ‘ADJ’).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.SingleRank.candidate_weighting">
+<span class="sig-name descname"><span class="pre">candidate_weighting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.SingleRank.candidate_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keyphrase candidate ranking using the weighted variant of the
+TextRank formulae. Candidates are scored by the sum of the scores of
+their words.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>int</em>) – the window within the sentence for connecting two
+words in the graph, defaults to 10.</p></li>
+<li><p><strong>pos</strong> (<em>set</em>) – the set of valid pos for words to be considered as nodes
+in the graph, defaults to (‘NOUN’, ‘PROPN’, ‘ADJ’).</p></li>
+<li><p><strong>normalized</strong> (<em>False</em>) – normalize keyphrase score by their length,
+defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="topicrank">
+<h3>TopicRank<a class="headerlink" href="#topicrank" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicRank">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.unsupervised.</span></span><span class="sig-name descname"><span class="pre">TopicRank</span></span><a class="headerlink" href="#pke.unsupervised.TopicRank" title="Permalink to this definition">¶</a></dt>
+<dd><p>TopicRank keyphrase extraction model.</p>
+<p>Parameterized example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+<span class="kn">import</span> <span class="nn">string</span>
+
+<span class="c1"># 1. create a TopicRank extractor.</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">TopicRank</span><span class="p">()</span>
+
+<span class="c1"># 2. load the content of the document.</span>
+<span class="n">stoplist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)</span>
+<span class="n">stoplist</span> <span class="o">+=</span> <span class="n">pke</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">&#39;path/to/input.xml&#39;</span><span class="p">,</span>
+                        <span class="n">stoplist</span><span class="o">=</span><span class="n">stoplist</span><span class="p">)</span>
+
+<span class="c1"># 3. select the longest sequences of nouns and adjectives, that do</span>
+<span class="c1">#    not contain punctuation marks or stopwords as candidates.</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;PROPN&#39;</span><span class="p">,</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">}</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_selection</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span>
+
+<span class="c1"># 4. build topics by grouping candidates with HAC (average linkage,</span>
+<span class="c1">#    threshold of 1/4 of shared stems). Weight the topics using random</span>
+<span class="c1">#    walk, and select the first occuring candidate from each topic.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.74</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+
+<span class="c1"># 5. get the 10-highest scored candidates as keyphrases</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicRank.build_topic_graph">
+<span class="sig-name descname"><span class="pre">build_topic_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TopicRank.build_topic_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build topic graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicRank.candidate_selection">
+<span class="sig-name descname"><span class="pre">candidate_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TopicRank.candidate_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects longest sequences of nouns and adjectives as keyphrase
+candidates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<em>set</em>) – the set of valid POS tags, defaults to (‘NOUN’,
+‘PROPN’, ‘ADJ’).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicRank.candidate_weighting">
+<span class="sig-name descname"><span class="pre">candidate_weighting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.74</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heuristic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TopicRank.candidate_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidate ranking using random walk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float</em>) – the minimum similarity for clustering, defaults
+to 0.74.</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – the linkage method, defaults to average.</p></li>
+<li><p><strong>heuristic</strong> (<em>str</em>) – the heuristic for selecting the best candidate for
+each topic, defaults to first occurring candidate. Other
+options are ‘frequent’ (most frequent candidate, position is
+used for ties).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicRank.graph">
+<span class="sig-name descname"><span class="pre">graph</span></span><a class="headerlink" href="#pke.unsupervised.TopicRank.graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>The topic graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicRank.topic_clustering">
+<span class="sig-name descname"><span class="pre">topic_clustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.74</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TopicRank.topic_clustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clustering candidates into topics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float</em>) – the minimum similarity for clustering, defaults
+to 0.74, i.e. more than 1/4 of stem overlap similarity.</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – the linkage method, defaults to average.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicRank.topics">
+<span class="sig-name descname"><span class="pre">topics</span></span><a class="headerlink" href="#pke.unsupervised.TopicRank.topics" title="Permalink to this definition">¶</a></dt>
+<dd><p>The topic container.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicRank.vectorize_candidates">
+<span class="sig-name descname"><span class="pre">vectorize_candidates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TopicRank.vectorize_candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vectorize the keyphrase candidates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the list of candidates.
+X (matrix): vectorized representation of the candidates.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>C (list)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="topicalpagerank">
+<h3>TopicalPageRank<a class="headerlink" href="#topicalpagerank" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicalPageRank">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.unsupervised.</span></span><span class="sig-name descname"><span class="pre">TopicalPageRank</span></span><a class="headerlink" href="#pke.unsupervised.TopicalPageRank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Single TopicalPageRank keyphrase extraction model.</p>
+<p>Parameterized example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+
+<span class="c1"># define the valid Part-of-Speeches to occur in the graph</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;PROPN&#39;</span><span class="p">,</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">}</span>
+
+<span class="c1"># define the grammar for selecting the keyphrase candidates</span>
+<span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {&lt;ADJ&gt;*&lt;NOUN|PROPN&gt;+}&quot;</span>
+
+<span class="c1"># 1. create a TopicalPageRank extractor.</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">TopicalPageRank</span><span class="p">()</span>
+
+<span class="c1"># 2. load the content of the document.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">&#39;path/to/input&#39;</span><span class="p">,</span>
+                        <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+                        <span class="n">normalization</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># 3. select the noun phrases as keyphrase candidates.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_selection</span><span class="p">(</span><span class="n">grammar</span><span class="o">=</span><span class="n">grammar</span><span class="p">)</span>
+
+<span class="c1"># 4. weight the keyphrase candidates using Single Topical PageRank.</span>
+<span class="c1">#    Builds a word-graph in which edges connecting two words occurring</span>
+<span class="c1">#    in a window are weighted by co-occurrence counts.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                              <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span>
+                              <span class="n">lda_model</span><span class="o">=</span><span class="s1">&#39;path/to/lda_model&#39;</span><span class="p">)</span>
+
+<span class="c1"># 5. get the 10-highest scored candidates as keyphrases</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicalPageRank.candidate_selection">
+<span class="sig-name descname"><span class="pre">candidate_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grammar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TopicalPageRank.candidate_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidate selection heuristic.</p>
+<p>Here we select noun phrases that match the regular expression
+(adjective)*(noun)+, which represents zero or more adjectives followed
+by one or more nouns (Liu et al., 2010).</p>
+<p>Note that there is no details on this in the Single TPR paper, and these
+are the only information that can be found:</p>
+<blockquote>
+<div><p>… a set of expressions or noun phrases …</p>
+<p>… Adjectives and nouns are then merged into keyphrases and
+corresponding scores are summed and ranked. …</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>grammar</strong> (<em>str</em>) – grammar defining POS patterns of NPs, defaults to
+“NP: {&lt;ADJ&gt;*&lt;NOUN|PROPN&gt;+}”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.TopicalPageRank.candidate_weighting">
+<span class="sig-name descname"><span class="pre">candidate_weighting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lda_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.TopicalPageRank.candidate_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidate weight calculation using a biased PageRank towards LDA
+topic distributions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>int</em>) – the window within the sentence for connecting two
+words in the graph, defaults to 10.</p></li>
+<li><p><strong>pos</strong> (<em>set</em>) – the set of valid pos for words to be considered as
+nodes in the graph, defaults to (‘NOUN’, ‘PROPN’, ‘ADJ’).</p></li>
+<li><p><strong>lda_model</strong> (<em>pickle.gz</em>) – an LDA model produced by sklearn in
+pickle compressed (.gz) format</p></li>
+<li><p><strong>normalized</strong> (<em>False</em>) – normalize keyphrase score by their length,
+defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="positionrank">
+<h3>PositionRank<a class="headerlink" href="#positionrank" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.unsupervised.PositionRank">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.unsupervised.</span></span><span class="sig-name descname"><span class="pre">PositionRank</span></span><a class="headerlink" href="#pke.unsupervised.PositionRank" title="Permalink to this definition">¶</a></dt>
+<dd><p>PositionRank keyphrase extraction model.</p>
+<p>Parameterized example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+
+<span class="c1"># define the valid Part-of-Speeches to occur in the graph</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;PROPN&#39;</span><span class="p">,</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">}</span>
+
+<span class="c1"># define the grammar for selecting the keyphrase candidates</span>
+<span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {&lt;ADJ&gt;*&lt;NOUN|PROPN&gt;+}&quot;</span>
+
+<span class="c1"># 1. create a PositionRank extractor.</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">PositionRank</span><span class="p">()</span>
+
+<span class="c1"># 2. load the content of the document.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">&#39;path/to/input&#39;</span><span class="p">,</span>
+                        <span class="n">language</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span>
+                        <span class="n">normalization</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># 3. select the noun phrases up to 3 words as keyphrase candidates.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_selection</span><span class="p">(</span><span class="n">grammar</span><span class="o">=</span><span class="n">grammar</span><span class="p">,</span>
+                              <span class="n">maximum_word_number</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># 4. weight the candidates using the sum of their word&#39;s scores that are</span>
+<span class="c1">#    computed using random walk biaised with the position of the words</span>
+<span class="c1">#    in the document. In the graph, nodes are words (nouns and</span>
+<span class="c1">#    adjectives only) that are connected if they occur in a window of</span>
+<span class="c1">#    10 words.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                              <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span>
+
+<span class="c1"># 5. get the 10-highest scored candidates as keyphrases</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.PositionRank.build_word_graph">
+<span class="sig-name descname"><span class="pre">build_word_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.PositionRank.build_word_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the graph representation of the document.</p>
+<p>In the graph, nodes are words that passes a Part-of-Speech filter. Two
+nodes are connected if the words corresponding to these nodes co-occur
+within a <cite>window</cite> of contiguous tokens. The weight of an edge is
+computed based on the co-occurrence count of the two words within a
+<cite>window</cite> of successive tokens.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>int</em>) – the window within the sentence for connecting two
+words in the graph, defaults to 10.</p></li>
+<li><p><strong>pos</strong> (<em>set</em>) – the set of valid pos for words to be considered as nodes
+in the graph, defaults to (‘NOUN’, ‘PROPN’, ‘ADJ’).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.PositionRank.candidate_selection">
+<span class="sig-name descname"><span class="pre">candidate_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grammar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_word_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.PositionRank.candidate_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidate selection heuristic using a syntactic PoS pattern for
+noun phrase extraction.</p>
+<p>Keyphrase candidates are noun phrases that match the regular expression
+(adjective)*(noun)+, of length up to three.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grammar</strong> (<em>str</em>) – grammar defining POS patterns of NPs, defaults to
+“NP: {&lt;ADJ&gt;*&lt;NOUN|PROPN&gt;+}”.</p></li>
+<li><p><strong>maximum_word_number</strong> (<em>int</em>) – the maximum number of words allowed for
+keyphrase candidates, defaults to 3.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.PositionRank.candidate_weighting">
+<span class="sig-name descname"><span class="pre">candidate_weighting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.PositionRank.candidate_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidate weight calculation using a biased PageRank.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> (<em>int</em>) – the window within the sentence for connecting two
+words in the graph, defaults to 10.</p></li>
+<li><p><strong>pos</strong> (<em>set</em>) – the set of valid pos for words to be considered as nodes
+in the graph, defaults to (‘NOUN’, ‘PROPN’, ‘ADJ’).</p></li>
+<li><p><strong>normalized</strong> (<em>False</em>) – normalize keyphrase score by their length,
+defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.unsupervised.PositionRank.positions">
+<span class="sig-name descname"><span class="pre">positions</span></span><a class="headerlink" href="#pke.unsupervised.PositionRank.positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container the sums of word’s inverse positions.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="multipartiterank">
+<h3>MultipartiteRank<a class="headerlink" href="#multipartiterank" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.unsupervised.MultipartiteRank">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.unsupervised.</span></span><span class="sig-name descname"><span class="pre">MultipartiteRank</span></span><a class="headerlink" href="#pke.unsupervised.MultipartiteRank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multipartite graph keyphrase extraction model.</p>
+<p>Parameterized example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+<span class="kn">import</span> <span class="nn">string</span>
+
+<span class="c1"># 1. create a MultipartiteRank extractor.</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">MultipartiteRank</span><span class="p">()</span>
+
+<span class="n">stoplist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)</span>
+<span class="n">stoplist</span> <span class="o">+=</span> <span class="n">pke</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. load the content of the document.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s1">&#39;path/to/input.xml&#39;</span><span class="p">,</span>
+                        <span class="n">stoplist</span><span class="o">=</span><span class="n">stoplist</span><span class="p">)</span>
+
+<span class="c1"># 3. select the longest sequences of nouns and adjectives, that do</span>
+<span class="c1">#    not contain punctuation marks or stopwords as candidates.</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;PROPN&#39;</span><span class="p">,</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">}</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_selection</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span>
+
+<span class="c1"># 4. build the Multipartite graph and rank candidates using random</span>
+<span class="c1">#    walk, alpha controls the weight adjustment mechanism, see</span>
+<span class="c1">#    TopicRank for threshold/method parameters.</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span>
+                              <span class="n">threshold</span><span class="o">=</span><span class="mf">0.74</span><span class="p">,</span>
+                              <span class="n">method</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+
+<span class="c1"># 5. get the 10-highest scored candidates as keyphrases</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.MultipartiteRank.build_topic_graph">
+<span class="sig-name descname"><span class="pre">build_topic_graph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.MultipartiteRank.build_topic_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the Multipartite graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.MultipartiteRank.candidate_weighting">
+<span class="sig-name descname"><span class="pre">candidate_weighting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.74</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.MultipartiteRank.candidate_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidate weight calculation using random walk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float</em>) – the minimum similarity for clustering,
+defaults to 0.25.</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – the linkage method, defaults to average.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – hyper-parameter that controls the strength of
+the weight adjustment, defaults to 1.1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.unsupervised.MultipartiteRank.graph">
+<span class="sig-name descname"><span class="pre">graph</span></span><a class="headerlink" href="#pke.unsupervised.MultipartiteRank.graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Redefine the graph as a directed graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.MultipartiteRank.topic_clustering">
+<span class="sig-name descname"><span class="pre">topic_clustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.74</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.MultipartiteRank.topic_clustering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clustering candidates into topics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> (<em>float</em>) – the minimum similarity for clustering,
+defaults to 0.74, i.e. more than 1/4 of stem overlap
+similarity.</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – the linkage method, defaults to average.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pke.unsupervised.MultipartiteRank.topic_identifiers">
+<span class="sig-name descname"><span class="pre">topic_identifiers</span></span><a class="headerlink" href="#pke.unsupervised.MultipartiteRank.topic_identifiers" title="Permalink to this definition">¶</a></dt>
+<dd><p>A container for linking candidates to topic identifiers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.unsupervised.MultipartiteRank.weight_adjustment">
+<span class="sig-name descname"><span class="pre">weight_adjustment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.unsupervised.MultipartiteRank.weight_adjustment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjust edge weights for boosting some candidates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>alpha</strong> (<em>float</em>) – hyper-parameter that controls the strength of
+the weight adjustment, defaults to 1.1.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Unsupervised models</a><ul>
+<li><a class="reference internal" href="#statistical-models">Statistical models</a><ul>
+<li><a class="reference internal" href="#tfidf">TfIdf</a></li>
+<li><a class="reference internal" href="#kpminer">KPMiner</a></li>
+<li><a class="reference internal" href="#yake">YAKE</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#graph-based-models">Graph-based models</a><ul>
+<li><a class="reference internal" href="#textrank">TextRank</a></li>
+<li><a class="reference internal" href="#singlerank">SingleRank</a></li>
+<li><a class="reference internal" href="#topicrank">TopicRank</a></li>
+<li><a class="reference internal" href="#topicalpagerank">TopicalPageRank</a></li>
+<li><a class="reference internal" href="#positionrank">PositionRank</a></li>
+<li><a class="reference internal" href="#multipartiterank">MultipartiteRank</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="base.html"
+                          title="previous chapter">Base classes</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="supervised.html"
+                          title="next chapter">Supervised models</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/unsupervised.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="supervised.html" title="Supervised models"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="base.html" title="Base classes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Unsupervised models</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018-2022, pke Contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Reader classes &#8212; pke 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Useful functions" href="utils.html" />
+    <link rel="prev" title="Supervised models" href="supervised.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="utils.html" title="Useful functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="supervised.html" title="Supervised models"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Reader classes</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-pke.readers">
+<span id="reader-classes"></span><h1>Reader classes<a class="headerlink" href="#module-pke.readers" title="Permalink to this headline">¶</a></h1>
+<p>Readers for the pke module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.readers.PreprocessedReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.readers.</span></span><span class="sig-name descname"><span class="pre">PreprocessedReader</span></span><a class="headerlink" href="#pke.readers.PreprocessedReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reader for preprocessed text.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.readers.RawTextReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.readers.</span></span><span class="sig-name descname"><span class="pre">RawTextReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.readers.RawTextReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reader for raw text.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pke.readers.RawTextReader.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spacy_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pke.readers.RawTextReader.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the input file and use spacy to pre-process.</p>
+<p>Spacy model selection: By default this function will load the spacy
+model that is closest to the <cite>language</cite> parameter (‘fr’ language will
+load the spacy model linked to ‘fr’ or any ‘fr_core_web_*’ available
+model). In order to select the model that will be used please provide a
+preloaded model via the <cite>spacy_model</cite> parameter, or link the model you
+wish to use to the corresponding language code
+<cite>python3 -m spacy link spacy_model lang_code</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – raw text to pre-process.</p></li>
+<li><p><strong>spacy_model</strong> (<em>model</em>) – an already loaded spacy model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.readers.Reader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.readers.</span></span><span class="sig-name descname"><span class="pre">Reader</span></span><a class="headerlink" href="#pke.readers.Reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reader default class.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pke.readers.SpacyDocReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pke.readers.</span></span><span class="sig-name descname"><span class="pre">SpacyDocReader</span></span><a class="headerlink" href="#pke.readers.SpacyDocReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimal Spacy Doc Reader.</p>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="supervised.html"
+                          title="previous chapter">Supervised models</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="utils.html"
+                          title="next chapter">Useful functions</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/readers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="utils.html" title="Useful functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="supervised.html" title="Supervised models"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Reader classes</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018-2022, pke Contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

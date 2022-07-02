@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Non English languages &#8212; pke 2.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Training supervised models" href="training.html" />
+    <link rel="prev" title="Input formats" href="input.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="training.html" title="Training supervised models"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="input.html" title="Input formats"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Non English languages</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="non-english-languages">
+<h1>Non English languages<a class="headerlink" href="#non-english-languages" title="Permalink to this headline">¶</a></h1>
+<p>pke uses spacy to pre-process the text. As such,
+<a class="reference external" href="https://spacy.io/usage/models">all the languages</a> that are supported in spacy
+can be processed in pke.</p>
+<p>An example of keyphrase extraction for <cite>French</cite> is given below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pke</span>
+
+<span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;Chaque année, la France déforeste potentiellement 5,1 millions</span>
+<span class="s2">d&#39;hectares via ses importations. Ensemble, agissons !&quot;&quot;&quot;</span>
+
+<span class="c1"># initialize a TopicRank extractor</span>
+<span class="n">extractor</span> <span class="o">=</span> <span class="n">pke</span><span class="o">.</span><span class="n">unsupervised</span><span class="o">.</span><span class="n">TopicRank</span><span class="p">()</span>
+
+<span class="c1"># load the content of the document and perform French stemming</span>
+
+<span class="n">extractor</span><span class="o">.</span><span class="n">load_document</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
+                        <span class="n">language</span><span class="o">=</span><span class="s1">&#39;fr&#39;</span><span class="p">,</span>
+                        <span class="n">normalization</span><span class="o">=</span><span class="s2">&quot;stemming&quot;</span><span class="p">)</span>
+
+<span class="c1"># keyphrase candidate selection, here sequences of nouns and adjectives</span>
+<span class="c1"># defined by the Universal PoS tagset</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_selection</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;NOUN&quot;</span><span class="p">,</span> <span class="s2">&quot;PROPN&quot;</span> <span class="s2">&quot;ADJ&quot;</span><span class="p">})</span>
+
+<span class="c1"># candidate weighting, here using a random walk algorithm</span>
+<span class="n">extractor</span><span class="o">.</span><span class="n">candidate_weighting</span><span class="p">()</span>
+
+<span class="c1"># N-best selection, keyphrases contains the 10 highest scored candidates as</span>
+<span class="c1"># (keyphrase, score) tuples</span>
+<span class="n">keyphrases</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">get_n_best</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[(</span><span class="s1">&#39;hectares&#39;</span><span class="p">,</span> <span class="mf">0.25085794471351</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;importations&#39;</span><span class="p">,</span> <span class="mf">0.22508473817875038</span><span class="p">)]</span>
+</pre></div>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="input.html"
+                          title="previous chapter">Input formats</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="training.html"
+                          title="next chapter">Training supervised models</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorials/non-english.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="training.html" title="Training supervised models"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="input.html" title="Input formats"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">pke 2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Non English languages</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018-2022, pke Contributors.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>
