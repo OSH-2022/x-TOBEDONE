@@ -158,7 +158,6 @@ public class WebSocket {
         System.out.println("===================================================");
         System.out.println("xxa: begin to send payload");
         System.out.println(payload);
-        System.out.println("xxa: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   ");
         System.out.println(payload.length);
         out.write(payload, 0, payload.length);
         System.out.println("finish sending");
