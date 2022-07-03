@@ -255,15 +255,23 @@ Ray Server以及Storage通过node_exporter和pushgateway把节点资源使用的
 
 ### 前端美化
 
-<<<<<<< HEAD
+登录界面使用基于 bootstrap 5 的 [MDB](https://mdbootstrap.com/docs/standard/) 登陆界面进行美化，登录界面与注册界面淡入淡出式切换，边框圆角化设计
+
+<img src="image/login.png" alt="login2" style="zoom:50%;" />
+
+网盘界面使用开源框架 Hendrix，整合 dontpanic 骨架
+
+![wangpan2](image/%E4%B8%BB%E9%A1%B5%E9%9D%A2%E6%88%AA%E5%9B%BE1.png)
+
+![2](image/主页面截图2.png)
 
 ### 增加功能
 
-=======
+
 
 #### 主页面
 
-使用网上开源框架Hendrix 将其与x-dontpanic的主页面整合
+使用开源框架Hendrix 将其与x-dontpanic的主页面整合
 
 具体改进如下：
 
@@ -382,6 +390,14 @@ CMD ["java", "-jar", "client.jar"]
 
 ### 用户操作
 
+登录注册界面：用户在该界面进行注册与登录操作
+
+网盘界面：用户在该界面从本机文件中选择文件进行上传，对于网盘中的文件可进行删除、重命名、共享等操作，还可创建文件夹并切换路径
+
+GRAPHW：用户在该界面查看网盘系统中的所有文件构成的关系图，通过文件间相连的 label 进行文件间关系的获取
+
+GRAPHS：用户在该界面根据 label 进行文件的查找，支持文件 label 的与关系，也可获取图数据库的可视化样式，还可对检索出的文件进行删除、重命名等操作
+
 ### 运维操作
 
 Storage server和Ray server启动之后，运维远程唤醒Storage节点，启动监控相关程序将监控指标格式化为可用PromQL查询的形式，再push到Prometheus server，然后登录运维界面查看监控指标。具体操作参见效果展示的运维视角。
@@ -389,6 +405,24 @@ Storage server和Ray server启动之后，运维远程唤醒Storage节点，启�
 ## 效果展示
 
 ### 用户视角
+
+首先通过 http://43.142.97.10:8080/grandpro_2022/ 进入到注册登录界面，输入用户名与密码进行注册与登录
+
+<img src="image/reg.png" alt="reg" style="zoom:50%;" />
+
+<img src="image/login.png" alt="login" style="zoom:50%;" />
+
+然后进入用户网盘界面，在这里，用户可以选择上传、下载、重命名、删除文件以及创建文件夹并切换路径，还可进入图数据库的可视化界面
+
+<img src="image/page2.png" alt="page2" style="zoom:50%;" />
+
+GRAPHW 是用户所拥有的文件的关系总图，利用文件的 label 可直观看出文件之间的关系：
+
+<img src="image/graphs.png" alt="graphs" style="zoom:80%;" />
+
+GRAPHS 提供用户基于可视化图数据库的文件检索界面，可以根据文件的 label 可视化查找文件，同时也提供文件删除重命名等各种文件基本功能，也是图数据库可视化的另一样式
+
+<img src="image/graphw.png" alt="graphw" style="zoom:50%;" />
 
 ### 运维视角
 
