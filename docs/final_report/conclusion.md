@@ -3,7 +3,6 @@
 ## 目录
 
 - [结题报告](#结题报告)
-  
   - [目录](#目录)
   - [项目介绍](#项目介绍)
   - [小组成员以及分工](#小组成员以及分工)
@@ -29,27 +28,33 @@
       - [打标操作](#打标操作)
       - [打标信息传给图数据库](#打标信息传给图数据库)
     - [Monitor](#monitor)
+      - [Prometheus](#prometheus-1)
+      - [InfluxDB](#influxdb)
+      - [Grafana](#grafana-1)
+      - [监控原理以及相关接口](#监控原理以及相关接口)
+      - [运维对Storage节点的远程操作](#运维对storage节点的远程操作)
     - [前端美化](#前端美化)
+  - [增加功能](#增加功能)
+    - [前端](#前端)
+      - [增加第二个图结构页面](#增加第二个图结构页面)
+      - [文件操作](#文件操作)
+      - [目录操作](#目录操作)
+    - [Storage](#storage)
+      - [碎片删除](#碎片删除)
+    - [Docker](#docker)
+      - [Docker 部署的意义](#docker-部署的意义)
+      - [打标服务器的部署](#打标服务器的部署)
+      - [存储节点的部署](#存储节点的部署)
+    - [Websockets](#websockets)
+    - [用户操作](#用户操作)
+    - [运维操作](#运维操作)
+  - [效果展示](#效果展示)
+    - [用户视角](#用户视角)
+    - [运维视角](#运维视角)
+  - [项目总结](#项目总结)
+  - [致谢](#致谢)
+  - [参考文献](#参考文献)
 
-- [增加功能](增加功能)
-  - [前端增加功能](#前端增加功能)
-    - [增加第二个图结构页面](#增加第二个图结构页面)
-    - [文件操作](#文件操作)
-    - [目录操作](#目录操作)
-  - [Storage](#storage)
-    - [碎片删除](#碎片删除)
-  - [Docker](#docker)
-    - [打标服务器的部署](#打标服务器的部署)
-    - [存储节点的部署](#存储节点的部署)
-  - [Websockets](#websockets)
-  - [用户操作](#用户操作)
-  - [运维操作](#运维操作)
-    - [效果展示](#效果展示)
-  - [用户视角](#用户视角)
-  - [运维视角](#运维视角)
-    - [项目总结](#项目总结)
-    - [致谢](#致谢)
-    - [参考文献](#参考文献)
 
 ## 项目介绍
 
@@ -72,6 +77,18 @@
 ## 立项依据
 
 ### 项目背景
+
+在信息大爆炸的时代，人类所能够获取和存储的信息量不断增长，这对人类自身对大量信息的管理能力了更高的要求。但是，现有的基于树形结构的文件系统设计主要面向机器思维而非人类思维，这迫使人类不得不以机器的方式思考，试图将自己思维映射到树形结构上从而适应机器，从而导致人类不能按照自然的思维模式对存储的信息进行检索。在这种思维的扭曲下，分类困难、文件起名困难、找不到文件等令人头疼的问题便层出不穷。考虑到人类的思维很大程度上基于信息与信息之间的“相关性”，用图的结构来描述文件之间的关系显然比树形结构更加符合人类思维。
+
+此外，随着社会经济的发展与信息化的进行，大量的的智能备正疯狂涌入人们的生活中。这些设备极大地提高了企业的办公效率、丰富了家庭的娱乐需求，但如何高效地利用分散在这些不同的设备上的存储空间如今正越发成为大家关注的问题：运用好这些分散的存储空间不仅可以方便多人合作，更可以避免资源的浪费。然而，传统的分布式文件系统由于缺少高性能服务器、设备在线时间不确定等原因不适用于小型私有场景，商业网盘存在收费高，限速等问题。由此，我们希望在前人的基础上，实现可用性高的、可移植性强的、基于互联网的小型分布式文件系统，在上述应用环境中提供良好的私人部署网盘服务。
+
+
+然而，分布式文件系统设备众多，如何实现设备的管理、维护网盘服务器便成为了一个难题。
+传统的通过日志实现系统监控的手段存在着理解困难、维护门槛高、难以实时监控、日志分散在各个设备的缺陷。因此，我们提出了在网盘的各个设备上部署分布式监控系统的设想。分布式监控是部署在分布式系统内的监控组件，可以监视和显示集群中各节点状态信息，最后将采集到的数据汇总到一个数据库，进行分析处理后以直观的图形化界面进行呈现。
+
+结合图结构以及监控的需求，我们提出了GraND Pro的设计，一个部署有监控的分布式图结构网盘。
+
+
 
 ### DisGraFS
 
@@ -254,17 +271,8 @@ Ray Server以及Storage通过node_exporter和pushgateway把节点资源使用的
 
 <img src="image/login.png" alt="login2" style="zoom:50%;" />
 
-网盘界面使用开源框架 Hendrix，整合 dontpanic 骨架
 
-![wangpan2](image/%E4%B8%BB%E9%A1%B5%E9%9D%A2%E6%88%AA%E5%9B%BE1.png)
-
-![2](image/主页面截图2.png)
-
-### 增加功能
-
-#### 主页面
-
-使用开源框架Hendrix 将其与x-dontpanic的主页面整合
+网盘界面使用开源框架[Hendrix](http://www.bootstrapmb.com/item/10834) 将其与x-dontpanic的主页面整合
 
 具体改进如下：
 
@@ -273,11 +281,15 @@ Ray Server以及Storage通过node_exporter和pushgateway把节点资源使用的
 3. 项目名字字体样式改进，增加渐变色
 4. 各按钮美化
 
-![majorpage](image/%E4%B8%BB%E9%A1%B5%E9%9D%A2%E6%88%AA%E5%9B%BE1.png)
+效果展示如下：
 
-![majorpage 2](image/主页面截图2.png)
+![wangpan2](image/%E4%B8%BB%E9%A1%B5%E9%9D%A2%E6%88%AA%E5%9B%BE1.png)
 
-### 前端增加功能
+![2](image/主页面截图2.png)
+
+## 增加功能
+
+### 前端
 
 #### 增加第二个图结构页面
 
@@ -287,7 +299,10 @@ Ray Server以及Storage通过node_exporter和pushgateway把节点资源使用的
 
 效果如下所示：
 
-![secondgraph](image/secondgraphshow.png)
+<div style="text-align:center">
+  <img src="image/secondgraphshow.png" alt="第二图界面"/>
+</div>
+
 
 #### 文件操作
 
@@ -411,7 +426,9 @@ Storage server和Ray server启动之后，运维远程唤醒Storage节点，启�
 
 GRAPHW 是用户所拥有的文件的关系总图，利用文件的 label 可直观看出文件之间的关系：
 
-<img src="image/graphs.png" alt="graphs" style="zoom:80%;" />
+<div style="text-align:center">
+  <img src="image/secondgraphshow.png" alt="第二图界面"/>
+</div>
 
 GRAPHS 提供用户基于可视化图数据库的文件检索界面，可以根据文件的 label 可视化查找文件，同时也提供文件删除重命名等各种文件基本功能，也是图数据库可视化的另一样式
 
@@ -439,7 +456,9 @@ GRAPHS 提供用户基于可视化图数据库的文件检索界面，可以根�
 
 本项目是在过去五年的几个 OSH 项目基础上优化发展而来的。
 
-![image-20220706103844647](D:\desktop\final_report\image\image-20220706103844647.png)
+<div style="text-align:center">
+  <img src="image/image-20220706103844647.png" alt="timeline"/>
+</div>
 
 时间线的源头是 2017年的 DFS，它实现了分布式网盘，以及用户管理功能，它的网盘是共享网盘，所有登陆上的用户用的是同一个网盘。 2020 年的 dontpanic 项目是在 DFS 基础上做的优化提升，dontpanic 改进了 DFS 的纠删码，实现了更高效率的编解码，增加了初步的用户隔离操作，文件传输不再经过中央节点，而是网页端与 storage 直接传输，2020年的另一个项目 GBDFS，是基于数据库文件系统，将数据库文件系统改进成为了图数据库文件系统。2021年的 DisGraFS 项目受到 DFS 和 GBDFS 启发，提出了分布式图文件系统，只是在具体实现时没有做到分布式存储，时间线来到了 2022 年，我们组基于 DisGraFS，实现了远程分布式存储集群，简化了用户操作，新增了一些网页端功能，引入了监控运维模块。
 
@@ -456,3 +475,20 @@ DisGraFS 和 dontpanic 的学长学姐在我们复现时提供了大量帮助，
 在此本小组成员一并表示感谢。
 
 ## 参考文献
+
+https://www.zhihu.com/question/53936892
+
+https://tech.ipalfish.com/blog/2020/07/21/tidb_monitor/
+
+https://tech.meituan.com/2018/11/01/cat-in-depth-java-application-monitoring.html
+
+https://tech.meituan.com/2018/11/01/cat-pr.html
+
+[OSH-2021/x-DisGraFS: Distributed Graph Filesystem (github.com)](https://github.com/OSH-2021/x-DisGraFS)
+
+[OSH-2020/x-dontpanic: team dontpanic in ustc-osh-2020 (github.com)](https://github.com/OSH-2020/x-dontpanic)
+
+[neo4j cypher authority](https://neo4j.com/developer/cypher/)
+
+[neo4j cpyher detail](https://blog.csdn.net/qq_46092061/article/details/117855018)
+
