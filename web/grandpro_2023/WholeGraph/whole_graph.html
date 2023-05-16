@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+    <title>GraNDPro Whole Graph</title>
+    <style type="text/css">
+        html, body {
+            font: 16pt arial;
+        }
+
+        #viz {
+            width: 900px;
+            height: 700px;
+            border: 1px solid lightgray;
+            font: 22pt arial;
+        }
+
+    </style>
+
+    <!-- FIXME: load from dist -->
+    <script type="text/javascript" src="js/neovis.js"></script>
+
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+		// define config car
+		// instantiate nodevis object
+		// draw
+
+		var viz;
+		var FS_username = window.location.href.split("username2=")[1];
+
+		function draw() {
+			var config = {
+				containerId: "viz",
+
+				neo4j: {
+					serverUrl: "bolt://101.33.236.114/:7687",
+					serverUser: "neo4j",
+					serverPassword: "11"
+				},
+
+				visConfig: {
+					edges: {
+						arrows: {
+							from: {
+								enabled: false
+							},
+							to: {
+								enabled: true
+							}
+						}
+					}
+				},
+
+				labels: {
+					FILE: {
+						label: "name",
+						group: "ext",
+						value: "size",
+						[NeoVis.NEOVIS_ADVANCED_CONFIG]: {
+							static: {
+								font: {
+									size: 20,
+									color: "black"
+								},
+								shape: "circle"
+							},
+							cypher: {
+								// TO BE DONE
+								// value: "MATCH (n) WHERE name(n) = RETURN SIZE((n)--()) AS s;"
+							}
+						}
+					},
+					Label: {
+						label: "name",
+						[NeoVis.NEOVIS_ADVANCED_CONFIG]: {
+							static: {
+								font: {
+									size: 12,
+									color: "green"
+								},
+								color: "green",
+								shape: "triangle"
+							},
+							cypher: {
+								// TO BE DONE
+								// value: "MATCH (n) WHERE id(n) = $id RETURN SIZE((n)--()) AS s"
+							}
+						}
+					}
+				},
+
+				relationships: {
+					tag: {}
+				},
+
+				initialCypher: "MATCH (n:FILE{owner:\"" + decodeURIComponent(FS_username) + "\"})-[r:tag]-(m:Label{owner:\"" + decodeURIComponent(FS_username) + "\"}) RETURN n,r,m"
+			};
+
+			viz = new NeoVis.default(config);
+			viz.render();
+			console.log(viz);
+		}
+    </script>
+</head>
+<body onload="draw()">
+<div id="viz"></div>
+
+
+<input type="submit" value="Reload Graph" id="reload">
+
+
+</body>
+
+<script>
+	$("#reload").click(function () {
+
+		var cypher = $("#cypher").val();
+
+		if (cypher.length > 3) {
+			viz.renderWithCypher(cypher);
+		} else {
+			console.log("reload");
+			viz.reload();
+
+		}
+
+	});
+
+</script>
+</html>

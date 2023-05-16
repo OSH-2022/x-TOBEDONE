@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- ghx -->
+    <!--bootstrap和JQerry相关库-->
+    <script src="js/jquery/jquery.js"></script>
+    <script src="js/jquery/jquery.cookie.js"></script>
+    <script src="js/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="js/bootstrap-3.3.7/css/bootstrap.min.css"> -->
+
+    <!--AJAX相关js动作-->
+    <script src="js/index_ajax.js" charset="utf-8"></script>
+    <!-- <meta charset="utf-8"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+
+    <!-- <script>
+    $(document).keyup(function (e) {
+        if (e.keyCode == 13) {
+        if (document.getElementById("pills-login").classList.contains('tab-pane')==true) {
+          document.getElementById("loginSubmitButton").click();
+          console.log("1");
+        }
+        else if (document.getElementById("pills-register").classList.contains('tab-pane')==true) {
+          document.getElementById("regSubmitButton").click();
+          console.log("2");
+        }
+        }
+    });
+    </script> -->
+
+    <script>
+      window.onload=function () {
+        var btnObj = document.getElementById("loginSubmitButton");
+        btnObj.onclick=function () {
+          // this.style.background="red";
+          var userName=$("#inputUsername_login").val();
+          if($.cookie().username!="undefine") {
+            $.removeCookie('username', { path: '/' });
+          }
+          $.cookie("username", userName, { path:'/'});
+          // window.console.log($.cookie().username);
+        };
+      };
+    </script>
+    <!-- ghx -->
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>GraNDPro</title>
+    <link rel="shortcut icon" href="jsp/images/favicons/favicon.ico">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <!-- Custom styles -->
+    <!-- ghx -->
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <link rel="stylesheet" href="css/b_iconfont.css" />
+    <link rel="stylesheet" href="css/b_style.css" />
+    <!-- ghx -->
+</head>
+<body>
+      <!--Main Navigation-->
+  <header>
+    <style>
+      #intro {
+        background-image: url(material/flower_background.jpg);
+        height: 100vh;
+      }
+
+      /* Height for devices larger than 576px */
+      @media (min-width: 992px) {
+        #intro {
+          margin-top: -58.59px;
+        }
+      }
+
+      .navbar .nav-link {
+        color: #fff !important;
+      }
+    </style>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
+      <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a class="navbar-brand nav-link" target="_blank" href="http://43.142.97.10:8080/grandpro_2022">
+          <strong>GraNDPro</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" aria-current="page" href="https://www.ustc.edu.cn">USTC</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/OSH-2022/x-TOBEDONE" rel="nofollow"
+                target="_blank">Github</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="https://mdbootstrap.com/docs/standard/" target="_blank">Download MDB UI KIT</a>
+            </li> -->
+          </ul>
+
+          <ul class="navbar-nav d-flex flex-row">
+            <!-- Icons -->
+            <!-- <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow"
+                target="_blank">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </li> -->
+            <!-- <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="https://www.facebook.com/mdbootstrap" rel="nofollow" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li> -->
+            <!-- <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="https://twitter.com/MDBootstrap" rel="nofollow" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li> -->
+            <li class="nav-item me-3 me-lg-0">
+              <a class="nav-link" href="https://github.com/OSH-2022/x-TOBEDONE" rel="nofollow" target="_blank">
+                <i class="fab fa-github"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Background image -->
+    <div id="intro" class="bg-image shadow-2-strong">
+      <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-xl-5 col-md-8">
+              <!-- <form class="bg-white rounded shadow-5-strong p-5"> -->
+                <!-- Email input -->
+                <!-- <div class="form-outline mb-4">
+                  <input type="email" id="form1Example1" class="form-control" />
+                  <label class="form-label" for="form1Example1">Email address</label>
+                </div> -->
+
+                <!-- Password input -->
+                <!-- <div class="form-outline mb-4">
+                  <input type="password" id="form1Example2" class="form-control" />
+                  <label class="form-label" for="form1Example2">Password</label>
+                </div> -->
+
+                <!-- 2 column grid layout for inline styling -->
+                <!-- <div class="row mb-4">
+                  <div class="col d-flex justify-content-center"> -->
+                    <!-- Checkbox -->
+                    <!-- <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                      <label class="form-check-label" for="form1Example3">
+                        Remember me
+                      </label>
+                    </div>
+                  </div> -->
+
+                  <!-- <div class="col text-center"> -->
+                    <!-- Simple link -->
+                    <!-- <a href="#!">Forgot password?</a>
+                  </div>
+                </div> -->
+
+                <!-- Submit button -->
+                <!-- <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+              </form> -->
+
+    <!-- ghx -->
+    <section class="bg-white rounded shadow-5-strong p-5">
+        <!-- <div style="width: 26rem;"> -->
+            <!-- Pills navs -->
+            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+                aria-controls="pills-login" aria-selected="true">Login</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
+                aria-controls="pills-register" aria-selected="false">Register</a>
+            </li>
+            </ul>
+            <!-- Pills navs -->
+
+            <!-- Pills content -->
+            <div class="tab-content">
+            <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                <form>
+                <!-- <div class="text-center mb-3">
+                    <p>Sign in with:</p>
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                    </button>
+                </div> -->
+            <div class="container-bilibili">
+                <div class="icon-bilibili">
+                    <i class="iconfont icon-dianzan"></i>
+                    <div class="shine">
+                        <!-- 这里是放射用的线段 -->
+                        <span style="--i:1"></span>
+                        <span style="--i:2"></span>
+                        <span style="--i:3"></span>
+                        <span style="--i:4"></span>
+                        <span style="--i:5"></span>
+                        <span style="--i:6"></span>
+                        <span style="--i:7"></span>
+                        <span style="--i:8"></span>
+                        <span style="--i:9"></span>
+                        <span style="--i:10"></span>
+                        <span style="--i:11"></span>
+                        <span style="--i:12"></span>
+                        <span style="--i:13"></span>
+                        <span style="--i:14"></span>
+                        <span style="--i:15"></span>
+                        <span style="--i:16"></span>
+                    </div>
+                </div>
+                <div class="icon-bilibili">
+                    <i class="iconfont icon-toubi"></i>
+                    <div class="shine">
+                        <span style="--i:1"></span>
+                        <span style="--i:2"></span>
+                        <span style="--i:3"></span>
+                        <span style="--i:4"></span>
+                        <span style="--i:5"></span>
+                        <span style="--i:6"></span>
+                        <span style="--i:7"></span>
+                        <span style="--i:8"></span>
+                        <span style="--i:9"></span>
+                        <span style="--i:10"></span>
+                        <span style="--i:11"></span>
+                        <span style="--i:12"></span>
+                        <span style="--i:13"></span>
+                        <span style="--i:14"></span>
+                        <span style="--i:15"></span>
+                        <span style="--i:16"></span>
+                    </div>
+                </div>
+                <div class="icon-bilibili">
+                    <i class="iconfont icon-shoucang"></i>
+                    <div class="shine">
+                        <span style="--i:1"></span>
+                        <span style="--i:2"></span>
+                        <span style="--i:3"></span>
+                        <span style="--i:4"></span>
+                        <span style="--i:5"></span>
+                        <span style="--i:6"></span>
+                        <span style="--i:7"></span>
+                        <span style="--i:8"></span>
+                        <span style="--i:9"></span>
+                        <span style="--i:10"></span>
+                        <span style="--i:11"></span>
+                        <span style="--i:12"></span>
+                        <span style="--i:13"></span>
+                        <span style="--i:14"></span>
+                        <span style="--i:15"></span>
+                        <span style="--i:16"></span>
+                    </div>
+                </div>
+            </div>
+                <!-- <p class="text-center">or:</p> -->
+
+                <!-- Username input -->
+                <div class="form-outline mb-4">
+                    <input type="email" id="inputUsername_login" class="form-control" />
+                    <label class="form-label" for="inputUsername_login">Username</label>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <input type="password" id="inputPassword_login" class="form-control" />
+                    <label class="form-label" for="inputPassword_login">Password</label>
+                </div>
+
+                <!-- 2 column grid layout -->
+                <!-- <div class="row mb-4">
+                    <div class="col-md-6 d-flex justify-content-center"> -->
+                    <!-- Checkbox -->
+                    <!-- <div class="form-check mb-3 mb-md-0">
+                        <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+                        <label class="form-check-label" for="loginCheck"> 为本项目一键三连！ </label>
+                    </div>
+                    </div> -->
+
+                    <!-- <div class="col-md-6 d-flex justify-content-center"> -->
+                    <!-- Simple link -->
+                    <!-- <a href="#!">Forgot password?</a> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+
+                <!-- Checkbox -->
+                <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="loginCheck" checked
+                    aria-describedby="loginCheckHelpText" />
+                    <label class="form-check-label" for="loginCheck">
+                      为本项目一键三连！
+                    </label>
+                </div>
+
+                <!-- Submit button -->
+                <button type="button" id="loginSubmitButton" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+                <!-- Register buttons -->
+                <!-- <div class="text-center">
+                    <p>Not a member? <a href="#!">Register</a></p>
+                </div> -->
+                </form>
+            </div>
+            <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                <form action="UserReg">
+                <!-- <div class="text-center mb-3">
+                    <p>Sign up with:</p>
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                    </button>
+                </div> -->
+
+                <!-- <p class="text-center">or:</p> -->
+
+            <div class="container-bilibili">
+                <div class="icon-bilibili">
+                    <i class="iconfont icon-dianzan"></i>
+                    <div class="shine">
+                        <!-- 这里是放射用的线段 -->
+                        <span style="--i:1"></span>
+                        <span style="--i:2"></span>
+                        <span style="--i:3"></span>
+                        <span style="--i:4"></span>
+                        <span style="--i:5"></span>
+                        <span style="--i:6"></span>
+                        <span style="--i:7"></span>
+                        <span style="--i:8"></span>
+                        <span style="--i:9"></span>
+                        <span style="--i:10"></span>
+                        <span style="--i:11"></span>
+                        <span style="--i:12"></span>
+                        <span style="--i:13"></span>
+                        <span style="--i:14"></span>
+                        <span style="--i:15"></span>
+                        <span style="--i:16"></span>
+                    </div>
+                </div>
+                <div class="icon-bilibili">
+                    <i class="iconfont icon-toubi"></i>
+                    <div class="shine">
+                        <span style="--i:1"></span>
+                        <span style="--i:2"></span>
+                        <span style="--i:3"></span>
+                        <span style="--i:4"></span>
+                        <span style="--i:5"></span>
+                        <span style="--i:6"></span>
+                        <span style="--i:7"></span>
+                        <span style="--i:8"></span>
+                        <span style="--i:9"></span>
+                        <span style="--i:10"></span>
+                        <span style="--i:11"></span>
+                        <span style="--i:12"></span>
+                        <span style="--i:13"></span>
+                        <span style="--i:14"></span>
+                        <span style="--i:15"></span>
+                        <span style="--i:16"></span>
+                    </div>
+                </div>
+                <div class="icon-bilibili">
+                    <i class="iconfont icon-shoucang"></i>
+                    <div class="shine">
+                        <span style="--i:1"></span>
+                        <span style="--i:2"></span>
+                        <span style="--i:3"></span>
+                        <span style="--i:4"></span>
+                        <span style="--i:5"></span>
+                        <span style="--i:6"></span>
+                        <span style="--i:7"></span>
+                        <span style="--i:8"></span>
+                        <span style="--i:9"></span>
+                        <span style="--i:10"></span>
+                        <span style="--i:11"></span>
+                        <span style="--i:12"></span>
+                        <span style="--i:13"></span>
+                        <span style="--i:14"></span>
+                        <span style="--i:15"></span>
+                        <span style="--i:16"></span>
+                    </div>
+                </div>
+            </div>
+                <!-- Name input -->
+                <!-- <div class="form-outline mb-4">
+                    <input type="text" id="registerName" class="form-control" />
+                    <label class="form-label" for="registerName">Name</label>
+                </div> -->
+
+                <!-- Username input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="inputUsername_reg" name="userName" class="form-control" />
+                    <label class="form-label" for="userName">Username</label>
+                </div>
+
+                <!-- Email input -->
+                <!-- <div class="form-outline mb-4">
+                    <input type="email" id="registerEmail" class="form-control" />
+                    <label class="form-label" for="registerEmail">Email</label>
+                </div> -->
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <input type="password" id="inputPassword_reg" name="userPasswd" class="form-control" />
+                    <label class="form-label" for="userPasswd">Password</label>
+                </div>
+
+                <!-- Repeat Password input -->
+                <!-- <div class="form-outline mb-4">
+                    <input type="password" id="registerRepeatPassword" class="form-control" />
+                    <label class="form-label" for="registerRepeatPassword">Repeat password</label>
+                </div> -->
+
+                <!-- Checkbox -->
+                <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
+                    aria-describedby="registerCheckHelpText" />
+                    <label class="form-check-label" for="registerCheck">
+                      为本项目一键三连！
+                    </label>
+                </div>
+
+                <!-- Submit button -->
+                <button type="button" id="regSubmitButton" class="btn btn-primary btn-block mb-4">Sign up</button>
+                </form>
+            </div>
+            </div>
+            <!-- Pills content -->
+        <!-- </div> -->
+
+        <div class="row mb-3" style="margin:10px auto 100px; text-align:center; width:60%; font-family:Microsoft YaHei,微软雅黑,Microsoft JhengHei,华文细黑,STHeiti,MingLiu; font-size: 1.5rem;">
+            <p id="statusFeedback">Hi</p>
+        </div>
+    </section>
+    <!-- ghx -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+
+  </header>
+  <!--Main Navigation-->
+
+  <!--Footer-->
+  <footer class="bg-light text-lg-start">
+    <!-- <div class="py-4 text-center">
+      <a role="button" class="btn btn-primary btn-lg m-2"
+        href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow" target="_blank">
+        Learn Bootstrap 5
+      </a>
+      <a role="button" class="btn btn-primary btn-lg m-2" href="https://mdbootstrap.com/docs/standard/" target="_blank">
+        Download MDB UI KIT
+      </a>
+    </div> -->
+
+    <hr class="m-0" />
+
+    <div class="text-center py-4 align-items-center">
+      <p>Follow x-TOBEDONE on social media</p>
+      <a href="https://github.com/OSH-2022/x-TOBEDONE" class="btn btn-primary m-1" role="button" rel="nofollow"
+        target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      <!-- © 2020 Copyright: -->
+      本项目由关浩祥、牛午甲、谭骏飞、徐奥、赵子毅基于
+      <a class="text-dark" href="https://github.com/OSH-2021/x-DisGraFS">DisGraFS</a>
+      与
+      <a class="text-dark" href="https://github.com/OSH-2020/x-dontpanic">dontpanic</a>
+      开发，有疑问欢迎
+      <a class="text-dark" href="https://github.com/OSH-2022/x-TOBEDONE">提 issue</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!--Footer-->
+    <!-- MDB -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <!-- <script type="text/javascript" src="js/script.js"></script> -->
+
+    <!-- ghx -->
+    <script>
+        // 开始写js脚本代码
+
+        // 定义两个计时器，分别控制按住过程中，另一个控制按住超过3秒钟
+        let timer_start = null;
+        let timer_end = null;
+
+        // 是否长按
+        let is_long = true;
+        // 鼠标按下的时间，统计计算鼠标弹起时的时间差来判断时长安还是点击
+        let mouse_down_start_time = 0;
+        // 鼠标弹起时的时间
+        let mouse_up_end_time = 0;
+
+        // 找到所有的icon
+        let icons = document.querySelectorAll('.icon-bilibili');
+
+        // 增加绑定事件
+        icons.forEach((icon, index) => {
+            // 增加点击事件
+            icon.addEventListener('click', () => {
+                // 点击时增加样式点亮
+                // 这里我们切换样式
+                if (index == 0 || index == 3) {
+                    // 第一个图标时不是长按时才会点亮
+                    // 快速点击有效，长按失效
+                    if (!is_long) {
+                        icon.classList.toggle('light');
+                    }
+                } else {
+                    icon.classList.toggle('light');
+                }
+            });
+        })
+
+        // 第一个图标增加按下事件
+        icons[0].addEventListener('mousedown', () => {
+            // 在这里我们需要控制一下放置于鼠标点击事件冲突
+            mouse_down_start_time = new Date().getTime();
+
+            // 鼠标按下 触发第一个计时器.5s后执行
+            timer_start = setTimeout(() => {
+                // 增加样式
+                icons.forEach((icon, index) => {
+                    // 第一个不同
+                    // 第一个增加抖动样式
+                    // 其他增加加载样式
+                    if (index == 0) {
+                        icon.classList.add('shake');
+                    } else if (index == 1 || index == 2) {
+                        icon.classList.add('loading');
+                    }
+                });
+
+            }, 500);
+
+            // 移除加载样式增加爆炸和点亮样式
+            // 这里延迟3.5s等待加载动画完成
+            timer_end = setTimeout(() => {
+                icons.forEach((icon, index) => {
+                    // 样式移除
+                    if (index < 3) {
+                        icon.classList.remove('shake');
+                        icon.classList.remove('loading');
+                        // 增加爆炸效果和完成之后的点亮
+                        icon.classList.add('bang');
+                        icon.classList.add("light");
+                    }
+                });
+
+                // 在增加一个计时器，让bang动画执行完成时清理掉样式
+                setTimeout(() => {
+                    icons.forEach((icon, index) => {
+                        if (index < 3) {
+                            icon.classList.remove('bang');
+                        }
+                    });
+                }, 1000);
+
+
+            }, 3500);
+
+
+        });
+        // 第一个图标增加弹起事件
+        icons[0].addEventListener('mouseup', () => {
+            // 在这里我们需要控制一下放置于鼠标点击事件冲突
+            mouse_up_end_time = new Date().getTime();
+            // 时间差超过300毫秒则为长按
+            if (mouse_up_end_time - mouse_down_start_time > 300) {
+                is_long = true;
+            } else {
+                is_long = false;
+            }
+
+            //基本样式有了，我们需要通过判断时长，让没有完成3s以上的加载不触发完成和放射效果
+            if (timer_start) {
+                clearTimeout(timer_start);
+            }
+            // 先把样式移除，然后把计时器取消
+            // 300-3500毫秒之间时需要结束加载动画，然后取消掉完成样式计时器的
+            if (mouse_up_end_time - mouse_down_start_time < 3500) {
+                icons.forEach((icon, index) => {
+                    if (index < 3) {
+                        icon.classList.remove('shake');
+                        icon.classList.remove('loading');
+                    }
+                });
+
+                if (timer_end) {
+                    clearTimeout(timer_end);
+                    timer_end = null;
+                }
+            }
+        });
+
+        // 第一个图标增加按下事件
+        icons[3].addEventListener('mousedown', () => {
+            // 在这里我们需要控制一下放置于鼠标点击事件冲突
+            mouse_down_start_time = new Date().getTime();
+
+            // 鼠标按下 触发第一个计时器.5s后执行
+            timer_start = setTimeout(() => {
+                // 增加样式
+                icons.forEach((icon, index) => {
+                    // 第一个不同
+                    // 第一个增加抖动样式
+                    // 其他增加加载样式
+                    if (index == 3) {
+                        icon.classList.add('shake');
+                    } else if (index == 4 || index == 5) {
+                        icon.classList.add('loading');
+                    }
+                });
+
+            }, 500);
+
+            // 移除加载样式增加爆炸和点亮样式
+            // 这里延迟3.5s等待加载动画完成
+            timer_end = setTimeout(() => {
+                icons.forEach((icon, index) => {
+                    if (index > 2) {
+                        // 样式移除
+                        icon.classList.remove('shake');
+                        icon.classList.remove('loading');
+                        // 增加爆炸效果和完成之后的点亮
+                        icon.classList.add('bang');
+                        icon.classList.add("light");
+                    }
+                });
+
+                // 在增加一个计时器，让bang动画执行完成时清理掉样式
+                setTimeout(() => {
+                    icons.forEach((icon, index) => {
+                        if (index > 2) {
+                            icon.classList.remove('bang');
+                        }
+                    });
+                }, 1000);
+
+
+            }, 3500);
+
+
+        });
+        // 第一个图标增加弹起事件
+        icons[3].addEventListener('mouseup', () => {
+            // 在这里我们需要控制一下放置于鼠标点击事件冲突
+            mouse_up_end_time = new Date().getTime();
+            // 时间差超过300毫秒则为长按
+            if (mouse_up_end_time - mouse_down_start_time > 300) {
+                is_long = true;
+            } else {
+                is_long = false;
+            }
+
+            //基本样式有了，我们需要通过判断时长，让没有完成3s以上的加载不触发完成和放射效果
+            if (timer_start) {
+                clearTimeout(timer_start);
+            }
+            // 先把样式移除，然后把计时器取消
+            // 300-3500毫秒之间时需要结束加载动画，然后取消掉完成样式计时器的
+            if (mouse_up_end_time - mouse_down_start_time < 3500) {
+                icons.forEach((icon, index) => {
+                    if (index > 2) {
+                        icon.classList.remove('shake');
+                        icon.classList.remove('loading');
+                    }
+                });
+
+                if (timer_end) {
+                    clearTimeout(timer_end);
+                    timer_end = null;
+                }
+            }
+        });
+
+    </script>
+    <!-- ghx -->
+</body>
+</html>
