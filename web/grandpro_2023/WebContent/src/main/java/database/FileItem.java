@@ -13,8 +13,11 @@ public class FileItem {
 	private String fileType;
 	private int fileSize;
 	private String whose;
+	private int isShare;
+	private int originID;
 	
-	FileItem(int id, String fileName, String path, String attribute, String time, int nod, int noa, boolean isFolder, String fileType, int fileSize,String whose) {
+	FileItem(int id, String fileName, String path, String attribute, String time, int nod, int noa, 
+	boolean isFolder, String fileType, int fileSize,String whose, int isShare, int originID) {
 		this.id=id;
 		this.fileName = fileName;
 		this.path=path;
@@ -26,9 +29,12 @@ public class FileItem {
 		this.fileType=fileType;
 		this.fileSize=fileSize;
 		this.whose=whose;
+		this.isShare=isShare;
+		this.originID=originID;
 	}
 
-	public FileItem(String fileName, String path, String attribute, String time, int nod, int noa, boolean isFolder, String fileType, int fileSize,String whose){
+	public FileItem(String fileName, String path, String attribute, String time, int nod, int noa, 
+	boolean isFolder, String fileType, int fileSize,String whose,int isShare, int originID ){
 		this.fileName = fileName;
 		this.path=path;
 		this.attribute=attribute;
@@ -39,7 +45,26 @@ public class FileItem {
 		this.fileType=fileType;
 		this.fileSize=fileSize;
 		this.whose=whose;
+		this.isShare=isShare;
+		this.originID=originID;
 	}
+
+	public int getIsShare(){
+		return this.isShare;
+	}
+
+	public void setIsShare(int isShare){
+		this.isShare = isShare;
+	}
+
+	public int getOriginID(){
+		return this.originID;
+	}
+
+	public void setOriginID(int originID){
+		this.originID = originID;
+	}
+
 
 	public int getId() {
 		return id;

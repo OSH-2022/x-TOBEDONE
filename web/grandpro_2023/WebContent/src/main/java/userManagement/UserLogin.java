@@ -46,8 +46,8 @@ public class UserLogin extends ActionSupport{
 
 	
 	@Override  
-	public String execute() throws Exception
-	{
+	public String execute() throws Exception	
+	{	/** 验证数据 */
 		
 		Query query = new Query();
 		String passwdStandard = query.queryUserPasswd(userName);
@@ -55,7 +55,7 @@ public class UserLogin extends ActionSupport{
 		
 		if(passwdStandard==null)
 		{
-			result = "登录失败：该用户不存在！";
+			result = "用户未注册";
 			return "success";
 		}
 		if(passwdStandard.compareTo(userPasswd)==0)
@@ -66,10 +66,9 @@ public class UserLogin extends ActionSupport{
 		}
 		else
 		{
-			result = "登录失败：密码错误！";
+			result = "密码错误";
 			return	"success";
 		}
 	}
 	
-
 }

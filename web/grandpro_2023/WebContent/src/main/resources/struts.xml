@@ -8,7 +8,7 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
 
      <package name ="userManagement" extends="json-default">
-            <action name ="UserReg" class = "userManagement.UserReg">  
+            <action name ="UserReg" class = "userManagement.UserReg">
  						<result type="json" name="success"></result> 
             </action >  
             
@@ -23,7 +23,7 @@
             <action name ="FileDownloader" class = "userManagement.FileDownloader" method = "*">  
  						<result type="json" name="success"></result>
             </action >
-
+            
              <action name ="FileUploader" class = "userManagement.FileUploader" method = "*">
                     <result type="json" name="success"></result>
              </action >

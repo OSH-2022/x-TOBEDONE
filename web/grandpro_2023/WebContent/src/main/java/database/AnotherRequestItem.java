@@ -6,7 +6,7 @@ public class AnotherRequestItem {
 	private String port;
 	private String filename;
 	private String fileType;
-	private int fileSize;
+	//private int fileSize;
 	//private int fileId;
 	private int fragmentId;
 

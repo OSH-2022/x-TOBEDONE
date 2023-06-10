@@ -4,17 +4,28 @@ import java.sql.*;
 
 public class Query {
 
+    // 如果一个变量被声明为final，它只能被赋值一次。最终变量的值在设置后不能修改。
+    
+    //驱动程序名
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+
+    // URL指向要访问的数据库名mydata
     static final String DB_URL = "jdbc:mysql://localhost:3306/mysql?useSSL=false&serverTimezone=Asia/Shanghai";
+
     //static final String DB_URL = "jdbc:mysql://mymysql:3306/mysql?useSSL=false"; // docker
     static final String USER = "root";
     static final String PASS = "201314";
 
     Connection conn = null;
 
-    public Query(){
+    public Query(){ // 构造函数
         try{
+            //Class.forName 传入 com.mysql.jdbc.Driver 之后,就知道我连接的数据库是 mysql
+            // 声明Connection对象
             Class.forName(JDBC_DRIVER);
+            
+            // 远程连接数据库
+            // getConnection()方法，连接MySQL数据库
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
         }
         catch (Exception e) {
@@ -32,14 +43,15 @@ public class Query {
         }
     }
 
-    public FileItem queryFile(String path,String name){
+    public FileItem queryFile(String path,String name,String mywhose){
         Statement stmt = null;
         ResultSet rs = null;
         FileItem fileItem = null;
         try{
             stmt = conn.createStatement();
             String sql;
-            sql = String.format("SELECT * FROM DFS.FILE WHERE NAME='%s' AND PATH='%s'",name,path);
+            sql = String.format("SELECT * FROM DFS.FILE WHERE NAME='%s' AND PATH='%s' AND WHOSE='%s';",name,path,mywhose);
+            // 执行查询操作
             rs = stmt.executeQuery(sql);
 
             if (rs.next()) {
@@ -52,8 +64,10 @@ public class Query {
                 String fileType=rs.getString("FILETYPE");
                 int fileSize=rs.getInt("FILESIZE");
                 String whose=rs.getString("WHOSE");
+                int isShare=rs.getInt("ISSHARE");
+                int originID=rs.getInt("ORIGINID");
 
-                fileItem=new FileItem(id,name,path,attr,time,nod,noa,isFolder,fileType,fileSize,whose);
+                fileItem=new FileItem(id,name,path,attr,time,nod,noa,isFolder,fileType,fileSize,whose,isShare,originID);
             }
         }
         catch(Exception e){
@@ -75,7 +89,174 @@ public class Query {
         }
         return fileItem;
     }
-	/*
+	
+    public boolean changePath(String path, String name, String newpath, String whose){
+        Statement stmt=null;
+        try{
+            stmt = conn.createStatement();
+
+            String sql;
+            sql = String.format("Update DFS.FILE SET PATH='%s' WHERE NAME='%s' AND PATH='%s' AND WHOSE='%s';", newpath, name, path, whose);
+            
+            stmt.executeUpdate(sql);
+
+            System.out.println("重命名成功");
+            conn.close();
+            System.out.println("数据库关闭成功");
+            return  true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean renameFile(String path, String name, String newname, String whose){
+        Statement stmt=null;
+        try{
+            stmt = conn.createStatement();
+
+            String sql;
+            sql = String.format("Update DFS.FILE SET NAME='%s' WHERE NAME='%s' AND PATH='%s' AND WHOSE='%s'", newname, name, path,whose);
+            
+            stmt.executeUpdate(sql);
+
+            System.out.println("重命名成功");
+            conn.close();
+            System.out.println("数据库关闭成功");
+            return  true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteDir(String path, String name, String whose){
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+            String sql;
+            sql = String.format("DELETE FROM DFS.FILE WHERE NAME='%s' AND PATH='%s' AND ISFOLDER='1' AND WHOSE='%s';", name, path, whose);
+
+            stmt.executeUpdate(sql);
+
+            System.out.println("数据库删除成功");
+            conn.close();
+            System.out.println("数据库关闭成功");
+            return true;
+
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public FileItem[] querySharedFile(int id){
+        Statement stmt = null;
+        ResultSet rs = null;
+        FileItem fileArray[] = null;
+
+        try{
+            stmt = conn.createStatement();
+            String sql;
+            
+            // 查出该文件相关的共享文件
+            sql = String.format("SELECT * FROM DFS.FILE WHERE ORIGINID='%d'", id);
+
+            rs = stmt.executeQuery(sql);
+            
+            if(!rs.last())
+                return null;
+
+            
+            int count = rs.getRow();
+
+            fileArray=new FileItem[count];
+            int i=0;
+            rs.first();
+
+            while(i<count){
+                int fileid = rs.getInt("ID");
+                int nod = rs.getInt("NOD");
+                int noa = rs.getInt("NOA");
+                String whose = rs.getString("WHOSE");
+                String name = rs.getString("NAME");
+                String attr = rs.getString("ATTRIBUTE");
+                String time = rs.getString("TIME");
+                boolean isFolder = rs.getBoolean("ISFOLDER");
+                String fileType=rs.getString("FILETYPE");
+                int fileSize=rs.getInt("FILESIZE");
+                String path=rs.getString("PATH");
+                int isShare=rs.getInt("ISSHARE");
+                int originID=rs.getInt("OriginID");
+                fileArray[i]=new FileItem(fileid,name,path,attr,time,nod,noa,isFolder,fileType,fileSize,whose,isShare,originID);
+                rs.next();
+                i++;
+            }
+            conn.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            try{
+                if(rs!=null && !rs.isClosed())
+                    rs.close();
+            }
+            catch(Exception e){
+            }
+            try{
+                if(stmt!=null && !stmt.isClosed())
+                    stmt.close();
+            }
+            catch(Exception e){
+            }
+        }
+        return fileArray;
+    }
+
+    public boolean deleteFile(String path, String name, String whose){
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+            String sql;
+            sql = String.format("DELETE FROM DFS.FILE WHERE NAME='%s' AND PATH='%s' AND ISFOLDER='0' AND WHOSE='%s';", name, path, whose);
+
+            stmt.executeUpdate(sql);
+
+            System.out.println("数据库删除成功");
+            conn.close();
+            System.out.println("数据库关闭成功");
+            return true;
+
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteFragment(int fragmentID){
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+
+            String sql;
+            sql = String.format("DELETE FROM DFS.FRAGMENT WHERE ID='%d'", fragmentID);
+
+            stmt.executeUpdate(sql);
+
+            System.out.println("数据库删除成功");
+            //conn.close();
+            System.out.println("数据库关闭成功");
+            return true;
+
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+    /*
 	public FileItem queryFile(int id){
         Statement stmt = null;
         ResultSet rs = null;
@@ -246,7 +427,78 @@ public class Query {
         return time;
     }*/
 
+
+    public FileItem[] queryDirFile(String whose, String dirpath){
+        // dirpath 是目录的绝对路径
+        // 查询某个目录下的文件列表
+        Statement stmt = null;
+        ResultSet rs = null;
+        FileItem fileArray[] = null;
+
+        int id, noa, nod;
+        String name, attr, time;
+        boolean isFolder;
+
+        int count, i;
+
+        try{
+            stmt = conn.createStatement();
+            String sql;
+            
+            sql = String.format("SELECT * FROM DFS.FILE WHERE WHOSE='%s' AND PATH REGEXP '^%s';", whose, dirpath);
+
+            rs = stmt.executeQuery(sql);
+            
+            if(!rs.last())
+                return null;
+
+            count = rs.getRow();
+
+            fileArray=new FileItem[count];
+            i=0;
+            rs.first();
+
+            while(i<count){
+                id = rs.getInt("ID");
+                nod = rs.getInt("NOD");
+                noa = rs.getInt("NOA");
+                name = rs.getString("NAME");
+                attr = rs.getString("ATTRIBUTE");
+                time = rs.getString("TIME");
+                isFolder = rs.getBoolean("ISFOLDER");
+                String fileType=rs.getString("FILETYPE");
+                int fileSize=rs.getInt("FILESIZE");
+                String path=rs.getString("PATH");
+                int isShare=rs.getInt("ISSHARE");
+                int originID=rs.getInt("OriginID");
+                fileArray[i]=new FileItem(id,name,path,attr,time,nod,noa,isFolder,fileType,fileSize,whose,isShare,originID);
+                rs.next();
+                i++;
+            }
+            conn.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            try{
+                if(rs!=null && !rs.isClosed())
+                    rs.close();
+            }
+            catch(Exception e){
+            }
+            try{
+                if(stmt!=null && !stmt.isClosed())
+                    stmt.close();
+            }
+            catch(Exception e){
+            }
+        }
+        return fileArray;
+    }
+
     public FileItem[] queryFileList(String whose, String path){
+        // 查询文件列表
         Statement stmt = null;
         ResultSet rs = null;
         FileItem fileArray[] = null;
@@ -258,9 +510,14 @@ public class Query {
         int count,i;
 
         try{
+            // 创建statement类对象，用来执行SQL语句 
             stmt = conn.createStatement();
             String sql;
+
+            //要执行的SQL语句
             sql = "SELECT * FROM DFS.FILE WHERE WHOSE='"+whose+"' AND PATH='"+path+"'";
+
+            // rs 为 ResultSet 类，用来存放获取的结果集！！
             rs = stmt.executeQuery(sql);
             if (!rs.last())
                 return null;
@@ -279,8 +536,10 @@ public class Query {
                 isFolder = rs.getBoolean("ISFOLDER");
                 String fileType=rs.getString("FILETYPE");
                 int fileSize=rs.getInt("FILESIZE");
+                int isShare=rs.getInt("ISSHARE");
+                int originID=rs.getInt("ORIGINID");
 
-                fileArray[i]=new FileItem(id,name,path,attr,time,nod,noa,isFolder,fileType,fileSize,whose);
+                fileArray[i]=new FileItem(id,name,path,attr,time,nod,noa,isFolder,fileType,fileSize,whose,isShare,originID);
                 rs.next();
                 i++;
             }
@@ -362,6 +621,46 @@ public class Query {
         return fileArray;
 	}*/
 
+    public boolean queryDir(String whose, String dirName, String path){
+    // 用于查询某个用户的特定路径下是否有某个名字的目录
+        Statement stmt = null;
+        ResultSet rs = null;
+        try{
+            stmt = conn.createStatement();
+            String sql;
+            sql = String.format("SELECT * FROM DFS.FILE WHERE WHOSE='%s' AND NAME='%s' AND PATH='%s' AND ISFOLDER='1'; ", whose, dirName, path);
+            rs = stmt.executeQuery(sql);
+            conn.close();
+            if(rs.next()) //说明已经存在这个文件夹
+                return true;
+            else{
+                return false; //说明这个文件夹不存在
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean addDir(String whose, String dirName, String path){
+        Statement stmt = null;
+        try{
+            stmt = conn.createStatement();
+            String sql;
+            sql = String.format("INSERT INTO DFS.FILE (NAME,PATH,ATTRIBUTE,TIME,NOD,NOA,ISFOLDER,WHOSE,FILETYPE,FILESIZE)"
+            +"VALUES ('%s','%s','rwxrwxrwx','', 0, 0,true,'%s','', 0);", dirName, path, whose);
+
+            stmt.executeUpdate(sql);
+
+            conn.close();
+
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public String queryFragment(int id){
         Statement stmt = null;
         ResultSet rs = null;
@@ -430,6 +729,84 @@ public class Query {
         }
     }
 
+    public String queryFragDevice(int fragid){
+        // 查询某个文件碎片存在哪个节点上
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = conn.createStatement();
+            String sql;
+            sql = String.format("SELECT * FROM DFS.FRAGMENT WHERE ID='%d';", fragid);
+
+            rs = stmt.executeQuery(sql);
+
+            // 返回文件碎片所在的存储节点
+            String ret = rs.getString("PATH");
+            
+            conn.close();
+
+            return ret;
+
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return "1000";
+        }
+    }
+
+    public int queryDeviceLftRS(int deviceid){
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = conn.createStatement();
+            String sql;
+            sql = String.format("SELECT * FROM DFS.DEVICE WHERE ID='%d';", deviceid);
+
+            rs = stmt.executeQuery(sql);
+            //conn.close();
+
+            if(!rs.last())
+                return -1;
+
+            // 返回设备的剩余容量
+            return rs.getInt("LEFTRS");
+            
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public boolean updateDeviceLftRS(int deviceid, int fragsize, int lftRS){
+        // 更新设备的剩余容量
+
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+            String sql;
+
+            int newRS = lftRS + fragsize;
+
+            sql = String.format("UPDATE DFS.DEVICE SET LEFTRS='%d' WHERE ID='%d';", newRS, deviceid);
+
+            stmt.executeUpdate(sql);
+            //conn.close();
+
+            return true;
+
+            // 返回文件碎片所在的存储节点
+            //return rs.getInt("PATH");
+            
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
     public DeviceItem[] queryOnlineDevice(){
         Statement stmt = null;
         ResultSet rs = null;
@@ -443,12 +820,14 @@ public class Query {
         try{
             stmt = conn.createStatement();
             String sql;
+
+            // 查询在线的设备，按使用空间的降序排列
             sql = String.format("SELECT * FROM DFS.DEVICE WHERE ISONLINE=true ORDER BY RS DESC");
             rs = stmt.executeQuery(sql);
 
             if (!rs.last())
                 return null;
-            count = rs.getRow();
+            count = rs.getRow(); // 在线的设备总数
             deviceArray=new DeviceItem[count];
             i=0;
             rs.first();
@@ -468,6 +847,7 @@ public class Query {
             }
         }
         catch(Exception e){
+            // 出现异常
             e.printStackTrace();
         }
         finally{
@@ -804,10 +1184,11 @@ public class Query {
                 sql = String.format("INSERT INTO DFS.FILE (NAME,PATH,ATTRIBUTE,TIME,NOD,NOA,ISFOLDER,WHOSE,FILETYPE,FILESIZE) "
                                 + "VALUES ('%s','%s','%s','%s',%d,%d,true,'%s','%s',%d);",file.getFileName(),file.getPath(),
                         file.getAttribute(),file.getTime(),1,0,file.getWhose(),"",0);
-            else
-                sql = String.format("INSERT INTO DFS.FILE (NAME,PATH,ATTRIBUTE,TIME,NOD,NOA,ISFOLDER,WHOSE,FILETYPE,FILESIZE) "
-                                + "VALUES ('%s','%s','%s','%s',%d,%d,false,'%s','%s',%d);",file.getFileName(),file.getPath(),
-                        file.getAttribute(),file.getTime(),file.getNod(),file.getNoa(),file.getWhose(),file.getFileType(),file.getFileSize());
+            else // 添加的是文件
+                sql = String.format("INSERT INTO DFS.FILE (NAME,PATH,ATTRIBUTE,TIME,NOD,NOA,ISFOLDER,WHOSE,FILETYPE,FILESIZE,ISSHARE,ORIGINID) "
+                                + "VALUES ('%s','%s','%s','%s',%d,%d,false,'%s','%s',%d,%d,%d);",file.getFileName(),file.getPath(),
+                        file.getAttribute(),file.getTime(),file.getNod(),file.getNoa(),file.getWhose(),file.getFileType(),file.getFileSize(),
+                        file.getIsShare(),file.getOriginID());
             System.out.println(sql);
             suc = stmt.executeUpdate(sql);
             if (suc>0){
@@ -836,7 +1217,7 @@ public class Query {
         return fileId;
     }
 
-    public int deleteFile(int id){
+    /*public int deleteFile(int id){
         Statement stmt = null;
         int suc = -1;
         try{
@@ -861,7 +1242,7 @@ public class Query {
             }
         }
         return suc;
-    }
+    }*/
 
     public int alterFile(FileItem file){
         Statement stmt = null;
@@ -969,7 +1350,7 @@ public class Query {
         return suc;
     }
 
-    public int deleteFragment(int id){
+    /*public int deleteFragment(int id){
         Statement stmt = null;
         int suc = -1;
         try{
@@ -1022,7 +1403,7 @@ public class Query {
             }
         }
         return suc;
-    }
+    }*/
 
     public int addRequest(RequestItem request){
         Statement stmt = null;

@@ -258,7 +258,7 @@ function encodeFile(selectedFile) {
 				content: content,
 				digest: digest,
 				fileSize: fileSize
-			})
+			},selectedFile)
 		//};
 		//console.log(raw);
 		//worker.postMessage({ input: raw });
@@ -275,9 +275,8 @@ function encodeFile(selectedFile) {
 		//alert("reading");
 	}
 }
-function encodeCallBack(fileInfo){
 
-
+function encodeCallBack(fileInfo, selectedFile){
 	var uploadForm = new FormData();
 	var deviceArray;
 	var fileId;
@@ -312,16 +311,57 @@ function encodeCallBack(fileInfo){
 	});
 
 	//alert("Before upload");
+	/*
+	console.log(typeof(deviceArray[0].ip));
+	console.log(deviceArray[0].ip);
+	console.log(typeof(deviceArray[0].port));
+	console.log(deviceArray[0].port);
+	console.log(fileInfo.content[0]);
+	console.log(fileInfo.digest[0]);
+	*/
 	for (var i = 0; i < deviceArray.length; i++) {
 		WebSocketUpload(deviceArray[i].ip, deviceArray[i].port, (fileId * 100 + i).toString(), fileInfo.content[i], fileInfo.digest[i]);
+	    
 	}
+
+	console.log("finish upload to storage, begin to upload to ray");
+
+	// 修改 ip 和 port，这里对应的是 ray 的地址
+	ip = "124.220.19.232";
+	port = "9998";
+
+	var content_x ="";
+	var digest_x = "";
+
+	function upLoader(evt) {
+		var fileString = evt.target.result;
+		content_x = new Uint8Array(fileString);
+		digest_x = objectHash.MD5(content_x);
+
+		WebSocketUpload(ip, port, selectedFile.name, content_x, digest_x);
+	}
+
+	var reader = new FileReader();
+	//reader.readAsBinaryString(files[0]);
+	reader.onload = upLoader;
+	reader.readAsArrayBuffer(selectedFile);
+	
+	console.log("finish upload to ray");
 }
 function fileUpload() {
-
+	console.log("begin to fileUpload");
 	let selectedFile = document.getElementById('files').files[0];//TODO multisel file
+	console.log("begin to encode");
 	encodeFile(selectedFile);
+	console.log("***************************************************");
+	console.log(selectedFile);
+	console.log("***************************************************");
+	// console.log("begin to download to ray");
+	// fileDownloadtoRay(selectedFile);
+	// console.log("finish downloading to ray");
+	
+} 
 
-}
 function fileDownload() {
 	var path;
 	var name;
@@ -356,8 +396,9 @@ function fileDownload() {
 			var	form=new FormData();
 			var deviceArray;
 			var fileInfo;
-			form.append("path",path);
-			form.append("name",name);
+			form.append("path", path);
+			form.append("name", name);
+			form.append("whose", $.cookie("username"));
 			$.ajax({
 				url:"FileDownloader!downloadRegister.action",
 				type:"POST",
@@ -415,23 +456,341 @@ function fileDownload() {
 		item = item.next();
 	}
 }
+
+function fileDelete() {
+	var path;
+	var name;
+	var item=$("#file_list_body").children();
+	item = item.next();
+	while(item.length!=0)
+	{
+		name = "";
+		path = "";
+		//如果ｉｔｅｍ不为空，则进行处理
+		var children=item.children();
+		if( children[1].children[0].children[0].checked ){
+			//文件路径
+			path = path + "/";
+			/*********/					if(curr_path_array.length>1)
+			path="";
+			for(var i=1;i<curr_path_array.length;i++)
+				path = path + curr_path_array[i] + "/" ;
+			//文件名
+			name = name + $.trim(children[1].innerText);
+			//alert(path + "  " + name);
+
+
+			/*
+             *
+             * 此处应当利用ａｊａｘ　远程调用　downloadRegister(String path, String name)；
+             *
+             * */
+			//利用ａｊａｘ　远程调用　downloadRegister(String path, String name)；
+			var result;
+			var	form=new FormData();
+			var deviceArray;
+			var deleteResult;
+			
+			var isfolder = 0;
+			if(children[1].children[1].className=="glyphicon glyphicon-file")
+				isfolder = 0;
+			else
+				isfolder = 1;
+			
+			var whose = $.cookie("username");
+			console.log(whose + " " + path + " " + name);
+			form.append("path", path);
+			form.append("name", name);
+			form.append("isfolder", isfolder);
+			form.append("whose", whose);
+
+			let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
+			
+			if(isfolder == 0) //网页端的删除文件行为需要同步到图数据库上
+				ws2.onopen = function()
+				{
+					ws2.send(whose + "_web");
+					console.log("('delete', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "'})");
+					ws2.send("('delete', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + whose + "'})");
+				}
+			else //删目录
+			{
+				var dirpath = path + name + "/";
+				if(path == "/"){
+					dirpath = name + "/";
+				}
+
+				ws2.onopen = function()
+				{
+					ws2.send(whose + "_web");
+					console.log("('delfolder', {'path': '" + dirpath + "', 'owner': '" + whose + "'})");
+					ws2.send("('delfolder', {'path': '" + dirpath + "', 'owner': '" + whose + "'})");
+				}
+			}
+				
+			$.ajax({
+				url:"FileDownloader!deleteRegister.action",
+				type:"POST",
+				data:form,
+				dataType:"text",
+				processData:false,
+				contentType:false,
+				async: false,								//此处采用同步查询进度
+				success:function(databack){
+					deleteResult = $.parseJSON(databack);
+					//alert(result);
+				}
+			});
+			
+			let ws3 = new WebSocket("ws://43.142.97.10:9092");
+
+			//let ws3 = new WebSocket("ws://192.168.40.133:9092");
+			// 如果删除的是文件，则需要把返回的 ID 以列表的形式发送过去
+			/// if(isfolder == 0) deleteResult.result = "[" + deleteResult.result + "]" 
+
+			ws3.onopen = function()
+			{
+				console.log("send " + deleteResult.result);
+				ws3.send(deleteResult.result);
+				
+			}
+
+			console.log("Delete " + deleteResult.result);
+		}
+		//
+		item = item.next();
+	}
+}
+
+
+function dialog_display(){
+	document.getElementById("rename_dialog").style.display = "block";
+}
+
+function add_dir(){
+	var dir_name = $("#dir_name").val();
+	console.log("new dir " + dir_name + " added.");
+	var form = new FormData();
+	var path = "/";
+	if(curr_path_array.length > 1)
+		path = "";
+	for(var i=1;i<curr_path_array.length;i++)
+		path = path + curr_path_array[i] + "/" ;
+	// 获取文件夹的路径
+
+
+	var whose = $.cookie("username");
+	console.log("Path: " + path);
+	console.log("Whose: "+ whose);
+
+	form.append("name", dir_name); //新建的目录名称
+	form.append("path", path);  //新建目录的位置
+	form.append("whose", whose);  //新建目录所属的用户
+
+	var Result;
+	$.ajax({
+		url: "FileDownloader!adddirRegister.action",
+		type: "POST",
+		data: form,
+		dataType: "text",
+		processData: false,
+		contentType: false,
+		async: false,
+		success: function(databack){
+			Result = $.parseJSON(databack);
+		}
+	});
+	console.log("Add dir " + Result.result);
+}
+
+function Check_fileRename() {
+	var path;
+	var name;
+	var item=$("#file_list_body").children();
+	var flag = false;
+	item = item.next();
+	while(item.length!=0)
+	{
+		name = "";
+		path = "";
+		//如果ｉｔｅｍ不为空，则进行处理
+		var children=item.children();
+		if(children[1].children[0].children[0].checked)
+		{
+			//文件路径
+			path = path + "/";
+			/*********/					
+			if(curr_path_array.length>1)
+				path="";
+			for(var i=1;i<curr_path_array.length;i++)
+				path = path + curr_path_array[i] + "/" ;
+			//文件名
+			name = name + $.trim(children[1].innerText);
+			flag = true;
+			console.log(path+"-"+name);
+			break;
+		}
+		//
+		item = item.next();
+	}
+	if(flag){  //表明有选中文件
+		console.log("Rename action detected.");
+		dialog_display();
+	}
+}
+
+function fileRename() {
+	var new_name = $("#new_name").val();
+	console.log("the new file name is " + new_name);
+	var path;
+	var name;
+	var item=$("#file_list_body").children();
+	item = item.next();
+	while(item.length!=0)
+	{
+		name = "";
+		path = "";
+		//如果ｉｔｅｍ不为空，则进行处理
+		var children=item.children();
+		if( children[1].children[0].children[0].checked )
+		{
+			//文件路径
+			path = path + "/";
+			/*********/					
+			if(curr_path_array.length>1)
+				path="";
+			for(var i=1;i<curr_path_array.length;i++)
+				path = path + curr_path_array[i] + "/" ;
+			//文件名
+			name = name + $.trim(children[1].innerText);
+
+			var isfolder;
+			if(children[1].children[1].className=="glyphicon glyphicon-file")
+				isfolder = 0;
+			else
+				isfolder = 1;
+			
+			var renameResult;
+			var form = new FormData();
+			form.append("path", path);
+			form.append("name", name);
+			form.append("newname", new_name);
+			form.append("isfolder", isfolder);
+			form.append("whose", $.cookie("username"));
+
+			// 网页端的重命名行为需要同步到图数据库上
+			let ws2 = new WebSocket("ws://101.33.236.114:9090"); //创建WebSocket连接
+			
+			if(isfolder == 0)
+			{ //重命名文件
+				ws2.onopen = function()
+				{
+					ws2.send($.cookie("username")+"_web");
+					ws2.send("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
+					console.log("('rename', {'name': '" + name + "', 'path': '" + path + "', 'owner': '" + $.cookie("username") + "', 'newname': '" + new_name + "'})");
+				}
+			}
+			else
+			{   //重命名目录
+				var dirpath = path + name + "/";
+				if(path == "/"){ //根目录
+					dirpath = name + "/";
+				}
+				
+				var newdirpath = path + new_name + "/";
+				if(path == "/"){
+					newdirpath = new_name + "/";
+				}
+				
+				ws2.onopen = function()
+				{
+					ws2.send($.cookie("username")+"_web");
+					ws2.send("('refolder', {'newpath': '" + newdirpath + "', 'path': '" + dirpath + "', 'owner': '" + $.cookie("username") + "'})");
+					console.log("('refolder', {'newpath': '" + newdirpath + "', 'path': '" + dirpath + "', 'owner': '" + $.cookie("username") + "'})");
+				}
+			}
+
+			console.log(path + " " + name + " " + new_name);
+
+			var dirpath = path + name + "/";
+			if(path=="/")
+				dirpath = name + "/";
+			console.log(dirpath);
+
+			$.ajax({
+				url:"FileDownloader!renameRegister.action",
+				type:"POST",
+				data:form,
+				dataType:"text",
+				processData:false,
+				contentType:false,
+				async:false,
+				success:function(databack){
+					renameResult = $.parseJSON(databack);
+				}
+			});
+
+			console.log("Rename " + renameResult.result);
+			break;
+		}
+		//
+		item = item.next();
+	}
+}
+
 $(document).ready(function(){
 	curr_path_array = [];
 	curr_path_array[0] = "/";
 	curr_path_html = "<li>ROOT</li>";
+	//ws2 = new WebSocket("ws://101.33.236.114:9090");
 	
 	//面包屑式访问路径显示  初始化
 	$("#curr_path").html(curr_path_html);
 	
-	//文件下载
+	// 文件下载
+	// 绑定点击事件
 	$("#button_download").click(function(){
-			fileDownload();
+		fileDownload();
 	});
 
 	$("#button_upload").click(function() {
 		$("#files").click();
+		//location.reload();
 	});
 
+	$("#button_delete").click(function(){
+		fileDelete();
+		//location.reload();
+	})
+
+	$("#button_rename").click(function(){
+		console.log("Start renaming");
+		Check_fileRename();
+	})
+
+	$("#button_confirm").click(function(){
+		document.getElementById("rename_dialog").style.display="none";
+		fileRename();
+		//location.reload();
+	});
+
+	$(".close").click(function(){
+		document.getElementById("rename_dialog").style.display="none";
+	})
+
+	$(".dirclose").click(function(){
+		document.getElementById("dirname_dialog").style.display="none";
+	})
+
+	$("#button_adddir").click(function(){
+		document.getElementById("dirname_dialog").style.display="block";
+	})
+
+	$("#button_confirm2").click(function(){
+		add_dir();
+		document.getElementById("dirname_dialog").style.display="none";
+		location.reload();
+	})
 	/*
 		<tr id="file_list_first">
 		<td> </td>
@@ -444,52 +803,55 @@ $(document).ready(function(){
 	
 	
 	//点击文件目录进入其子目录　　刷新文件目录列表
-	$("#file_list_body").on("click","tr.file_list_go",
-			function()
+	$("#file_list_body").on("click","i.ion-android-folder",
+			function(){
+			//如果是文件而不是文件夹，点击不刷新目录，提示信息
+			/*if(this.children[1].children[1].className=="glyphicon glyphicon-file")
 			{
-				//如果是文件而不是文件夹，点击不刷新目录，提示信息
-				if(this.children[1].children[1].className=="glyphicon glyphicon-file")
-				{
-					$("#statusFeedback").text("您所点击的是文件而不是文件夹，无法进入该目录！");
-					return;
-				}
-				//更新路径显示
-				curr_path_array = curr_path_array.concat( $.trim(this.children[1].innerText) ) //此处用$.trim去除空格
-				curr_path_html = "<li>ROOT</li>";
-				for(var i=1;i<curr_path_array.length;i++)
-				curr_path_html = curr_path_html + "<li>" + curr_path_array[i] + "</li>";
-				$("#curr_path").html(curr_path_html);		
-				//ajax
-				var QueryPath="/";
-/*********/		if(curr_path_array.length>1)
-					QueryPath="";
-				for(var i=1;i<curr_path_array.length;i++)
-				{
-					QueryPath = QueryPath + curr_path_array[i] + "/" ;
-				}
-				var	form=new FormData();
-
-				var whose = $.cookie("username");
-				form.append("Whose", whose);
-				form.append("Path",QueryPath);
-				//console.log(form.get("whose"));
-				//alert(queryPath);
-				$.ajax({
-						url:"GetFileList.action",
-						type:"POST",
-						data:form,
-						dataType:"text",
-						processData:false,
-						contentType:false,
-						success:function(databack){
-							var obj = $.parseJSON(databack);
-							var new_file_list = obj.html;
-							//alert(new_file_list);
-							$("#file_list_body").html(new_file_list);
-						}
-				});
-				$("#statusFeedback").text("成功进入该目录！");
+				$("#statusFeedback").text("您所点击的是文件而不是文件夹，无法进入该目录！");
+				return;
 			}
+			if(this.children[1].children[1].className="glyphicon glyphicon-folder-open" && this.children[1].children[0].children[0].checked)
+				return;*/
+			//更新路径显示
+			console.log("click deteced");
+			curr_path_array = curr_path_array.concat( $.trim(this.innerText) ); //此处用$.trim去除空格
+			console.log($.trim(this.innerText));
+			curr_path_html = "<li>ROOT</li>";
+			for(var i=1;i<curr_path_array.length;i++)
+			curr_path_html = curr_path_html + "<li>" + curr_path_array[i] + "</li>";
+			$("#curr_path").html(curr_path_html);		
+			//ajax
+			var QueryPath="/";
+			if(curr_path_array.length>1)
+				QueryPath="";
+			for(var i=1;i<curr_path_array.length;i++)
+			{
+				QueryPath = QueryPath + curr_path_array[i] + "/" ;
+			}
+			var	form=new FormData();
+
+			var whose = $.cookie("username");
+			form.append("Whose", whose);
+			form.append("Path",QueryPath);
+			//console.log(form.get("whose"));
+			//alert(queryPath);
+			$.ajax({
+					url:"GetFileList.action",
+					type:"POST",
+					data:form,
+					dataType:"text",
+					processData:false,
+					contentType:false,
+					success:function(databack){
+						var obj = $.parseJSON(databack);
+						var new_file_list = obj.html;
+						//alert(new_file_list);
+						$("#file_list_body").html(new_file_list);
+					}
+			});
+			$("#statusFeedback").text("成功进入该目录！");
+		}
 	);
 	
 	//点击的是返回上一层的文件项

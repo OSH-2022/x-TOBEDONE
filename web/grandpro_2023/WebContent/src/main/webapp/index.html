@@ -23,8 +23,8 @@
 </style>
 
 <script>
-    layui.use(['element','layer'], function(){
-		var element = layui.element,
+    layui.use(['element','layer'], function(){ //用于加载layui中的模块
+		var element = layui.element, 
 			layer = layui.layer;
 		/*
 		element.on('tab(xyy)', function(data){
@@ -46,6 +46,8 @@
 			anim: 'updown'
 		});
 	});
+
+	// Window 对象表示浏览器中打开的窗口
 	$(window).resize(function () {
     	// window.location.reload();
 		document.getElementById("xyycarousel").style.height = (0.9*$(window).width()/proport).toString()+'px';
@@ -60,76 +62,46 @@
 	*/
 </script>
 
+<!--下面这一段用于创建和编辑 Cookie-->
 <script>
+	// window.onload() 方法用于在网页加载完毕后立刻执行的操作，即当 HTML 文档加载完毕后，立刻执行某个方法。
 	window.onload=function () {
-		var btnObj = document.getElementById("loginSubmitButton");
-		btnObj.onclick=function () {
+		var btnObj = document.getElementById("loginSubmitButton");	// 登录按钮
+
+		btnObj.onclick=function () {	//定义点击这个按钮时执行后面的函数
 			// this.style.background="red";
-			var userName=$("#inputUsername_login").val();
-			if($.cookie().username!="undefine") {
+
+			var userName=$("#inputUsername_login").val();	// 获得用户输入的用户名
+			if($.cookie().username!="undefine") {	// $表示JQuery
 				$.removeCookie('username', { path: '/' });
+				// 删除Cookie
 			}
-			$.cookie("username", userName, { path:'/'});
+			$.cookie("username", userName, { path:'/'}); 
+			// 创建 cookie，路径为网站的根目录
+
 			// window.console.log($.cookie().username);
 		};
 	};
 </script>
 
+
+<!--这一段完成了通过按回车键对按登录键的代替-->
 <script>
-	/*
-	function check() {
-		var formname=document.loginForm;
-		if (formname.userName.value == "") {
-			alert("请输入用户名！");
-			formname.userName.focus();
-			return false;
-		}
-		if (formname.pwd.value == "") {
-			alert("请输入密码！");
-			formname.pwd.focus();
-			return false;
-		}
-	  	formname.submit();
-	}
-	function on_return() {
-		if(window.event.keyCode == 13) {
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13) {
 			if (document.getElementById("index-login").classList.contains('layui-show')==true) {
 				document.getElementById("loginSubmitButton").click();
+				// 单击该元素时，触发 click 事件
+				// e.keyCode == 13 表明按下了回车键
+
+				// console.log("1");
 			}
 			else if (document.getElementById("index-register").classList.contains('layui-show')==true) {
 				document.getElementById("regSubmitButton").click();
+				// console.log("2");
 			}
 		}
-	}
-*/
-$(document).keyup(function (e) {
-    if (e.keyCode == 13) {
-		if (document.getElementById("index-login").classList.contains('layui-show')==true) {
-			document.getElementById("loginSubmitButton").click();
-			// console.log("1");
-		}
-		else if (document.getElementById("index-register").classList.contains('layui-show')==true) {
-			document.getElementById("regSubmitButton").click();
-			// console.log("2");
-		}
-    }
-});
-/*
-document.onkeyup = function (e) {
-	if (window.event)
-		e = window.event;
-	var code = e.charCode || e.keyCode;
-	if (code == 13) {
-		if (document.getElementById("index-login").classList.contains('layui-show')==true) {
-			document.getElementById("loginSubmitButton").click();
-		}
-		else if (document.getElementById("index-register").classList.contains('layui-show')==true) {
-			document.getElementById("regSubmitButton").click();
-		}
-		console.log("13");
-    }
-}
-*/
+	});
 </script>
 
 <title>DFS 分布式网盘</title>
@@ -172,6 +144,7 @@ document.onkeyup = function (e) {
 					<form class="layui-form" role="form">
 						<div class="layui-form-item">
 							<label for="inputUsername_login" class="layui-form-label">用户名</label>
+							<!--<label> 标签为 input 元素定义标注（标记）。-->
 							<div class="layui-input-block">
 								<input class="layui-input" type="text" class="form-control" id="inputUsername_login" placeholder="请输入用户名"/>
 							</div>
@@ -188,7 +161,7 @@ document.onkeyup = function (e) {
 					</form>
 				</div>
 				<div class="layui-tab-item" id="index-register">
-					<form class="layui-form" role="form" action = "UserReg">
+					<form class="layui-form" role="form" action = "UserReg.java">
 						<div class="layui-form-item">
 							<label for="userName" class="layui-form-label">用户名</label>
 							<div class="layui-input-block">

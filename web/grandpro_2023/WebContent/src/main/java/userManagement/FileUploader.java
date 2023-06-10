@@ -1,7 +1,6 @@
 package userManagement;
 
 import com.opensymphony.xwork2.ActionSupport;
-import database.AnotherRequestItem;
 import database.DeviceItem;
 import database.FileItem;
 import database.Query;
@@ -9,7 +8,6 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import java.io.File;
-import java.util.LinkedList;
 import java.util.ArrayList; // fix
 
 public class FileUploader extends ActionSupport{
@@ -25,10 +23,30 @@ public class FileUploader extends ActionSupport{
 	private int noa;
 	private int nod;
 	private String whose;
+	private String dirName;
 	private int fileId;
+	private int originID;
 	//TODO
 	private static final String fragmentFolderPath = "/usr/local/tomcat/webapps/DFS/CloudDriveServer/downloadFragment";
 	private static final String fileFolderPath = "/usr/local/tomcat/webapps/DFS/CloudDriveServer/tmpFile";
+
+	public int getOriginID(){
+		return this.originID;
+	}
+
+	public void setOriginID(int originID){
+		this.originID = originID;
+	}
+
+	public String getdirName()
+	{
+		return this.dirName;
+	}
+
+	public void setdirName(String dirName)
+	{
+		this.dirName = dirName;
+	}
 
 	public	String	getPath()
 	{
@@ -219,7 +237,7 @@ public class FileUploader extends ActionSupport{
 		System.out.println("uploadRegister is called");
 
 		Query query=new Query();
-		FileItem fileItem=query.queryFile(path, fileName);
+		FileItem fileItem=query.queryFile(path, fileName, whose);
 		DeviceItem[] onlineDevice =query.queryOnlineDevice();
 
 		if(onlineDevice==null)
@@ -235,13 +253,14 @@ public class FileUploader extends ActionSupport{
 			return "success";
 		}
 		else{
-			FileItem newFile=new FileItem(fileName,path,"rwxrwxrwx","",nod,noa,false,fileType,fileSize,whose);
+			// 初始时默认不是共享文件，origin=0 表示该文件不是共享文件
+			FileItem newFile=new FileItem(fileName,path,"rwxrwxrwx","",nod,noa,false,fileType,fileSize,whose,0,0);
 			fileId=query.addFile(newFile);
 			if(fileId<0){
 				//TODO
 			}
-			int deviceID;
-			String str;
+			//int deviceID;
+			//String str;
 			JSONArray jsonArray = new JSONArray();
 			DeviceItem[] deviceItemList=getAllocateDeviceList(query,nod,noa,whose);
 			if(deviceItemList==null){
@@ -257,25 +276,6 @@ public class FileUploader extends ActionSupport{
 				jsonArray.add(formDetailsJson);
 				//query.addFragment(fileId*100+i,"1");
 				query.addFragment(fileId*100+i,String.valueOf(deviceItemList[i].getId()));
-				/*
-				str=query.queryFragment(id*100+i);
-				if (str==null || str.equals("-1"))
-					continue;
-				deviceID=Integer.parseInt(str);
-				for (DeviceItem deviceItem : onlineDevice){//TODO
-					if (deviceItem.getId()==deviceID){
-						DeviceItem curDevice=query.queryDevice(deviceID);
-						//reqItems.add(new AnotherRequestItem(curDevice.getIp(), String.valueOf(curDevice.getPort()), String.valueOf(id*100+i),fileType,i));
-
-						JSONObject formDetailsJson = new JSONObject();
-						formDetailsJson.put("filename", String.valueOf(id*100+i));
-						formDetailsJson.put("fragmentId", i);
-						formDetailsJson.put("ip", curDevice.getIp());
-						formDetailsJson.put("port", String.valueOf(curDevice.getPort()));
-						jsonArray.add(formDetailsJson);
-						break;
-					}
-				}*/
 			}
 			if (jsonArray.size() < nod+noa){
 				query.closeConnection();
@@ -299,7 +299,7 @@ public class FileUploader extends ActionSupport{
 		//return -1 if error
 		//else, return a number from 0 to 100 as # of fragments which have been downloaded
 		Query query=new Query();
-		FileItem fileItem=query.queryFile(path, fileName);
+		FileItem fileItem=query.queryFile(path, fileName, whose);
 		query.closeConnection();
 		if (fileItem==null)
 		{
@@ -336,7 +336,7 @@ public class FileUploader extends ActionSupport{
 		System.out.println("decodeFile is called");
 
 		Query query=new Query();
-		FileItem fileItem=query.queryFile(path, fileName);
+		FileItem fileItem=query.queryFile(path, fileName, whose);
 		query.closeConnection();
 		if (fileItem==null)
 		{
